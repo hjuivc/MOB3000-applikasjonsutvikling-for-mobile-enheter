@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "304522454423",
+    "project_id": "mob3000-applikasjonsutvikling",
+    "storage_bucket": "mob3000-applikasjonsutvikling.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:304522454423:android:5f0c2d4544452df3e610d2",
+        "android_client_info": {
+          "package_name": "com.example.recipeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "304522454423-9gcac3aij5asanndsvklqf3cnj30msrb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-pUxJP76KWvSA7goLn5Uc0M0ds90BPSw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "304522454423-9gcac3aij5asanndsvklqf3cnj30msrb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
