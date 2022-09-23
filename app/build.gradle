@@ -29,6 +29,8 @@ android {
 }
 
 dependencies {
+    // Material Design
+    implementation 'com.google.android.material:material:<version>'
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:30.4.1')
     // When using the BoM, don't specify versions in Firebase dependencies
