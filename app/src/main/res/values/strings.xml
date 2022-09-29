@@ -1,3 +1,5 @@
+<!-- Tittel på de ulike activity i appen -->
 <resources>
     <string name="app_name">recippy</string>
+    <string name="activity_login">Login</string>
 </resources>
