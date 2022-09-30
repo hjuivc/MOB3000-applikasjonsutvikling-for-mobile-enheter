@@ -32,8 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
+        setContentView(R.layout.activity_login);
 
         /**
          Legge inn tittel på siden.
@@ -49,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         forgotPassword = (TextView) findViewById(R.id.forgotPassword);
         forgotPassword.setOnClickListener(this);
 
-        signIn = (Button) findViewById(R.id.btnLogin);
+        signIn = (Button) findViewById(R.id.btnRegister);
         signIn.setOnClickListener(this);
 
         editTextEmail = (EditText) findViewById(R.id.txtEmail);
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.forgotPassword:
                 startActivity(new Intent(this, ForgotPassword.class));
                 break;
-            case R.id.btnLogin:
+            case R.id.btnRegister:
                 userLogin();
                 break;
         }
