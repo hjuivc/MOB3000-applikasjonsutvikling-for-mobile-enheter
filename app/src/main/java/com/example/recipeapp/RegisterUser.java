@@ -66,7 +66,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnForgotPassword:
+            case R.id.btnRegisterUser:
                 registerUser();
                 break;
         }
