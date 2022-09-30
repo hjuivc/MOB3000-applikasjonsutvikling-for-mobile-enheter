@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         forgotPassword = (TextView) findViewById(R.id.forgotPassword);
         forgotPassword.setOnClickListener(this);
 
-        signIn = (Button) findViewById(R.id.btnRegister);
+        signIn = (Button) findViewById(R.id.btnLogin);
         signIn.setOnClickListener(this);
 
         editTextEmail = (EditText) findViewById(R.id.txtEmail);
@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.forgotPassword:
                 startActivity(new Intent(this, ForgotPassword.class));
                 break;
-            case R.id.btnRegister:
+            case R.id.btnForgotPassword:
                 userLogin();
                 break;
         }

@@ -3,4 +3,5 @@
     <string name="app_name">recippy</string>
     <string name="activity_login">Login</string>
     <string name="activity_register_user">Register</string>
+    <string name="activity_forgot_password">Forgot password</string>
 </resources>

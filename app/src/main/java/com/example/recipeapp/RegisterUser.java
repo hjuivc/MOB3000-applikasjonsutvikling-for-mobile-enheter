@@ -40,11 +40,16 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         this.setTitle(getResources().getString(R.string.activity_register_user));
 
         /**
+         * Aktivere tilbake knapp i action bar.
+         */
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        /**
          * Aktivisere komponentene i layouten og koble de til variablene.
          */
         mAuth = FirebaseAuth.getInstance();
 
-        registerUser = findViewById(R.id.btnRegister);
+        registerUser = findViewById(R.id.btnRegisterUser);
         registerUser.setOnClickListener(this);
 
         editTextFullName = (EditText) findViewById(R.id.txtFullName);
@@ -61,7 +66,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnRegister:
+            case R.id.btnForgotPassword:
                 registerUser();
                 break;
         }
