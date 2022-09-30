@@ -10,5 +10,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        /**
+         Legge inn tittel på siden.
+         */
+        this.setTitle(getResources().getString(R.string.activity_login));
+
+
+
     }
 }
