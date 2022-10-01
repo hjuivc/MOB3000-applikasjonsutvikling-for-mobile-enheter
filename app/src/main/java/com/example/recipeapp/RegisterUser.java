@@ -124,9 +124,11 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             User user = new User(fullName, age, email);
                             /**
-                             * We will store the user data in the Firebase Realtime Database.
-                             * The path will be "Users/UID" where UID is the user's unique ID.
+                             * Vi lagrer bruker data i Firebase Realtime Database.
+                             * Vi bruker Firebase Authentikator for å lagre bruker data.
+                             * Målet vil være "Users/UID" where UID is the user's unique ID.
                              */
+
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
