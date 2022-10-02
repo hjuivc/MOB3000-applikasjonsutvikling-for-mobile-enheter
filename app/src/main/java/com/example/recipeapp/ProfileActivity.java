@@ -72,17 +72,63 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        /**
-         * Logg ut knapp
-         */
+
 
         initViews();
 
+        /**
+         * Show All Recipes
+         */
+        btnShowAllRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, ShowAllRecipes.class);
+                startActivity(intent);
+            }
+        });
+
+        /**
+         * Favorite recipes
+         */
+        btnFavoriteRecipes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, FavoriteRecipes.class);
+                startActivity(intent);
+            }
+        });
+
+        /**
+         * Add recipe
+         */
+        btnAddRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, AddRecipe.class);
+                startActivity(intent);
+            }
+        });
+
+        /**
+         * About
+         */
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, About.class);
+                startActivity(intent);
+            }
+        });
+
+        /**
+         * Logg ut knapp
+         */
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                Toast.makeText(ProfileActivity.this, "Logged out!", Toast.LENGTH_SHORT).show();
             }
         });
     }
