@@ -1,10 +1,8 @@
 package com.example.recipeapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.view.MenuItem;
 
 public class AddRecipe extends AppCompatActivity {
 
@@ -23,20 +21,5 @@ public class AddRecipe extends AppCompatActivity {
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-    }
-
-    /**
-     * Kode for å aktivere tilbake knappen i appen.
-     */
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

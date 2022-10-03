@@ -9,4 +9,14 @@
     <string name="activity_add_recipe">Add Recipe</string>
     <string name="activity_favorite_recipes">Favorite Recipes</string>
     <string name="activity_show_all_recipes">All Recipes</string>
+
+    <!-- About -->
+    <string name="emoji">Hey there! &#127858;</string>
+    <string name="about">This app is made by a group of students at USN Ringerike. We are studying software engineering and this is an app that is a part of course MOB3000 Mobile Application Development.</string>
+    <string name="about2">The app is made to help you save your recipes and to create favorite lists of your favorite recipes. Feel free to contact us by pressing "contact us" if you have any questions, issues or just want to reach out. </string>
+    <string name="about3">We hope that you will enjoy using our app! Bon appétit from Even, Alex and Bjørnar &#128526; &#129367;</string>
+
+    <!-- Copyright(c) -->
+    <string name="copyright">Copyright \u00a9 recippy. All rights reserved.</string>
+
 </resources>
