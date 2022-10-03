@@ -5,4 +5,8 @@
     <string name="activity_register_user">Register</string>
     <string name="activity_forgot_password">Forgot password</string>
     <string name="activity_profile">Profile</string>
+    <string name="activity_about">About</string>
+    <string name="activity_add_recipe">Add Recipe</string>
+    <string name="activity_favorite_recipes">Favorite Recipes</string>
+    <string name="activity_show_all_recipes">All Recipes</string>
 </resources>

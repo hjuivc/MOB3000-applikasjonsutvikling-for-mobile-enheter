@@ -10,5 +10,11 @@ public class FavoriteRecipes extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_recipes);
+
+        /**
+         Legge inn tittel på siden.
+         */
+        this.setTitle(getResources().getString(R.string.activity_favorite_recipes));
+
     }
 }
