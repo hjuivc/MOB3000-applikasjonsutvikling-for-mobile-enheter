@@ -1,6 +1,7 @@
 package com.example.recipeapp;
 
 public class Ingredients {
+    public int ingredientID, recipeID;
     public String ingredient, amount, unit;
 
     public Ingredients() {
@@ -9,7 +10,9 @@ public class Ingredients {
          */
     }
 
-    public Ingredients(String ingredient, String amount, String unit) {
+    public Ingredients(int ingredientID, int recipeID, String ingredient, String amount, String unit) {
+        this.ingredientID = ingredientID;
+        this.recipeID = recipeID;
         this.ingredient = ingredient;
         this.amount = amount;
         this.unit = unit;

@@ -1,7 +1,8 @@
 package com.example.recipeapp;
 
 public class Recipe {
-    public String name, description, stepbystep, cuisine, vegan, favorite;
+    public int recipeID;
+    public String userID, name, description, stepbystep, cuisine, vegan, favorite;
 
     public Recipe() {
         /**
@@ -9,12 +10,14 @@ public class Recipe {
          */
     }
 
-    public Recipe(String name, String description, String stepbystep, String cuisine, String vegan, String favorite) {
+    public Recipe(String userID, int recipeID, String name, String description, String stepbystep, String cuisine, Boolean vegan, Boolean favorite) {
+        this.userID = userID;
+        this.recipeID = recipeID;
         this.name = name;
         this.description = description;
         this.stepbystep = stepbystep;
         this.cuisine = cuisine;
-        this.vegan = vegan;
-        this.favorite = favorite;
+        this.vegan = String.valueOf(vegan);
+        this.favorite = String.valueOf(favorite);
     }
 }

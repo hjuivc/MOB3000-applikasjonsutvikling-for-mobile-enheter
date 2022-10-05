@@ -13,9 +13,15 @@ k
 ;app/src/main/java/com/example/recipeapp/ShowAllRecipes.java,2\6\2630aa074327b74aa9c51029c26af230e3a7ede0
 @
 app/build.gradle,f\4\f4a01d6a4fcb971362ec00a83903fd3902f52164
-j
-:app/src/main/java/com/example/recipeapp/LoginActivity.java,9\c\9c0e243a2f74e480af5f9c847db4e267c99471b1
 k
 ;app/src/main/java/com/example/recipeapp/ForgotPassword.java,a\e\ae6ae75d3d9e456da9a6bdb6c9878ea09a90c4c9
 b
 2app/src/main/java/com/example/recipeapp/About.java,d\1\d109a2e1429338ccbc3d1ef6a741bfbf9c91f739
+a
+1app/src/main/java/com/example/recipeapp/User.java,2\1\21658a190f9d500ec70b1c1e3d093138e35d86d1
+l
+<app/src/main/java/com/example/recipeapp/ProfileActivity.java,d\f\df642959682a12c2265c3702b06927121e8510b4
+j
+:app/src/main/java/com/example/recipeapp/LoginActivity.java,9\c\9c0e243a2f74e480af5f9c847db4e267c99471b1
+h
+8app/src/main/java/com/example/recipeapp/Ingredients.java,c\0\c08f2b19c409a9cb5ccd252daa8e787a19ff0fb5
