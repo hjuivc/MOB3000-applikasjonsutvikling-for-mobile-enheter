@@ -1,0 +1,17 @@
+
+f
+java:S13015"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ
+/
+java:S1700"Rename field "about"(ªÙ¢Çıÿÿÿÿ
+]
+java:S1659"BDeclare "about" and all following declarations on a separate line.(ªÙ¢Çıÿÿÿÿ
+o
+java:S1450"TRemove the "about" field and declare it as a local variable in the relevant methods.(ªÙ¢Çıÿÿÿÿ
+p
+java:S1450"URemove the "about2" field and declare it as a local variable in the relevant methods.(ªÙ¢Çıÿÿÿÿ
+p
+java:S1450"URemove the "about3" field and declare it as a local variable in the relevant methods.(ªÙ¢Çıÿÿÿÿ
+z
+java:S1450"XRemove the "copyright" field and declare it as a local variable in the relevant methods.(ªÙ¢Çıÿÿÿÿ8Òœòé¹0
+v
+java:S1450"TRemove the "emoji" field and declare it as a local variable in the relevant methods.(ªÙ¢Çıÿÿÿÿ8Ùê¹0

@@ -2,9 +2,148 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/veganSwitch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddRecipe"
-    android:background="@color/background">
+    android:background="@color/background"
+    tools:context=".AddRecipe">
+
+    <EditText
+        android:id="@+id/txtRecipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:width="230dp"
+        android:ems="10"
+        android:hint="Name of recipe"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_logo_foreground" />
+
+    <EditText
+        android:id="@+id/txtStep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:width="230dp"
+        android:ems="10"
+        android:hint="Step by step"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+    <EditText
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:width="230dp"
+        android:ems="10"
+        android:hint="Description"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRecipeName" />
+
+    <Switch
+        android:id="@+id/txtVeganSwitch"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:includeFontPadding="false"
+        android:paddingStart="5dp"
+        android:text="Vegan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerCuisine" />
+
+    <Spinner
+        android:id="@+id/spinnerCuisine"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtStep" />
+
+    <EditText
+        android:id="@+id/txtIngredient"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Ingredient"
+        android:inputType="textPersonName"
+        android:textSize="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtVeganSwitch"
+        tools:layout_editor_absoluteX="89dp" />
+
+    <EditText
+        android:id="@+id/txtAmount"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="Amount"
+        android:inputType="textPersonName"
+        android:textSize="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtVeganSwitch"
+        tools:layout_editor_absoluteX="186dp" />
+
+    <Spinner
+        android:id="@+id/spinnerUnit"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/txtVeganSwitch"
+        tools:layout_editor_absoluteX="291dp" />
+
+    <ImageButton
+        android:id="@+id/btnAddIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="#F7BF4F"
+        app:layout_constraintTop_toBottomOf="@+id/txtIngredient"
+        app:srcCompat="@drawable/ic_baseline_add_circle_24"
+        tools:layout_editor_absoluteX="91dp" />
+
+    <TextView
+        android:id="@+id/lblIngredient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:text="Add ingredient"
+        app:layout_constraintStart_toEndOf="@+id/btnAddIngredient"
+        app:layout_constraintTop_toBottomOf="@+id/txtAmount" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSave"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="100dp"
+        android:text="Save"
+        app:backgroundTint="#323232"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblIngredient"
+        app:shapeAppearanceOverlay="@style/buttomShape" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
