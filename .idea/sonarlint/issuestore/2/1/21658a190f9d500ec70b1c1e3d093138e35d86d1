@@ -1,9 +1,0 @@
-
-j
-java:S1104"TMake fullName a static final constant or non-public and provide accessors if needed.(óËĞö
-e
-java:S1104"OMake age a static final constant or non-public and provide accessors if needed.(óËĞö
-g
-java:S1104"QMake email a static final constant or non-public and provide accessors if needed.(óËĞö
-V
-java:S1659"@Declare "age" and all following declarations on a separate line.(óËĞö
