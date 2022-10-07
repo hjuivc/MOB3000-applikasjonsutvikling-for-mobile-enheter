@@ -1,5 +1,5 @@
-<!-- Tittel på de ulike activity i appen -->
 <resources>
+    <!-- Tittel på de ulike activity i appen -->
     <string name="app_name">recippy</string>
     <string name="activity_login">Login</string>
     <string name="activity_register_user">Register</string>
@@ -18,5 +18,26 @@
 
     <!-- Copyright(c) -->
     <string name="copyright">Copyright \u00a9 recippy. All rights reserved.</string>
+
+    <!-- Spinner cousine -->
+    <string-array name="cousine_array">
+        <item>Italian</item>
+        <item>Indian</item>
+        <item>Norwegian</item>
+        <item>French</item>
+        <item>Mexican</item>
+        <item>Chinese</item>
+        <item>Japanese</item>
+        <item>Spanish</item>
+    </string-array>
+
+    <!-- Spinner unit -->
+    <string-array name="unit_array">
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>l</item>
+        <item>pcs</item>
+    </string-array>
 
 </resources>

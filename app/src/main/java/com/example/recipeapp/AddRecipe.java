@@ -6,11 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Filterable;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.ThemedSpinnerAdapter;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -62,6 +65,19 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        /**
+         * Legge til elementer i cousine spinneren
+         */
+        ArrayAdapter<CharSequence> adapter_cousine = ArrayAdapter.createFromResource(this, R.array.cousine_array, android.R.layout.simple_spinner_item);
+        adapter_cousine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCuisine.setAdapter(adapter_cousine);
+
+        /**
+         * Legge til elementer i unit spinneren
+         */
+        ArrayAdapter<CharSequence> adapter_unit = ArrayAdapter.createFromResource(this, R.array.unit_array, android.R.layout.simple_spinner_item);
+        adapter_unit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnit.setAdapter(adapter_unit);
     }
 
     /**
