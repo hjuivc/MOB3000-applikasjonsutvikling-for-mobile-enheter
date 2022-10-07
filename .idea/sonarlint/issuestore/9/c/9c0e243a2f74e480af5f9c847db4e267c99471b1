@@ -1,0 +1,14 @@
+
+C
+java:S1604x"(Make this anonymous inner class a lambda(ü»×¬ıÿÿÿÿ
+B
+java:S1659",Declare "forgotPassword" on a separate line.(¸„
+P
+java:S1659".Declare "editTextPassword" on a separate line.(æ˜¬ıÿÿÿÿ8ú­ó¸0
+z
+java:S1450"]Remove the "forgotPassword" field and declare it as a local variable in the relevant methods.(¸„8ƒú­ó¸0
+t
+java:S1450"WRemove the "register" field and declare it as a local variable in the relevant methods.(¸„8…ú­ó¸0
+r
+java:S1450"URemove the "signIn" field and declare it as a local variable in the relevant methods.(Ï†Úö8‡ú­ó¸0
+C	java:S131G""Add a default case to this switch.(×“¾ñùÿÿÿÿ8ºú­ó¸0

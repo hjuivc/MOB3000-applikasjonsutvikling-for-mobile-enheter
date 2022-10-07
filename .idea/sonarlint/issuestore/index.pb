@@ -21,3 +21,13 @@ l
 <app/src/main/java/com/example/recipeapp/ProfileActivity.java,d\f\df642959682a12c2265c3702b06927121e8510b4
 h
 8app/src/main/java/com/example/recipeapp/Ingredients.java,c\0\c08f2b19c409a9cb5ccd252daa8e787a19ff0fb5
+c
+3app/src/main/java/com/example/recipeapp/Recipe.java,c\d\cd1d9624062dd229437290f032b14e91abe4f3ae
+j
+:app/src/main/java/com/example/recipeapp/LoginActivity.java,9\c\9c0e243a2f74e480af5f9c847db4e267c99471b1
+l
+<app/src/main/java/com/example/recipeapp/FavoriteRecipes.java,6\5\652460e005c1a046041b21ce06549d9541fa31bf
+f
+6app/src/main/java/com/example/recipeapp/AddRecipe.java,f\5\f59e37bb3c74323c6d8bdbbd803fda90d2fda052
+i
+9app/src/main/java/com/example/recipeapp/RegisterUser.java,9\3\939bef3a0c143e78be070f53517ebedaadb070b4

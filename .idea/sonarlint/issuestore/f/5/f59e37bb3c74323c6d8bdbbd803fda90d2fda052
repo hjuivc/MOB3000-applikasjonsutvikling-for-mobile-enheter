@@ -1,0 +1,24 @@
+
+r	java:S117G"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íÎ›çıÿÿÿÿ8îş¤Œ»0
+r	java:S117N"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(îŞÀİûÿÿÿÿ8ÉŞ¥Œ»0
+m
+java:S1301X"KReplace this "switch" statement by "if" statements to increase readability.(×“¾ñùÿÿÿÿ8Ë¨¦Œ»0
+n
+java:S1301«"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8Î¨¦Œ»0
+k
+java:S1659"PDeclare "editTextDescription" and all following declarations on a separate line.(õÆìêùÿÿÿÿ
+?
+java:S1659")Declare "spinnerUnit" on a separate line.(¸İªÀ
+p
+java:S1450 "ZRemove the "switchVegan" field and declare it as a local variable in the relevant methods.(…Ô’Í
+r
+java:S1450"\Remove the "txtSaveRecipy" field and declare it as a local variable in the relevant methods.(í¸º
+M
+java:S19057"2Remove this unnecessary cast to "OnClickListener".(ŠÃ½Æùÿÿÿÿ
+C	java:S131X""Add a default case to this switch.(×“¾ñùÿÿÿÿ8­¬¦Œ»0
+T
+java:S1135\"2Complete the task associated to this TODO comment.(ıø¼–øÿÿÿÿ8±¬¦Œ»0
+T
+java:S1135i"2Complete the task associated to this TODO comment.(‰Æ‘˜ıÿÿÿÿ8È¬¦Œ»0
+E
+java:S1068 "/Remove this unused "switchVegan" private field.(…Ô’Í

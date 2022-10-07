@@ -1,0 +1,20 @@
+
+b	java:S107"AConstructor has 8 parameters, which is greater than 7 authorized.(‚ò’Šúÿÿÿÿ8çºÅ½º0
+j
+java:S1104"TMake recipeID a static final constant or non-public and provide accessors if needed.(‚×ì
+o
+java:S1104"RMake userID a static final constant or non-public and provide accessors if needed.(ƒäûù8‡óÃ½º0
+f
+java:S1104"PMake name a static final constant or non-public and provide accessors if needed.(ƒäûù
+m
+java:S1104"WMake description a static final constant or non-public and provide accessors if needed.(ƒäûù
+l
+java:S1104"VMake stepbystep a static final constant or non-public and provide accessors if needed.(ƒäûù
+i
+java:S1104"SMake cuisine a static final constant or non-public and provide accessors if needed.(ƒäûù
+g
+java:S1104"QMake vegan a static final constant or non-public and provide accessors if needed.(ƒäûù
+j
+java:S1104"TMake favorite a static final constant or non-public and provide accessors if needed.(ƒäûù
+^
+java:S1659"ADeclare "name" and all following declarations on a separate line.(ƒäûù8óÃ½º0
