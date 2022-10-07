@@ -7,8 +7,6 @@ H
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 P
  app/src/main/AndroidManifest.xml,8\c\8c55c3ccc257e5907959013f99656e4c8ec3903e
-l
-<app/src/main/java/com/example/recipeapp/FavoriteRecipes.java,6\5\652460e005c1a046041b21ce06549d9541fa31bf
 k
 ;app/src/main/java/com/example/recipeapp/ShowAllRecipes.java,2\6\2630aa074327b74aa9c51029c26af230e3a7ede0
 @
@@ -21,7 +19,5 @@ a
 1app/src/main/java/com/example/recipeapp/User.java,2\1\21658a190f9d500ec70b1c1e3d093138e35d86d1
 l
 <app/src/main/java/com/example/recipeapp/ProfileActivity.java,d\f\df642959682a12c2265c3702b06927121e8510b4
-j
-:app/src/main/java/com/example/recipeapp/LoginActivity.java,9\c\9c0e243a2f74e480af5f9c847db4e267c99471b1
 h
 8app/src/main/java/com/example/recipeapp/Ingredients.java,c\0\c08f2b19c409a9cb5ccd252daa8e787a19ff0fb5
