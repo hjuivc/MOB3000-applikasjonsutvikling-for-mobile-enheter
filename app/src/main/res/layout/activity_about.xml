@@ -91,5 +91,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about3"
-        app:shapeAppearanceOverlay="@style/buttomShape" />/>
+        app:shapeAppearanceOverlay="@style/buttonShape" />
 </androidx.constraintlayout.widget.ConstraintLayout>

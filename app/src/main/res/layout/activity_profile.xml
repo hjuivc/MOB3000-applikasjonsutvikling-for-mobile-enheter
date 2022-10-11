@@ -29,7 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:shapeAppearanceOverlay="@style/buttomShape" />
+        app:shapeAppearanceOverlay="@style/buttonShape" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAbout"
@@ -41,7 +41,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:shapeAppearanceOverlay="@style/buttomShape" />
+        app:shapeAppearanceOverlay="@style/buttonShape" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddRecipe"
@@ -52,7 +52,7 @@
         app:backgroundTint="#323232"
         app:layout_constraintBottom_toTopOf="@+id/btnAbout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:shapeAppearanceOverlay="@style/buttomShape"
+        app:shapeAppearanceOverlay="@style/buttonShape"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
@@ -64,7 +64,7 @@
         app:backgroundTint="#323232"
         app:layout_constraintBottom_toTopOf="@+id/btnAddRecipe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:shapeAppearanceOverlay="@style/buttomShape"
+        app:shapeAppearanceOverlay="@style/buttonShape"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
@@ -78,7 +78,7 @@
         app:layout_constraintBottom_toTopOf="@+id/btnFavoriteRecipes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:shapeAppearanceOverlay="@style/buttomShape" />
+        app:shapeAppearanceOverlay="@style/buttonShape" />
 
     <TextView
         android:id="@+id/greeting"

@@ -16,7 +16,7 @@
     </style>
 
     <!-- Styling av knapper. -->
-    <style name="buttomShape">
+    <style name="buttonShape">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
     </style>
