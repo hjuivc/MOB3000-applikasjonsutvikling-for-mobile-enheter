@@ -1,0 +1,51 @@
+
+K
+java:S3740"/Provide the parametrized type for this generic.(Şö¹Ìûÿÿÿÿ
+K
+java:S3740"/Provide the parametrized type for this generic.(Şö¹Ìûÿÿÿÿ
+k	java:S117j"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(íÎ›çıÿÿÿÿ
+?
+java:S1604“"(Make this anonymous inner class a lambda(Âì
+n
+java:S1301ı"KReplace this "switch" statement by "if" statements to increase readability.(øå´¡ÿÿÿÿÿ8¡âµ¼0
+k
+java:S1659$"PDeclare "editTextDescription" and all following declarations on a separate line.(õÆìêùÿÿÿÿ
+?
+java:S1659'")Declare "spinnerUnit" on a separate line.(¸İªÀ
+J
+java:S1659+"(Declare "btnSaveIng" on a separate line.(Óş‡Ûúÿÿÿÿ8Åû¯µ¼0
+{
+java:S1450+"YRemove the "btnSaveIng" field and declare it as a local variable in the relevant methods.(Óş‡Ûúÿÿÿÿ8Åû¯µ¼0
+z
+java:S1450+"XRemove the "buttonAdd" field and declare it as a local variable in the relevant methods.(Óş‡Ûúÿÿÿÿ8áË®µ¼0
+r
+java:S1450#"\Remove the "txtSaveRecipy" field and declare it as a local variable in the relevant methods.(í¸º
+M
+java:S1905T"2Remove this unnecessary cast to "OnClickListener".(ŠÃ½Æùÿÿÿÿ
+<	java:S131x""Add a default case to this switch.(×“¾ñùÿÿÿÿ
+T
+java:S1854‹"=Remove this useless assignment to local variable "txtAmount".(¾ö‘
+X
+java:S1854Š"ARemove this useless assignment to local variable "txtIngredient".(…¸¹É
+I
+java:S1481Š"2Remove this unused "txtIngredient" local variable.(…¸¹É
+E
+java:S1481‹".Remove this unused "txtAmount" local variable.(¾ö‘
+U
+java:S1117Œ"?Rename "spinnerUnit" which hides the field declared at line 39.(å™»
+T	java:S106"9Replace this use of System.out or System.err by a logger.(ŒêÿÍşÿÿÿÿ
+O	java:S106¥"9Replace this use of System.out or System.err by a logger.(ß“ş€
+I
+java:S1135¦"2Complete the task associated to this TODO comment.(÷Æûú
+V	java:S106©"9Replace this use of System.out or System.err by a logger.(£½èü8‡ãµ¼0
+V	java:S106ª"9Replace this use of System.out or System.err by a logger.(¾ÇŞ8•ãµ¼0
+[	java:S106«"9Replace this use of System.out or System.err by a logger.(ó³ºşşÿÿÿÿ8±Àµ¼0
+[	java:S106¬"9Replace this use of System.out or System.err by a logger.(ÉÍ†¸şÿÿÿÿ8²Àµ¼0
+P
+java:S1135ß"2Complete the task associated to this TODO comment.(ß·”Â8ãµ¼0
+b
+java:S1117ç"?Rename "ingredients" which hides the field declared at line 45.(»ÊÕëúÿÿÿÿ8ãµ¼0
+V	java:S106‹"9Replace this use of System.out or System.err by a logger.(îó˜ä8ÛÇ£µ¼0
+V	java:S106"9Replace this use of System.out or System.err by a logger.(“èë¥8ƒ÷Àµ¼0
+J
+java:S1068-"/Remove this unused "ingredients" private field.(ØğåŸúÿÿÿÿ

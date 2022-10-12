@@ -40,8 +40,10 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private Switch switchVegan;
 
     private LinearLayout layoutList;
-    private Button buttonAdd;
-    private List<String> ingredients = new ArrayList<>();
+    private Button buttonAdd, btnSaveIng;
+    private List<String> units = new ArrayList<>();
+    private ArrayList<String> ingredients = new ArrayList<>();
+    ArrayList<View> viewsList =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +53,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         /**
          * Legger til elementer i array som skal inn i spinneren
          */
-        ingredients.add("g");
-        ingredients.add("kg");
-        ingredients.add("ml");
-        ingredients.add("l");
-        ingredients.add("pcs");
+        units.add("g");
+        units.add("kg");
+        units.add("ml");
+        units.add("l");
+        units.add("pcs");
+        units.add("c");
+        units.add("lb");
+        units.add("oz");
+        units.add("pt");
+        units.add("tsp");
+        units.add("tbsp");
 
         /**
          Legge inn tittel på siden.
@@ -85,9 +93,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         layoutList = findViewById(R.id.ingredientList);
         buttonAdd = findViewById(R.id.btnAddIngredient);
-        spinnerUnit = findViewById(R.id.spinnerUnit);
 
         buttonAdd.setOnClickListener(this);
+
+        btnSaveIng = findViewById(R.id.btnSaveIngredients);
+
+        btnSaveIng.setOnClickListener(this);
 
         /**
          * Legge til elementer i cousine spinneren
@@ -99,11 +110,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         if (switchVegan != null) {
             switchVegan.setOnCheckedChangeListener(this);
         }
-
     }
-
-
-
 
     /**
      * Metode for å registrere bruker. Kalles når man trykker "save" og "add ingredients.
@@ -117,6 +124,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             case R.id.btnAddIngredient:
                 addIngredient();
                 break;
+            case R.id.btnSaveIngredients:
+                saveIngredients();
         }
     }
 
@@ -124,29 +133,45 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
      * Metode for å legge til ingredienser
      */
     private void addIngredient() {
-        View cricketerView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
+        View ingredientsView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
 
-        EditText txtIngredient = cricketerView.findViewById(R.id.txtIngredient);
-        AppCompatSpinner spinnerUnit = (AppCompatSpinner) cricketerView.findViewById(R.id.spinnerUnit);
-        ImageView imageClose = (ImageView) cricketerView.findViewById(R.id.image_remove);
+        EditText txtIngredient  = ingredientsView.findViewById(R.id.txtIngredient);
+        EditText txtAmount = ingredientsView.findViewById(R.id.txtAmount);
+        AppCompatSpinner spinnerUnit = (AppCompatSpinner) ingredientsView.findViewById(R.id.spinnerUnit);
+        ImageView imageClose = (ImageView) ingredientsView.findViewById(R.id.image_remove);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, ingredients);
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, units);
         spinnerUnit.setAdapter(arrayAdapter);
 
             imageClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                removeView(cricketerView);
+                removeView(ingredientsView);
             }
         });
-            layoutList.addView(cricketerView);
-}
+
+
+            layoutList.addView(ingredientsView);
+            ingredientsView.setId(View.generateViewId());
+            System.out.println(ingredientsView.getId());
+    }
 
     private void removeView(View view) {
         layoutList.removeView(view);
-
     }
 
+    private void saveIngredients() {
+        System.out.println("save ingredients");
+        //TODO: Legge til ingredienser i array
+        View child = getLayoutInflater().inflate(R.layout.activity_add_recipe, null, false);
+        layoutList.addView(child);
+        System.out.println(layoutList.getChildCount());
+        System.out.println(layoutList.getChildAt(1));
+        System.out.println(layoutList.getChildAt(2).getId());
+        System.out.println(layoutList.getChildAt(3));
+    }
+    
 
     /**
      * Metode for å lagre oppskriften.
@@ -195,6 +220,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         progressBar.setVisibility(View.VISIBLE);
 
+        //TODO: Her må vi ordne med autogenerering av recipeID og ingredientID.
         int recipeID = 1;
         int ingredientID = 2;
         mAuth = FirebaseAuth.getInstance();

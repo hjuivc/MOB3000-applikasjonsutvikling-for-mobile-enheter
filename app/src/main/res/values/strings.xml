@@ -30,14 +30,4 @@
         <item>Japanese</item>
         <item>Spanish</item>
     </string-array>
-
-    <!-- Spinner unit -->
-    <string-array name="unit_array">
-        <item>g</item>
-        <item>kg</item>
-        <item>ml</item>
-        <item>l</item>
-        <item>pcs</item>
-    </string-array>
-
 </resources>
