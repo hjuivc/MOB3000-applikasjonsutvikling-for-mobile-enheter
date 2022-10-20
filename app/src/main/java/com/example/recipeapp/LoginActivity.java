@@ -89,25 +89,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = editTextPassword.getText().toString().trim();
 
         if (email.isEmpty()) {
-            editTextEmail.setError("Email is required");
+            editTextEmail.setError(getText(R.string.email_error2));
             editTextEmail.requestFocus();
             return;
         }
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Please enter a valid email");
+            editTextEmail.setError(getText(R.string.email_error));
             editTextEmail.requestFocus();
             return;
         }
 
         if (password.isEmpty()) {
-            editTextPassword.setError("Password is required");
+            editTextPassword.setError(getText(R.string.password_error));
             editTextPassword.requestFocus();
             return;
         }
 
         if (password.length() < 6) {
-            editTextPassword.setError("Minimum length of password should be 6");
+            editTextPassword.setError(getText(R.string.minimum_length));
             editTextPassword.requestFocus();
             return;
         }
@@ -126,14 +126,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
                     } else {
                         user.sendEmailVerification();
-                        Toast.makeText(getApplicationContext(), "Check your email to verify your account!", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), R.string.check_email, Toast.LENGTH_LONG).show();
                     }
                     /**
                      * Sende brukeren til bruker profilen
                      */
                     startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
                 } else {
-                    Toast.makeText(LoginActivity.this, "Failed to login! Please check your credentials", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this, R.string.login_error_message, Toast.LENGTH_LONG).show();
                 }
             }
         });
