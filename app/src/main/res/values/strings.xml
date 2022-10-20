@@ -10,14 +10,42 @@
     <string name="activity_favorite_recipes">Favorite Recipes</string>
     <string name="activity_show_all_recipes">All Recipes</string>
 
+    <!-- Login -->
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_forgot_password">Forgot password?</string>
+    <string name="login_register">Register</string>
+    <string name="login_error_message">Wrong email or password</string>
+    <string name="check_email">Check your email. To verify your account!</string>
+    <string name="minimum_length">Minimum length of password should be 6</string>
+    <string name="password_error">Password is required</string>
+    <string name="email_error">Please enter a valid email</string>
+    <string name="email_error2">Email is required</string>
+
+    <!-- Login hints -->
+
+    <!-- Profile -->
+    <string name="txtProfile_welcome">Welcome</string>
+    <string name="txtProfile_name">Name</string>
+    <string name="txtProfile_email">Email</string>
+    <string name="txtProfile_age">Age</string>
+    <string name="btnShow_all_recipes">Show all recipes</string>
+    <string name="btnAdd_recipe">Add recipe</string>
+    <string name="btnFavorite_recipes">Favorite recipes</string>
+    <string name="btnAbout">About</string>
+    <string name="btnLogout">Logout</string>
+
+
     <!-- About -->
-    <string name="emoji">Hey there! &#127858;</string>
-    <string name="about">This app is made by a group of students at USN Ringerike. We are studying software engineering and this is an app that is a part of course MOB3000 Mobile Application Development.</string>
-    <string name="about2">The app is made to help you save your recipes and to create favorite lists of your favorite recipes. Feel free to contact us by pressing "contact us" if you have any questions, issues or just want to reach out. </string>
-    <string name="about3">We hope that you will enjoy using our app! Bon appétit from Even, Alex and Bjørnar &#128526; &#129367;</string>
+    <string name="txtAbout">Hey there! &#127858;</string>
+    <string name="txtAbout1">This app is made by a group of students at USN Ringerike. We are studying software engineering and this is an app that is a part of course MOB3000 Mobile Application Development.</string>
+    <string name="txtAbout2">The app is made to help you save your recipes and to create favorite lists of your favorite recipes. Feel free to contact us by pressing "contact us" if you have any questions, issues or just want to reach out. </string>
+    <string name="txtAbout3">We hope that you will enjoy using our app! Bon appétit from Even, Alex and Bjørnar &#128526; &#129367;</string>
+    <string name="btnContact_us">Contact us</string>
 
     <!-- Copyright(c) -->
-    <string name="copyright">Copyright \u00a9 recippy. All rights reserved.</string>
+    <string name="txtCopyrightAbout">Copyright \u00a9 recippy. All rights reserved.</string>
 
     <!-- Spinner cousine -->
     <string-array name="cousine_array">
