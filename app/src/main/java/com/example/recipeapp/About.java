@@ -29,20 +29,20 @@ public class About extends AppCompatActivity {
         /**
          * Legge til emoji og tekst på about siden.
          */
-        emoji = (TextView) findViewById(R.id.emoji);
-        emoji.setText(getResources().getString(R.string.emoji));
+        emoji = (TextView) findViewById(R.id.txtAbout);
+        emoji.setText(getResources().getString(R.string.txtAbout));
 
-        about = (TextView) findViewById(R.id.about);
-        about.setText(getResources().getString(R.string.about));
+        about = (TextView) findViewById(R.id.txtAbout1);
+        about.setText(getResources().getString(R.string.txtAbout1));
 
-        about2 = (TextView) findViewById(R.id.about2);
-        about2.setText(getResources().getString(R.string.about2));
+        about2 = (TextView) findViewById(R.id.txtAbout2);
+        about2.setText(getResources().getString(R.string.txtAbout2));
 
-        about3 = (TextView) findViewById(R.id.about3);
-        about3.setText(getResources().getString(R.string.about3));
+        about3 = (TextView) findViewById(R.id.txtAbout3);
+        about3.setText(getResources().getString(R.string.txtAbout3));
 
-        copyright = (TextView) findViewById(R.id.copyright);
-        copyright.setText(getResources().getString(R.string.copyright));
+        copyright = (TextView) findViewById(R.id.txtCopyrightAbout);
+        copyright.setText(getResources().getString(R.string.txtCopyrightAbout));
     }
 
     /**
