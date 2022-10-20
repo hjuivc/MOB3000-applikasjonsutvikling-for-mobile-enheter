@@ -59,10 +59,11 @@ public class ProfileActivity extends AppCompatActivity {
                     String email = userProfile.email;
                     String age = userProfile.age;
 
-                    greetingTextView.setText("Welcome " + fullName + "!");
-                    emailTextView.setText("E-mail: " + email);
-                    fullNameTextView.setText("Name: " + fullName);
-                    ageTextView.setText("Age: " + age);
+
+                    greetingTextView.setText(getResources().getString(R.string.txtProfile_welcome) + ": " + fullName + "!");
+                    emailTextView.setText(getResources().getString(R.string.txtProfile_email) + ": " + email);
+                    fullNameTextView.setText(getResources().getString(R.string.txtProfile_name) + ": " + fullName);
+                    ageTextView.setText(getResources().getString(R.string.txtProfile_age) + ": " +age);
                 }
             }
 
