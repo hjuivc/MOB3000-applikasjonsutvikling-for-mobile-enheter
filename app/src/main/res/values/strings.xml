@@ -47,6 +47,9 @@
     <!-- Copyright(c) -->
     <string name="txtCopyrightAbout">Copyright \u00a9 recippy. All rights reserved.</string>
 
+    <!-- Activity_add_ingredient -->
+    <string name="ingredients_added">Ingredients added!! &#127858;</string>
+
     <!-- Spinner cousine -->
     <string-array name="cousine_array">
         <item>Italian</item>
@@ -57,5 +60,14 @@
         <item>Chinese</item>
         <item>Japanese</item>
         <item>Spanish</item>
+    </string-array>
+
+    <!-- Spinner unit -->
+    <string-array name="unit_array">
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>l</item>
+        <item>pcs</item>
     </string-array>
 </resources>
