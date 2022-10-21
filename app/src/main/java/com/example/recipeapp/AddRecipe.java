@@ -251,8 +251,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         String description = editTextDescription.getText().toString().trim();
         String stepByStep = editStepByStep.getText().toString().trim();
         String cuisine = spinnerCuisine.getSelectedItem().toString();
-        Boolean vegan = false;
-        Boolean favorite = false;
+        boolean vegan = Boolean.parseBoolean(switchVegan.isChecked() ? "true" : "false");
+        boolean favorite = false;
 
         if (name.isEmpty()) {
             editRecipeName.setError("Recipe name is required");
