@@ -11,22 +11,24 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ThemedSpinnerAdapter;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
@@ -39,6 +41,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private FirebaseAuth mAuth;
     private Spinner spinnerCuisine, spinnerUnit;
     private Switch switchVegan;
+
+    private FirebaseUser recipie;
+    private DatabaseReference reference;
+
+    private String recipieID;
+
 
     private LinearLayout layoutList;
     private Button buttonAdd, btnSaveIng;
@@ -138,18 +146,28 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         });
         layoutList.addView(ingredientsView);
     }
-
+    /**
+     * Metode for å fjerne ingredienser
+     */
     private void removeView(View view) {
         layoutList.removeView(view);
     }
 
+    /**
+     * Metode for å lagre ingredienser
+     */
     private void saveIngredients() {
         if (checkIfValidAndRead()) {
-            for (int i=0; i < ingredientsList.size(); i++) {
-                System.out.println(ingredientsList.get(i).getIngredient());
-                System.out.println(ingredientsList.get(i).getAmount());
-                System.out.println(ingredientsList.get(i).getUnit());
-                Toast.makeText(this, R.string.ingredients_added, Toast.LENGTH_SHORT).show();
+
+            int ingredientCount = layoutList.getChildCount();
+            for (int i=0; i < ingredientsList.size(); i++) {;
+
+                Ingredients ingredients = new Ingredients(i + 1, 2, ingredientsList.get(i).getIngredient(), ingredientsList.get(i).getAmount(), ingredientsList.get(i).getUnit());
+
+                FirebaseDatabase.getInstance().getReference("Ingredients")
+                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .push() // Legger til for å ikke overskrive data til databasen hver gang
+                        .setValue(ingredients);
             }
         }
     }
@@ -157,8 +175,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private boolean checkIfValidAndRead() {
         ingredientsList.clear();
         boolean result = true;
-
-        System.out.println(layoutList.getChildCount());
 
         for (int i = 1; i < layoutList.getChildCount(); i++) {
 
@@ -191,6 +207,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 break;
             }
             ingredientsList.add(ingredients);
+
         }
 
         if (ingredientsList.size()==0){
@@ -201,22 +218,41 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         }
         return result;
     }
-    
 
     /**
      * Metode for å lagre oppskriften.
      */
     private void saveRecipe() {
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String userID = currentUser.getUid();
+
+        DatabaseReference recipies = (DatabaseReference) FirebaseDatabase.getInstance().getReference().child("Recipes");
+        Query recipiesHighestId = recipies.child(userID).orderByChild("recipeID").limitToLast(1);
+        recipiesHighestId.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot){
+                for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                    String Key = childSnapshot.getKey();
+                    System.out.println("Key: " + Key);
+                    String value = childSnapshot.child("recipeID").getValue(String.class);
+                    System.out.println("Value: " + value);
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(AddRecipe.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
+                throw databaseError.toException(); // don't swallow errors
+
+            }
+        });
+
         String name = editRecipeName.getText().toString().trim();
         String description = editTextDescription.getText().toString().trim();
         String stepByStep = editStepByStep.getText().toString().trim();
-        String ingredient = editIngredient.getText().toString().trim();
-        String amount = editAmount.getText().toString().trim();
         String cuisine = spinnerCuisine.getSelectedItem().toString();
-        String unit = spinnerUnit.getSelectedItem().toString();
         Boolean vegan = false;
         Boolean favorite = false;
-
 
         if (name.isEmpty()) {
             editRecipeName.setError("Recipe name is required");
@@ -236,41 +272,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             return;
         }
 
-        if (ingredient.isEmpty()) {
-            editIngredient.setError("Ingredients are required");
-            editIngredient.requestFocus();
-            return;
-        }
-
-        if (amount.isEmpty()) {
-            editAmount.setError("Amount is required");
-            editAmount.requestFocus();
-            return;
-        }
-
         progressBar.setVisibility(View.VISIBLE);
 
         //TODO: Her må vi ordne med autogenerering av recipeID og ingredientID.
-        int recipeID = 1;
-        int ingredientID = 2;
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        String userID = currentUser.getUid();
 
-        Recipe recipe = new Recipe(userID, recipeID, name, description, stepByStep, cuisine, vegan, favorite);
-        Ingredients ingredients = new Ingredients(recipeID, ingredientID, ingredient, amount, unit);
+
+        Recipe recipe = new Recipe(userID, 1, name, description, stepByStep, cuisine, vegan, favorite);
 
         FirebaseDatabase.getInstance().getReference("Recipes")
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .push() // Legger til for å ikke overskrive data til databasen hver gang
-                .child(userID)
                 .setValue(recipe);
-
-        FirebaseDatabase.getInstance().getReference("Ingredients")
-                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                .push() // Legger til for å ikke overskrive data til databasen hver gang
-                .child(String.valueOf(recipeID))
-                .setValue(ingredients);
 
         progressBar.setVisibility(View.GONE);
     }
