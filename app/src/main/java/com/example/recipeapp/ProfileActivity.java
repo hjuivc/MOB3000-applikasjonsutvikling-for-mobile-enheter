@@ -73,8 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
-
         initViews();
 
         /**
