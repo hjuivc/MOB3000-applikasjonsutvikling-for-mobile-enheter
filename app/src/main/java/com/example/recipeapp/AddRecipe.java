@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.ThemedSpinnerAdapter;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -33,7 +34,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
      * Lage variabler for de forskjellige elementene i layouten
      */
     private TextView txtSaveRecipy;
-    private EditText editRecipeName, editTextDescription, editStepByStep, editIngredient, editAmount;
+    private EditText editRecipeName, editTextDescription, editStepByStep, editIngredient, editAmount,  txtAmount, txtIngredient;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private Spinner spinnerCuisine, spinnerUnit;
@@ -41,29 +42,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
     private LinearLayout layoutList;
     private Button buttonAdd, btnSaveIng;
-    private List<String> units = new ArrayList<>();
-    private ArrayList<String> ingredients = new ArrayList<>();
-    ArrayList<View> viewsList =new ArrayList<>();
+    ArrayList<Ingredients> ingredientsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
-
-        /**
-         * Legger til elementer i array som skal inn i spinneren
-         */
-        units.add("g");
-        units.add("kg");
-        units.add("ml");
-        units.add("l");
-        units.add("pcs");
-        units.add("c");
-        units.add("lb");
-        units.add("oz");
-        units.add("pt");
-        units.add("tsp");
-        units.add("tbsp");
 
         /**
          Legge inn tittel på siden.
@@ -109,6 +93,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         if (switchVegan != null) {
             switchVegan.setOnCheckedChangeListener(this);
+            //TODO: Legge til funksjonalitet for å lagre om oppskriften er vegan eller ikke.
         }
     }
 
@@ -133,7 +118,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
      * Metode for å legge til ingredienser
      */
     private void addIngredient() {
-        View ingredientsView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
+        final View ingredientsView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
 
         EditText txtIngredient  = ingredientsView.findViewById(R.id.txtIngredient);
         EditText txtAmount = ingredientsView.findViewById(R.id.txtAmount);
@@ -141,20 +126,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         ImageView imageClose = (ImageView) ingredientsView.findViewById(R.id.image_remove);
 
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, units);
-        spinnerUnit.setAdapter(arrayAdapter);
+        ArrayAdapter<CharSequence> adapter_unit = ArrayAdapter.createFromResource(this, R.array.unit_array, android.R.layout.simple_spinner_item);
+        adapter_unit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnit.setAdapter(adapter_unit);
 
-            imageClose.setOnClickListener(new View.OnClickListener() {
+        imageClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removeView(ingredientsView);
             }
         });
-
-
-            layoutList.addView(ingredientsView);
-            ingredientsView.setId(View.generateViewId());
-            System.out.println(ingredientsView.getId());
+        layoutList.addView(ingredientsView);
     }
 
     private void removeView(View view) {
@@ -162,14 +144,62 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     private void saveIngredients() {
-        System.out.println("save ingredients");
-        //TODO: Legge til ingredienser i array
-        View child = getLayoutInflater().inflate(R.layout.activity_add_recipe, null, false);
-        layoutList.addView(child);
+        if (checkIfValidAndRead()) {
+            for (int i=0; i < ingredientsList.size(); i++) {
+                System.out.println(ingredientsList.get(i).getIngredient());
+                System.out.println(ingredientsList.get(i).getAmount());
+                System.out.println(ingredientsList.get(i).getUnit());
+                Toast.makeText(this, R.string.ingredients_added, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private boolean checkIfValidAndRead() {
+        ingredientsList.clear();
+        boolean result = true;
+
         System.out.println(layoutList.getChildCount());
-        System.out.println(layoutList.getChildAt(1));
-        System.out.println(layoutList.getChildAt(2).getId());
-        System.out.println(layoutList.getChildAt(3));
+
+        for (int i = 1; i < layoutList.getChildCount(); i++) {
+
+            View ingredientsView = layoutList.getChildAt(i);
+
+            EditText txtIngredient = (EditText) ingredientsView.findViewById(R.id.txtIngredient);
+            EditText txtAmount = (EditText) ingredientsView.findViewById(R.id.txtAmount);
+            AppCompatSpinner spinnerUnit = (AppCompatSpinner) ingredientsView.findViewById(R.id.spinnerUnit);
+
+            Ingredients ingredients = new Ingredients();
+
+            if (!txtIngredient.getText().toString().equals("")) {
+                ingredients.setIngredient(txtIngredient.getText().toString());
+            } else {
+                result = false;
+                break;
+            }
+
+            if (!txtAmount.getText().toString().equals("")) {
+                ingredients.setAmount(txtAmount.getText().toString());
+            } else {
+                result = false;
+                break;
+            }
+
+            if (spinnerUnit.getSelectedItemPosition()!=0){
+                ingredients.setUnit(spinnerUnit.getSelectedItem().toString());
+            } else {
+                result = false;
+                break;
+            }
+            ingredientsList.add(ingredients);
+        }
+
+        if (ingredientsList.size()==0){
+            result = false;
+            Toast.makeText(this, "Add ingredient first!", Toast.LENGTH_SHORT).show();
+        } else if(!result){
+            Toast.makeText(this, "Enter All Details Correctly!", Toast.LENGTH_SHORT).show();
+        }
+        return result;
     }
     
 
@@ -260,6 +290,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
+    //TODO: Må fikse at knappen er aktivert.
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
