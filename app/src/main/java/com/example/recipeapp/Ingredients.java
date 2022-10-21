@@ -17,4 +17,44 @@ public class Ingredients {
         this.amount = amount;
         this.unit = unit;
     }
+
+    public int getIngredientID() {
+        return ingredientID;
+    }
+
+    public void setIngredientID(int ingredientID) {
+        this.ingredientID = ingredientID;
+    }
+
+    public int getRecipeID() {
+        return recipeID;
+    }
+
+    public void setRecipeID(int recipeID) {
+        this.recipeID = recipeID;
+    }
+
+    public String getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(String ingredient) {
+        this.ingredient = ingredient;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
 }
