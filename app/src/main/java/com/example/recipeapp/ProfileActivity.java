@@ -44,10 +44,10 @@ public class ProfileActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
 
-        final TextView greetingTextView = (TextView) findViewById(R.id.greeting);
-        final TextView emailTextView = (TextView) findViewById(R.id.email);
-        final TextView fullNameTextView = (TextView) findViewById(R.id.fullName);
-        final TextView ageTextView = (TextView) findViewById(R.id.age);
+        final TextView greetingTextView = findViewById(R.id.greeting);
+        final TextView emailTextView = findViewById(R.id.email);
+        final TextView fullNameTextView = findViewById(R.id.fullName);
+        final TextView ageTextView = findViewById(R.id.age);
 
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
