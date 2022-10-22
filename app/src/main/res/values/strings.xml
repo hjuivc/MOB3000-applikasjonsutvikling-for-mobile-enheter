@@ -48,7 +48,15 @@
     <string name="txtCopyrightAbout">Copyright \u00a9 recippy. All rights reserved.</string>
 
     <!-- Activity_add_ingredient -->
-    <string name="ingredients_added">Ingredients added!! &#127858;</string>
+    <string name="recipe_added">Recipe added!! &#127858;</string>
+    <string name="add_ingredient_first">Add ingredient first!</string>
+    <string name="ingredient_error">Enter all details correctly!</string>
+    <string name="recipe_name">Recipe name is required!</string>
+    <string name="recipe_description">Description is required!</string>
+    <string name="recipe_step_by_step">Step by step is required!</string>
+    <string name="error_message">Something wrong happened!</string>
+    <string name="vegan">Vegan</string>
+    <string name="not_vegan">Not Vegan</string>
 
     //TODO: Add more strings here
     <!-- Spinner cousine -->
