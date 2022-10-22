@@ -186,9 +186,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         if (ingredientsList.size() == 0) {
             result = false;
-            Toast.makeText(this, "Add ingredient first!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.add_ingredient_first, Toast.LENGTH_SHORT).show();
         } else if (!result) {
-            Toast.makeText(this, "Enter All Details Correctly!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.ingredient_error, Toast.LENGTH_SHORT).show();
         }
         return result;
     }
@@ -248,19 +248,19 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                     boolean favorite = false;
 
                     if (name.isEmpty()) {
-                        editRecipeName.setError("Recipe name is required");
+                        editRecipeName.setError(getText(R.string.recipe_name));
                         editRecipeName.requestFocus();
                         return;
                     }
 
                     if (description.isEmpty()) {
-                        editTextDescription.setError("Description is required");
+                        editTextDescription.setError(getText(R.string.recipe_description));
                         editTextDescription.requestFocus();
                         return;
                     }
 
                     if (stepByStep.isEmpty()) {
-                        editStepByStep.setError("Steps is required");
+                        editStepByStep.setError(getText(R.string.recipe_step_by_step));
                         editStepByStep.requestFocus();
                         return;
                     }
@@ -282,7 +282,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(AddRecipe.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(AddRecipe.this, R.string.error_message, Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -309,9 +309,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            switchVegan.setText("Vegan");
+            switchVegan.setText(R.string.vegan);
         } else {
-            switchVegan.setText("Not Vegan");
+            switchVegan.setText(R.string.not_vegan);
         }
     }
 }
