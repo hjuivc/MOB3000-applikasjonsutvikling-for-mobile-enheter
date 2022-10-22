@@ -44,22 +44,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         /**
          * Aktivisere komponentene i layouten og koble de til variablene.
          */
-        register = (TextView) findViewById(R.id.registerNewUser);
+        register = findViewById(R.id.registerNewUser);
         register.setOnClickListener(this);
 
-        forgotPassword = (TextView) findViewById(R.id.forgotPassword);
+        forgotPassword = findViewById(R.id.forgotPassword);
         forgotPassword.setOnClickListener(this);
 
-        signIn = (Button) findViewById(R.id.btnLogin);
+        signIn = findViewById(R.id.btnLogin);
         signIn.setOnClickListener(this);
 
-        editTextEmail = (EditText) findViewById(R.id.txtEmail);
+        editTextEmail = findViewById(R.id.txtEmail);
         editTextEmail.setOnClickListener(this);
 
-        editTextPassword = (EditText) findViewById(R.id.txtPassword);
+        editTextPassword = findViewById(R.id.txtPassword);
         editTextPassword.setOnClickListener(this);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
     }
 
