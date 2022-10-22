@@ -2,6 +2,7 @@ package com.example.recipeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 public class ShowAllRecipes extends AppCompatActivity {
     private RecyclerView recyclerView;
     RecipeRecAdapter adapter;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,10 @@ public class ShowAllRecipes extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /**
-         * Recycler view
+         * Aktivere search view
          */
+        searchView = findViewById(R.id.searchView);
+
         /**
          * Iterate through recipes database and display all recipes.
          */
@@ -61,6 +65,33 @@ public class ShowAllRecipes extends AppCompatActivity {
         {
             super.onStart();
             adapter.startListening();
+
+            if (searchView != null) {
+                searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String newText) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        processSearch(newText);
+                        return false;
+                    }
+                });
+            }
+        }
+
+        private void processSearch(String newText) {
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
+            FirebaseRecyclerOptions<Recipe> options =
+                    new FirebaseRecyclerOptions.Builder<Recipe>()
+                            .setQuery(mAuth.orderByChild("name").startAt(newText).endAt(newText + "\uf8ff"), Recipe.class)
+                            .build();
+            adapter = new RecipeRecAdapter(options);
+            adapter.startListening();
+            recyclerView.setAdapter(adapter);
         }
 
         @Override
@@ -69,7 +100,7 @@ public class ShowAllRecipes extends AppCompatActivity {
             super.onStop();
             adapter.stopListening();
         }
-        
+
     /**
      * Kode for å aktivere tilbake knappen i appen.
      */
