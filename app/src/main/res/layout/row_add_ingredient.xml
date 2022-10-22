@@ -13,7 +13,7 @@
 
     <EditText
         android:id="@+id/txtIngredient"
-        android:layout_width="145dp"
+        android:layout_width="130dp"
         android:layout_height="40dp"
         android:layout_margin="5dp"
         android:layout_marginStart="16dp"
@@ -46,7 +46,7 @@
 
     <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/spinnerUnit"
-        android:layout_width="95dp"
+        android:layout_width="105dp"
         android:layout_height="40dp"
         android:layout_margin="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
