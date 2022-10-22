@@ -88,10 +88,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         buttonAdd.setOnClickListener(this);
 
-        btnSaveIng = findViewById(R.id.btnSaveIngredients);
-
-        btnSaveIng.setOnClickListener(this);
-
         /**
          * Legge til elementer i cousine spinneren
          */
@@ -117,8 +113,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             case R.id.btnAddIngredient:
                 addIngredient();
                 break;
-            case R.id.btnSaveIngredients:
-                //saveIngredients();
         }
     }
 
@@ -152,52 +146,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private void removeView(View view) {
         layoutList.removeView(view);
     }
-
-    /**
-     * Metode for å lagre ingredienser
-
-    private void saveIngredients() {
-        if (checkIfValidAndRead()) {
-            mAuth = FirebaseAuth.getInstance();
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            String userID = currentUser.getUid();
-
-            DatabaseReference recipies = (DatabaseReference) FirebaseDatabase.getInstance().getReference().child("Recipes");
-            Query recipiesHighestId = recipies.child(userID).orderByChild("recipeID").limitToLast(1);
-            recipiesHighestId.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Integer highestRecipeID = null;
-                    for (DataSnapshot recipeSnapshot : dataSnapshot.getChildren()) {
-                        highestRecipeID = recipeSnapshot.child("recipeID").getValue(Integer.class);
-                    }
-                    if (highestRecipeID == null) {
-                        highestRecipeID = 0;
-                    }
-                    highestRecipeID++;
-                    saveIngredientsToDatabase(highestRecipeID);
-                }
-
-                private void saveIngredientsToDatabase(Integer highestRecipeID) {
-                    Integer recipeID = highestRecipeID;
-                    for (int i=0; i < ingredientsList.size(); i++) {;
-
-                        Ingredients ingredients = new Ingredients(i + 1, recipeID, ingredientsList.get(i).getIngredient(), ingredientsList.get(i).getAmount(), ingredientsList.get(i).getUnit());
-
-                        FirebaseDatabase.getInstance().getReference("Ingredients")
-                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .push() // Legger til for å ikke overskrive data til databasen hver gang
-                                .setValue(ingredients);
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(AddRecipe.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
-                }
-            });
-        }
-    }*/
 
     private boolean checkIfValidAndRead() {
         ingredientsList.clear();
