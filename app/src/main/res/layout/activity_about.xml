@@ -96,5 +96,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtAbout3"
-        app:shapeAppearanceOverlay="@style/buttonShape" />
+        app:shapeAppearanceOverlay="@style/buttonShape"
+        android:onClick="contactButton"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>
