@@ -13,7 +13,7 @@
 
     <EditText
         android:id="@+id/txtIngredient"
-        android:layout_width="130dp"
+        android:layout_width="110dp"
         android:layout_height="40dp"
         android:layout_margin="5dp"
         android:layout_marginStart="16dp"
@@ -29,7 +29,7 @@
 
     <EditText
         android:id="@+id/txtAmount"
-        android:layout_width="60dp"
+        android:layout_width="80dp"
         android:layout_height="40dp"
         android:layout_margin="5dp"
         android:layout_marginStart="16dp"
