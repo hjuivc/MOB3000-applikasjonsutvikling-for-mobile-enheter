@@ -64,6 +64,7 @@
 
     <!-- Spinner unit -->
     <string-array name="unit_array">
+        <item>Enhet</item>
         <item>g</item>
         <item>kg</item>
         <item>ml</item>
