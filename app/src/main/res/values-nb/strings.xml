@@ -50,6 +50,7 @@
     <!-- Activity_add_ingredient -->
     <string name="ingredients_added">Ingredienser lagt til!! &#127858;</string>
 
+    //TODO: Add more strings here
     <!-- Spinner cousine -->
     <string-array name="cousine_array">
         <item>Italian</item>
@@ -62,6 +63,7 @@
         <item>Spanish</item>
     </string-array>
 
+    //TODO: Add more strings here
     <!-- Spinner unit -->
     <string-array name="unit_array">
         <item>Enhet</item>
