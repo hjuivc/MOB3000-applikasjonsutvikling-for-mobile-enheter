@@ -48,7 +48,15 @@
     <string name="txtCopyrightAbout">Copyright \u00a9 recippy. All rights reserved.</string>
 
     <!-- Activity_add_ingredient -->
-    <string name="ingredients_added">Ingredienser lagt til!! &#127858;</string>
+    <string name="recipe_added">Oppskrift registrerts!! &#127858;</string>
+    <string name="add_ingredient_first">Legg til ingrediens først!</string>
+    <string name="ingredient_error">Legg inn alle detaljer korrekt!</string>
+    <string name="recipe_name">Navn på oppskrift trengs!</string>
+    <string name="recipe_description">Beskrivelse av oppskrift må fylles ut!</string>
+    <string name="recipe_step_by_step">Step by step må fylles ut!</string>
+    <string name="error_message">Noe feil har skjedd!</string>
+    <string name="vegan">Vegetar</string>
+    <string name="not_vegan">Ikke Vegetar</string>
 
     //TODO: Add more strings here
     <!-- Spinner cousine -->
