@@ -35,19 +35,19 @@ public class About extends AppCompatActivity {
         /**
          * Legge til emoji og tekst på about siden.
          */
-        emoji = (TextView) findViewById(R.id.txtAbout);
+        emoji = findViewById(R.id.txtAbout);
         emoji.setText(getResources().getString(R.string.txtAbout));
 
-        about = (TextView) findViewById(R.id.txtAbout1);
+        about = findViewById(R.id.txtAbout1);
         about.setText(getResources().getString(R.string.txtAbout1));
 
-        about2 = (TextView) findViewById(R.id.txtAbout2);
+        about2 = findViewById(R.id.txtAbout2);
         about2.setText(getResources().getString(R.string.txtAbout2));
 
-        about3 = (TextView) findViewById(R.id.txtAbout3);
+        about3 = findViewById(R.id.txtAbout3);
         about3.setText(getResources().getString(R.string.txtAbout3));
 
-        copyright = (TextView) findViewById(R.id.txtCopyrightAbout);
+        copyright = findViewById(R.id.txtCopyrightAbout);
         copyright.setText(getResources().getString(R.string.txtCopyrightAbout));
     }
 
@@ -67,7 +67,7 @@ public class About extends AppCompatActivity {
     }
 
     public void contactButton(View view) {
-        contact_btn = (MaterialButton) findViewById(R.id.contact);
+        contact_btn = findViewById(R.id.contact);
         contact_btn.setText(getResources().getString(R.string.btnContact_us));
         startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto: " + ")")));
     }
