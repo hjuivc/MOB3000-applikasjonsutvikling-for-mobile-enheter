@@ -36,7 +36,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
      * Lage variabler for de forskjellige elementene i layouten
      */
     private TextView txtSaveRecipy;
-    private EditText editRecipeName, editTextDescription, editStepByStep, editIngredient, editAmount,  txtAmount, txtIngredient;
+    private EditText editRecipeName, editTextDescription, editStepByStep, editIngredient, editAmount, txtAmount, txtIngredient;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
     private Spinner spinnerCuisine, spinnerUnit;
@@ -73,15 +73,15 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         mAuth = FirebaseAuth.getInstance();
 
         txtSaveRecipy = findViewById(R.id.btnSave);
-        txtSaveRecipy.setOnClickListener((View.OnClickListener) this);
+        txtSaveRecipy.setOnClickListener(this);
 
-        editRecipeName = (EditText) findViewById(R.id.txtRecipeName);
-        editTextDescription = (EditText) findViewById(R.id.txtDescription);
-        editStepByStep = (EditText) findViewById(R.id.txtStep);
-        spinnerCuisine = (Spinner) findViewById(R.id.spinnerCuisine);
-        switchVegan = (Switch) findViewById(R.id.txtVeganSwitch);
+        editRecipeName = findViewById(R.id.txtRecipeName);
+        editTextDescription = findViewById(R.id.txtDescription);
+        editStepByStep = findViewById(R.id.txtStep);
+        spinnerCuisine = findViewById(R.id.spinnerCuisine);
+        switchVegan = findViewById(R.id.txtVeganSwitch);
 
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBar);
 
         layoutList = findViewById(R.id.ingredientList);
         buttonAdd = findViewById(R.id.btnAddIngredient);
@@ -97,7 +97,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         if (switchVegan != null) {
             switchVegan.setOnCheckedChangeListener(this);
-            //TODO: Legge til funksjonalitet for å lagre om oppskriften er vegan eller ikke.
         }
     }
 
@@ -122,11 +121,10 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private void addIngredient() {
         final View ingredientsView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
 
-        EditText txtIngredient  = ingredientsView.findViewById(R.id.txtIngredient);
+        EditText txtIngredient = ingredientsView.findViewById(R.id.txtIngredient);
         EditText txtAmount = ingredientsView.findViewById(R.id.txtAmount);
-        AppCompatSpinner spinnerUnit = (AppCompatSpinner) ingredientsView.findViewById(R.id.spinnerUnit);
-        ImageView imageClose = (ImageView) ingredientsView.findViewById(R.id.image_remove);
-
+        AppCompatSpinner spinnerUnit = ingredientsView.findViewById(R.id.spinnerUnit);
+        ImageView imageClose = ingredientsView.findViewById(R.id.image_remove);
 
         ArrayAdapter<CharSequence> adapter_unit = ArrayAdapter.createFromResource(this, R.array.unit_array, android.R.layout.simple_spinner_item);
         adapter_unit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -140,6 +138,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         });
         layoutList.addView(ingredientsView);
     }
+
     /**
      * Metode for å fjerne ingredienser
      */
@@ -155,14 +154,13 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
             View ingredientsView = layoutList.getChildAt(i);
 
-            EditText txtIngredient = (EditText) ingredientsView.findViewById(R.id.txtIngredient);
-            EditText txtAmount = (EditText) ingredientsView.findViewById(R.id.txtAmount);
-            AppCompatSpinner spinnerUnit = (AppCompatSpinner) ingredientsView.findViewById(R.id.spinnerUnit);
+            EditText txtIngredient = ingredientsView.findViewById(R.id.txtIngredient);
+            EditText txtAmount = ingredientsView.findViewById(R.id.txtAmount);
+            AppCompatSpinner spinnerUnit = ingredientsView.findViewById(R.id.spinnerUnit);
 
             Ingredients ingredients = new Ingredients();
 
             if (!txtIngredient.getText().toString().equals("")) {
-                System.out.println("Ingredients ikke lagt til");
                 ingredients.setIngredient(txtIngredient.getText().toString());
             } else {
                 result = false;
@@ -170,15 +168,13 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             }
 
             if (!txtAmount.getText().toString().equals("")) {
-                System.out.println("Amount ikke lagt til");
                 ingredients.setAmount(txtAmount.getText().toString());
             } else {
                 result = false;
                 break;
             }
 
-            if (spinnerUnit.getSelectedItemPosition()!=0){
-                System.out.println("Unit ikke lagt til");
+            if (spinnerUnit.getSelectedItemPosition() != 0) {
                 ingredients.setUnit(spinnerUnit.getSelectedItem().toString());
             } else {
                 result = false;
@@ -188,17 +184,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         }
 
-        if (ingredientsList.size()==0){
+        if (ingredientsList.size() == 0) {
             result = false;
             Toast.makeText(this, "Add ingredient first!", Toast.LENGTH_SHORT).show();
-        } else if(!result){
+        } else if (!result) {
             Toast.makeText(this, "Enter All Details Correctly!", Toast.LENGTH_SHORT).show();
         }
         return result;
     }
 
     /**
-     * Metode for å lagre oppskriften.
+     * Metode for å lagre hele oppskriften.
      */
     private void saveRecipe() {
         if (checkIfValidAndRead()) {
@@ -206,7 +202,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
             FirebaseUser currentUser = mAuth.getCurrentUser();
             String userID = currentUser.getUid();
 
-            DatabaseReference recipies = (DatabaseReference) FirebaseDatabase.getInstance().getReference().child("Recipes");
+            DatabaseReference recipies = FirebaseDatabase.getInstance().getReference().child("Recipes");
             Query recipiesHighestId = recipies.child(userID).orderByChild("recipeID").limitToLast(1);
             recipiesHighestId.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -223,9 +219,12 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                 }
 
+                /**
+                 * Metode for å lagre ingrediens til databasen.
+                 */
                 private void saveIngredientsToDatabase(Integer highestRecipeID) {
                     Integer recipeID = highestRecipeID;
-                    for (int i=0; i < ingredientsList.size(); i++) {;
+                    for (int i = 0; i < ingredientsList.size(); i++) {
 
                         Ingredients ingredients = new Ingredients(i + 1, recipeID, ingredientsList.get(i).getIngredient(), ingredientsList.get(i).getAmount(), ingredientsList.get(i).getUnit());
 
@@ -236,6 +235,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                     }
                 }
 
+                /**
+                 * Metode for å lagre oppskriften til databasen
+                 */
                 private void saveRecipeToDatabase(Integer highestRecipeID) {
                     Integer recipeID = highestRecipeID;
                     String name = editRecipeName.getText().toString().trim();
@@ -265,8 +267,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                     progressBar.setVisibility(View.VISIBLE);
 
-                    //TODO: Her må vi ordne med autogenerering av recipeID og ingredientID.
-
                     saveIngredientsToDatabase(highestRecipeID);
 
                     Recipe recipe = new Recipe(userID, recipeID, name, description, stepByStep, cuisine, vegan, favorite);
@@ -277,6 +277,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                             .setValue(recipe);
 
                     progressBar.setVisibility(View.GONE);
+                    Toast.makeText(AddRecipe.this, R.string.recipe_added, Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -302,14 +303,15 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Metode for å aktivere switch vegan i appen.
+     */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
             switchVegan.setText("Vegan");
-            System.out.println("Vegan");
         } else {
             switchVegan.setText("Not Vegan");
-            System.out.println("Not Vegan");
         }
     }
 }
