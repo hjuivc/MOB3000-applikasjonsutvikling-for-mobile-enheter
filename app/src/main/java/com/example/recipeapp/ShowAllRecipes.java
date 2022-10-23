@@ -61,8 +61,7 @@ public class ShowAllRecipes extends AppCompatActivity {
         }
 
         @Override
-        protected void onStart()
-        {
+        protected void onStart() {
             super.onStart();
             adapter.startListening();
 
@@ -70,49 +69,50 @@ public class ShowAllRecipes extends AppCompatActivity {
                 searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                     @Override
                     public boolean onQueryTextSubmit(String newText) {
+                        processSearch(newText);
                         return false;
                     }
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         processSearch(newText);
-                        return false;
+                        return true;
                     }
                 });
             }
         }
 
-        private void processSearch(String newText) {
+        public void processSearch(String searchText) {
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
             FirebaseRecyclerOptions<Recipe> options =
                     new FirebaseRecyclerOptions.Builder<Recipe>()
-                            .setQuery(mAuth.orderByChild("name").startAt(newText).endAt(newText + "\uf8ff"), Recipe.class)
+                            .setQuery(mAuth.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff"), Recipe.class)
                             .build();
+
             adapter = new RecipeRecAdapter(options);
             adapter.startListening();
             recyclerView.setAdapter(adapter);
         }
 
         @Override
-        protected void onStop()
-        {
+        protected void onStop() {
             super.onStop();
             adapter.stopListening();
         }
 
-    /**
-     * Kode for å aktivere tilbake knappen i appen.
-     */
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                break;
-            default:
-                break;
+        /**
+         * Kode for å aktivere tilbake knappen i appen.
+         */
+        @Override
+        public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()) {
+                case android.R.id.home:
+                    onBackPressed();
+                    break;
+                default:
+                    break;
+            }
+            return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
-    }
 }
