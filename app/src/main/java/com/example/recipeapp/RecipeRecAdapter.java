@@ -1,5 +1,6 @@
 package com.example.recipeapp;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,15 @@ public class RecipeRecAdapter extends FirebaseRecyclerAdapter<Recipe, RecipeRecA
     protected void onBindViewHolder(@NonNull recipeViewholder holder, int position, @NonNull Recipe model) {
         holder.recipeNameText.setText(model.getName());
         holder.recipeDescriptionText.setText(model.getDescription());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), RecipeActivity.class);
+                intent.putExtra("recipeId", getRef(position).getKey());
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @NonNull
