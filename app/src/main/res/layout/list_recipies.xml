@@ -12,7 +12,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        android:padding="10dp"
+        android:background="@drawable/customborder">
 
         <TextView
             android:id="@+id/recipeName"
@@ -34,7 +35,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Recipe name: "
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/recipeDescriptionText"
             app:layout_constraintStart_toEndOf="@+id/recipeName"
@@ -60,7 +60,6 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:text="Description: "
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/recipeDescription"
