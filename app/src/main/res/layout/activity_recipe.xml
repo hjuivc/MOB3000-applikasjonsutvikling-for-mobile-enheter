@@ -25,26 +25,94 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintStart_toEndOf="@+id/txtRecipeName"
         app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <TextView
         android:id="@+id/recipeDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.091"
+        app:layout_constraintStart_toEndOf="@+id/txtDescription"
         app:layout_constraintTop_toBottomOf="@+id/recipeName" />
 
     <TextView
         android:id="@+id/recipeStepByStep"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.067"
+        app:layout_constraintStart_toEndOf="@+id/txtStepByStep"
         app:layout_constraintTop_toBottomOf="@+id/recipeDescription" />
+
+    <TextView
+        android:id="@+id/txtRecipeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="40dp"
+        android:text="Recipe name:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:text="Description:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtRecipeName" />
+
+    <TextView
+        android:id="@+id/txtStepByStep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        android:text="Step by step:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnUpdateRecipe"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="Delete recipe"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.53"
+        app:layout_constraintStart_toEndOf="@+id/btnDeleteRecipe"
+        app:layout_constraintTop_toBottomOf="@+id/switch1"
+        app:shapeAppearanceOverlay="@style/buttonShape" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnDeleteRecipe"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="72dp"
+        android:text="Update Recipe"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/switch1"
+        app:shapeAppearanceOverlay="@style/buttonShape" />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Add to favorite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.235"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtStepByStep" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
