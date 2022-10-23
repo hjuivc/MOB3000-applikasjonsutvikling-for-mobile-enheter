@@ -9,6 +9,7 @@
     <string name="activity_add_recipe">Add Recipe</string>
     <string name="activity_favorite_recipes">Favorite Recipes</string>
     <string name="activity_show_all_recipes">All Recipes</string>
+    <string name="activity_show_recipe">Recipe</string>
 
     <!-- Login -->
     <string name="login_email">Email</string>
@@ -57,6 +58,9 @@
     <string name="error_message">Something wrong happened!</string>
     <string name="vegan">Vegan</string>
     <string name="not_vegan">Not Vegan</string>
+
+    <!-- Activity_add_recipe -->
+
 
     //TODO: Add more strings here
     <!-- Spinner cousine -->
