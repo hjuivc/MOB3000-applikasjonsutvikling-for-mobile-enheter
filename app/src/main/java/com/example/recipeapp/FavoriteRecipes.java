@@ -48,7 +48,7 @@ public class FavoriteRecipes extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FirebaseRecyclerOptions<Recipe> options =
                 new FirebaseRecyclerOptions.Builder<Recipe>()
-                        .setQuery(mAuth, Recipe.class)
+                        .setQuery(mAuth.orderByChild("favorite").equalTo(true), Recipe.class)
                         .build();
 
         adapter = new RecipeRecAdapter(options);
