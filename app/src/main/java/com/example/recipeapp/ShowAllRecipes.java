@@ -45,12 +45,17 @@ public class ShowAllRecipes extends AppCompatActivity {
         searchView = findViewById(R.id.searchView);
 
         /**
+         * Aktivere recycler view
+         */
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recipeRecyclerView);
+
+
+        /**
          * Iterate through recipes database and display all recipes.
          */
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
-        recyclerView = findViewById(R.id.recipeRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         FirebaseRecyclerOptions<Recipe> options =
                 new FirebaseRecyclerOptions.Builder<Recipe>()
                         .setQuery(mAuth, Recipe.class)
