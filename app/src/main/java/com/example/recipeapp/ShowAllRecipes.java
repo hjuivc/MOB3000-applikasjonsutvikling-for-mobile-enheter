@@ -75,8 +75,15 @@ public class ShowAllRecipes extends AppCompatActivity {
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
-                        processSearch(newText);
-                        return true;
+                        if (newText.isEmpty()) {
+                            processSearch(newText);
+                            return false;
+
+                        } else {
+                            String formatedSearch = newText.substring(0, 1).toUpperCase() + newText.substring(1);
+                            processSearch(formatedSearch);
+                            return true;
+                        }
                     }
                 });
             }
