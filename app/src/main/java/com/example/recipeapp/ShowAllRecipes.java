@@ -47,7 +47,7 @@ public class ShowAllRecipes extends AppCompatActivity {
         /**
          * Aktivere recycler view
          */
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recipeRecyclerView);
+        recyclerView = findViewById(R.id.recipeRecyclerView);
 
 
         /**
