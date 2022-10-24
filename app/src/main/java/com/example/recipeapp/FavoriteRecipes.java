@@ -45,7 +45,7 @@ public class FavoriteRecipes extends AppCompatActivity {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
         recyclerView = findViewById(R.id.recipeRecyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         FirebaseRecyclerOptions<Recipe> options =
                 new FirebaseRecyclerOptions.Builder<Recipe>()
                         .setQuery(mAuth.orderByChild("favorite").equalTo(true), Recipe.class)
