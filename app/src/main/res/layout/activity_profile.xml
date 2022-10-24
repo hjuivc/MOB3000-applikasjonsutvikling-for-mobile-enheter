@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".ProfileActivity"
     tools:layout_editor_absoluteX="-52dp"
-    tools:layout_editor_absoluteY="0dp"
-    android:background="@color/background">
+    tools:layout_editor_absoluteY="0dp">
 
     <ImageView
         android:id="@+id/logo"
@@ -40,32 +40,36 @@
         app:backgroundTint="#323232"
         app:layout_constraintBottom_toTopOf="@+id/btnLogout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddRecipe"
         app:shapeAppearanceOverlay="@style/buttonShape" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddRecipe"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:text="@string/btnAdd_recipe"
         app:backgroundTint="#323232"
         app:layout_constraintBottom_toTopOf="@+id/btnAbout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:shapeAppearanceOverlay="@style/buttonShape"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnFavoriteRecipes"
+        app:shapeAppearanceOverlay="@style/buttonShape" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFavoriteRecipes"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
         android:text="@string/btnFavorite_recipes"
         app:backgroundTint="#323232"
         app:layout_constraintBottom_toTopOf="@+id/btnAddRecipe"
         app:layout_constraintEnd_toEndOf="parent"
-        app:shapeAppearanceOverlay="@style/buttonShape"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnShowAllRecipes"
+        app:shapeAppearanceOverlay="@style/buttonShape" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnShowAllRecipes"
@@ -76,6 +80,7 @@
         app:backgroundTint="#323232"
         app:layout_constraintBottom_toTopOf="@+id/btnFavoriteRecipes"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/age"
         app:shapeAppearanceOverlay="@style/buttonShape" />
@@ -85,8 +90,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:textSize="20sp"
         android:text="@string/txtProfile_welcome"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -115,10 +120,10 @@
 
     <TextView
         android:id="@+id/age"
-        android:text="@string/txtProfile_age"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:text="@string/txtProfile_age"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fullName" />
