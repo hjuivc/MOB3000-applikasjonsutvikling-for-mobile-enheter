@@ -61,6 +61,11 @@
 
     <!-- Activity_add_recipe -->
 
+    <!-- Recipe activity -->
+    <string name="ingredient_label">Name</string>
+    <string name="amount_label">Amount</string>
+
+
 
     //TODO: Add more strings here
     <!-- Spinner cousine -->
