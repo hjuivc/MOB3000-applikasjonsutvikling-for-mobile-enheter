@@ -1,5 +1,6 @@
 package com.example.recipeapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +20,7 @@ public class RecipeRecAdapter extends FirebaseRecyclerAdapter<Recipe, RecipeRecA
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull recipeViewholder holder, int position, @NonNull Recipe model) {
+    protected void onBindViewHolder(@NonNull recipeViewholder holder, @SuppressLint("RecyclerView") int position, @NonNull Recipe model) {
         holder.recipeNameText.setText(model.getName());
         holder.recipeDescriptionText.setText(model.getDescription());
 
