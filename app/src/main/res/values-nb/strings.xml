@@ -10,6 +10,7 @@
     <string name="activity_add_recipe">Legg til oppskrift</string>
     <string name="activity_favorite_recipes">Favoritt oppskrifter</string>
     <string name="activity_show_all_recipes">Alle oppskrifter</string>
+    <string name="activity_show_recipe">Recipe</string>
 
     <!-- Login -->
     <string name="login_email">Epost</string>
@@ -57,6 +58,10 @@
     <string name="error_message">Noe feil har skjedd!</string>
     <string name="vegan">Vegetar</string>
     <string name="not_vegan">Ikke Vegetar</string>
+
+    <!-- Recipe activity -->
+    <string name="ingredient_label">Name</string>
+    <string name="amount_label">Amount</string>
 
     //TODO: Add more strings here
     <!-- Spinner cousine -->
