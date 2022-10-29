@@ -1,12 +1,16 @@
 package com.example.recipeapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.Switch;
@@ -31,6 +35,8 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
     private String userID;
     private Switch favoriteSwitch;
 
+    private Button btnUpdateRecipe, btnDeleteRecipe;
+
     private RecyclerView recyclerView;
 
     @Override
@@ -50,6 +56,12 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
         final TextView recipeDescriptionTextView = findViewById(R.id.recipeDescription);
         final TextView recipeStepsTextView = findViewById(R.id.recipeStepByStep);
         final TextView recipeCousineTextView = findViewById(R.id.recipeCousine);
+
+        btnUpdateRecipe = findViewById(R.id.btnUpdateRecipe);
+        btnDeleteRecipe = findViewById(R.id.btnDeleteRecipe);
+
+        btnUpdateRecipe.setOnClickListener(this);
+        btnDeleteRecipe.setOnClickListener(this);
 
         if (favoriteSwitch != null) {
             favoriteSwitch.setOnCheckedChangeListener(this);
@@ -106,6 +118,9 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
+
+
+
         /**
          Legge inn tittel på siden.
          */
@@ -124,8 +139,19 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
             favoriteSwitch.setText("Favorite");
+            boolean vegan = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
+
+            // Update recipe vegan status
+            String recipeId = getIntent().getStringExtra("recipeId");
+            referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(vegan);
+
         } else {
             favoriteSwitch.setText("Not favorite");
+            boolean vegan = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
+
+            // Update recipe vegan status
+            String recipeId = getIntent().getStringExtra("recipeId");
+            referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(vegan);
         }
     }
 
@@ -151,15 +177,16 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                 updateRecipe();
                 break;
             case R.id.btnDeleteRecipe:
-                //TODO: Må legge til kode for å slette recipe.
+                deleteRecipe();
                 break;
         }
     }
 
     private void updateRecipe() {
-        //TODO: Legge inn kode for å oppdatere oppskrift.
-        boolean vegan = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
-        System.out.println(vegan);
+    }
+
+    private void deleteRecipe() {
+     
     }
 
     @Override
