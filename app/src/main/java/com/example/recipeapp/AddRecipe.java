@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -278,6 +279,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                     progressBar.setVisibility(View.GONE);
                     Toast.makeText(AddRecipe.this, R.string.recipe_added, Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(AddRecipe.this, ProfileActivity.class));
                 }
 
                 @Override
