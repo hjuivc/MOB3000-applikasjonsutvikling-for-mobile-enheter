@@ -145,7 +145,7 @@
         </androidx.cardview.widget.CardView>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnUpdateRecipe"
+            android:id="@+id/btnDeleteRecipe"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_marginTop="72dp"
@@ -154,12 +154,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.542"
-            app:layout_constraintStart_toEndOf="@+id/btnDeleteRecipe"
+            app:layout_constraintStart_toEndOf="@+id/btnUpdateRecipe"
             app:layout_constraintTop_toBottomOf="@+id/txtFavoriteSwitch"
             app:shapeAppearanceOverlay="@style/buttonShape" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnDeleteRecipe"
+            android:id="@+id/btnUpdateRecipe"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
