@@ -10,6 +10,7 @@
     <string name="activity_favorite_recipes">Favorite Recipes</string>
     <string name="activity_show_all_recipes">All Recipes</string>
     <string name="activity_show_recipe">Recipe</string>
+    <string name="activity_update_recipes">Update Recipe</string>
 
     <!-- Login -->
     <string name="login_email">Email</string>
@@ -64,7 +65,6 @@
     <!-- Recipe activity -->
     <string name="ingredient_label">Name</string>
     <string name="amount_label">Amount</string>
-
 
 
     //TODO: Add more strings here
