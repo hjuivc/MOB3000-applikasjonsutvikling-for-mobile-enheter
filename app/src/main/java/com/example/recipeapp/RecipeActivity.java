@@ -3,6 +3,7 @@ package com.example.recipeapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
@@ -10,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
@@ -24,6 +26,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class RecipeActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -43,6 +46,9 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe);
+        // Always keep the screen on when showing this page
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         referenceRecipe = FirebaseDatabase.getInstance().getReference("Recipes");
@@ -62,11 +68,31 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
 
         btnUpdateRecipe.setOnClickListener(this);
         btnDeleteRecipe.setOnClickListener(this);
+        favoriteSwitch.setOnCheckedChangeListener(this);
 
-        if (favoriteSwitch != null) {
-            favoriteSwitch.setOnCheckedChangeListener(this);
-        }
+        /**
+         * If favorite is set it will show as set.
+         */
+        referenceRecipe.child(userID).child(recipeId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Recipe recipe = dataSnapshot.getValue(Recipe.class);
+                if (recipe.getFavorite() == true) {
+                    favoriteSwitch.setChecked(true);
+                } else {
+                    favoriteSwitch.setChecked(false);
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(RecipeActivity.this, databaseError.getCode(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        /**
+         * Iterate through recipes database and display all recipes.
+         */
         referenceRecipe.child(userID).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -183,10 +209,33 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void updateRecipe() {
+        String recipeId = getIntent().getStringExtra("recipeId");
+        Intent intent = new Intent(this, UpdateRecipe.class);
+        intent.putExtra("recipeId", recipeId);
+        startActivity(intent);
     }
 
     private void deleteRecipe() {
-     
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        String recipeId = getIntent().getStringExtra("recipeId");
+                        referenceRecipe.child(userID).child(recipeId).removeValue();
+                        Toast.makeText(RecipeActivity.this, "Recipe deleted", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(RecipeActivity.this, ShowAllRecipes.class));
+                        break;
+
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
     }
 
     @Override
