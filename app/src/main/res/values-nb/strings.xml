@@ -10,7 +10,9 @@
     <string name="activity_add_recipe">Legg til oppskrift</string>
     <string name="activity_favorite_recipes">Favoritt oppskrifter</string>
     <string name="activity_show_all_recipes">Alle oppskrifter</string>
-    <string name="activity_show_recipe">Recipe</string>
+    <string name="activity_show_recipe">Oppskrift</string>
+    <string name="activity_update_recipes">Oppdatere oppskrift</string>
+
 
     <!-- Login -->
     <string name="login_email">Epost</string>
