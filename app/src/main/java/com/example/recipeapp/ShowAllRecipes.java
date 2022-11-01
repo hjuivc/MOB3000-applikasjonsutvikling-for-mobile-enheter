@@ -8,6 +8,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.Spinner;
+import android.widget.Switch;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,10 +25,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class ShowAllRecipes extends AppCompatActivity {
+public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
     private RecyclerView recyclerView;
     RecipeRecAdapter adapter;
     SearchView searchView;
+    private Switch veganSwitch;
+    private String userID;
+    private FirebaseUser user;
+    private DatabaseReference referenceRecipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +58,111 @@ public class ShowAllRecipes extends AppCompatActivity {
          * Aktivere recycler view
          */
         recyclerView = findViewById(R.id.recipeRecyclerView);
+
+        /**
+         * Aktivere vegan switch
+         */
+        veganSwitch = findViewById(R.id.veganSwitch);
+        veganSwitch.setOnCheckedChangeListener(this);
+
+        /**
+         * Iterate through recipes database and display all recipes.
+         */
+        referenceRecipe = FirebaseDatabase.getInstance().getReference("Recipes");
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+
+        /**
+         * Legge til elementer i cousine spinneren
+         */
+        final Spinner recipeCousineSpinner = findViewById(R.id.recipeCousine);
+        ArrayAdapter<CharSequence> adapter_cousine = ArrayAdapter.createFromResource(this, R.array.cousine_array, android.R.layout.simple_spinner_item);
+        adapter_cousine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        recipeCousineSpinner.setAdapter(adapter_cousine);
+
+
+        recipeCousineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String cousine = recipeCousineSpinner.getSelectedItem().toString();
+                if (cousine.equals("Cuisine")) {
+                    showAllRecipes();
+                } else {
+                    showRecipesByCousine(cousine);
+                }
+
+            }
+            private void showRecipesByCousine(String cousine) {
+                if (veganSwitch.isChecked()) {
+                    System.out.println("vegan switch is checked");
+                    referenceRecipe.orderByChild("cuisine").equalTo(cousine).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            System.out.println("dataSnapshot: " + dataSnapshot);
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Recipe recipe = snapshot.getValue(Recipe.class);
+                                System.out.println(recipe.name);
+                                if (recipe.vegan.equals(true)) {
+                                    System.out.println("vegan");
+                                    FirebaseRecyclerOptions<Recipe> options =
+                                            new FirebaseRecyclerOptions.Builder<Recipe>()
+                                                    .setQuery(referenceRecipe.orderByChild("cuisine").equalTo(cousine), Recipe.class)
+                                                    .build();
+                                    adapter = new RecipeRecAdapter(options);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
+                                    recyclerView.setAdapter(adapter);
+                                }
+                            }
+
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+
+                    });
+
+                    /**
+                    Query query = FirebaseDatabase.getInstance().getReference().child("Recipes").orderByChild("cousine").equalTo(cousine).orderByChild("vegan").equalTo(true);
+                    FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>().setQuery(query, Recipe.class).build();
+                    adapter = new RecipeRecAdapter(options);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
+                    recyclerView.setAdapter(adapter);
+                } else {
+                    Query query = FirebaseDatabase.getInstance().getReference().child("Recipes").orderByChild("cousine").equalTo(cousine);
+                    FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>().setQuery(query, Recipe.class).build();
+                    adapter = new RecipeRecAdapter(options);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
+                    recyclerView.setAdapter(adapter);*/
+
+                    }
+                else {
+                    Query query = FirebaseDatabase.getInstance().getReference().child("Recipes").orderByChild("cousine").equalTo(cousine);
+                    FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>().setQuery(query, Recipe.class).build();
+                    adapter = new RecipeRecAdapter(options);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            private void showAllRecipes() {
+                String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
+                FirebaseRecyclerOptions<Recipe> options =
+                        new FirebaseRecyclerOptions.Builder<Recipe>()
+                                .setQuery(mAuth, Recipe.class)
+                                .build();
+
+                adapter = new RecipeRecAdapter(options);
+                adapter.startListening();
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                System.out.println("Nothing selected");
+
+            }
+        });
 
 
         /**
@@ -94,6 +209,8 @@ public class ShowAllRecipes extends AppCompatActivity {
             }
         }
 
+
+
         public void processSearch(String searchText) {
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
@@ -107,11 +224,53 @@ public class ShowAllRecipes extends AppCompatActivity {
             recyclerView.setAdapter(adapter);
         }
 
-        @Override
-        protected void onStop() {
-            super.onStop();
-            adapter.stopListening();
+
+    /**
+     * Metode for å aktivere switch favorite i appen.
+     */
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (veganSwitch.isChecked()) {
+            veganSwitch.setText("Vegan");
+
+
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
+            recyclerView = findViewById(R.id.recipeRecyclerView);
+            recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+            FirebaseRecyclerOptions<Recipe> options =
+                    new FirebaseRecyclerOptions.Builder<Recipe>()
+                            .setQuery(mAuth.orderByChild("vegan").equalTo(true), Recipe.class)
+                            .build();
+
+            adapter = new RecipeRecAdapter(options);
+            adapter.startListening();
+            recyclerView.setAdapter(adapter);
+
+        } if (!veganSwitch.isChecked()) {
+            veganSwitch.setText("Not vegan");
+
+
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
+            recyclerView = findViewById(R.id.recipeRecyclerView);
+            recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+            FirebaseRecyclerOptions<Recipe> options =
+                    new FirebaseRecyclerOptions.Builder<Recipe>()
+                            .setQuery(mAuth, Recipe.class)
+                            .build();
+
+            adapter = new RecipeRecAdapter(options);
+            adapter.startListening();
+            recyclerView.setAdapter(adapter);
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
 
         /**
          * Kode for å aktivere tilbake knappen i appen.
