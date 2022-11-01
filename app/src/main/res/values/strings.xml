@@ -70,6 +70,7 @@
     //TODO: Add more strings here
     <!-- Spinner cousine -->
     <string-array name="cousine_array">
+        <item>Cuisine</item>
         <item>Italian</item>
         <item>Indian</item>
         <item>Norwegian</item>
