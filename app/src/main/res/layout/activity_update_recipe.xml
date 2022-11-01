@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".RecipeActivity"
-    android:id="@+id/favoriteSwitch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
@@ -63,41 +62,41 @@
 
                         <EditText
                             android:id="@+id/recipeName"
-                            android:textSize="14dp"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textSize="14dp" />
 
 
                         <TextView
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="Description: "
                             android:textStyle="bold" />
 
                         <EditText
-                            android:textSize="14dp"
                             android:id="@+id/recipeDescription"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textSize="14dp" />
 
                         <TextView
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="Step by step: "
                             android:textStyle="bold" />
 
                         <EditText
-                            android:textSize="14dp"
                             android:id="@+id/recipeStepByStep"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                            android:layout_height="wrap_content"
+                            android:textSize="14dp" />
 
                         <TextView
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="Cousine: "
                             android:textStyle="bold" />
 
@@ -107,37 +106,39 @@
                             android:layout_height="wrap_content" />
 
                         <TextView
-                            android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
                             android:text="Ingredients: "
                             android:textStyle="bold" />
+
                         <LinearLayout
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:weightSum="3">
-                            <TextView
-                                android:layout_marginTop="5dp"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:text="Name: "
-                                android:textStyle="bold"
-                                android:layout_weight="2"/>
 
                             <TextView
-                                android:layout_marginTop="5dp"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="2"
+                                android:text="Name: "
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_weight="1"
                                 android:text="Amount: "
-                                android:textStyle="bold"
-                                android:layout_weight="1"/>
+                                android:textStyle="bold" />
                         </LinearLayout>
 
                         <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/ingredientList"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/ingredientList"
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
                     </LinearLayout>
@@ -157,8 +158,33 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/veganSwitch"
             app:shapeAppearanceOverlay="@style/buttonShape" />
+
+        <Switch
+            android:id="@+id/veganSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Not vegan"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/favoriteSwitch"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <Switch
+            android:id="@+id/favoriteSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Not favorite"
+            app:layout_constraintBottom_toTopOf="@+id/btnUpdateRecipe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/veganSwitch"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
