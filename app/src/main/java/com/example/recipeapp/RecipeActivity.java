@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -37,6 +38,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
 
     private String userID;
     private Switch favoriteSwitch;
+    private ImageView image;
 
     private Button btnUpdateRecipe, btnDeleteRecipe;
 
@@ -69,6 +71,9 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
         btnUpdateRecipe.setOnClickListener(this);
         btnDeleteRecipe.setOnClickListener(this);
         favoriteSwitch.setOnCheckedChangeListener(this);
+
+        image = findViewById(R.id.logo);
+        image.setOnClickListener(this);
 
         /**
          * If favorite is set it will show as set.
@@ -140,7 +145,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(RecipeActivity.this, "Noe gikk galt", Toast.LENGTH_LONG).show();
+                Toast.makeText(RecipeActivity.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -148,18 +153,18 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
 
 
         /**
-         Legge inn tittel på siden.
+         Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_show_recipe));
 
         /**
-         * Aktivere tilbake knapp i action bar.
+         * Activating "back- button" on the action bar.
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     /**
-     * Metode for å aktivere switch vegan i appen.
+     * Method for acitvating the SwitchVegan in the app
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -182,7 +187,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     /**
-     * Kode for å aktivere tilbake knappen i appen.
+     * Code for activating the "back- button" on the action bar.
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -204,6 +209,9 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.btnDeleteRecipe:
                 deleteRecipe();
+                break;
+            case R.id.logo:
+                startActivity(new Intent(this, ProfileActivity.class));
                 break;
         }
     }

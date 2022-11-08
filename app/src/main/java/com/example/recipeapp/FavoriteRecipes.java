@@ -6,18 +6,23 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class FavoriteRecipes extends AppCompatActivity {
+public class FavoriteRecipes extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView recyclerView;
     RecipeRecAdapter adapter;
     SearchView searchView;
+    private ImageView image;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +30,25 @@ public class FavoriteRecipes extends AppCompatActivity {
         setContentView(R.layout.activity_favorite_recipes);
 
         /**
-         Legge inn tittel på siden.
+         Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_favorite_recipes));
 
         /**
-         * Aktivere tilbake knapp i action bar.
+         * Activating the "back- button" on the action bar.
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /**
-         * Aktivere search view
+         * Activating search view
          */
         searchView = findViewById(R.id.searchView);
+
+        /**
+         * Activating logo
+         */
+        image = findViewById(R.id.logo);
+        image.setOnClickListener(this);
 
         /**
          * Iterate through recipes database and display all recipes.
@@ -98,7 +109,7 @@ public class FavoriteRecipes extends AppCompatActivity {
     }
 
     /**
-     * Kode for å aktivere tilbake knappen i appen.
+     * Code for activating the "back- button" in the app.
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -110,5 +121,17 @@ public class FavoriteRecipes extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Code for activating the logo.
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.logo:
+                startActivity(new Intent(this, ProfileActivity.class));
+                break;
+        }
     }
 }

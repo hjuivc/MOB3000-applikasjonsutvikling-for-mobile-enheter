@@ -5,8 +5,8 @@ public class User {
 
     public User() {
         /**
-         * Default konstruktør trengs for å kalle på DataSnapshot.getValue(User.class)
-          */
+         * Default constructor required for calls to DataSnapshot.getValue(User.class)
+         */
     }
 
     public User(String fullName, String age, String email) {

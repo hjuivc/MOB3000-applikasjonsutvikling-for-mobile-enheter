@@ -30,17 +30,17 @@ public class ForgotPassword extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
 
         /**
-         Legge inn tittel på siden.
+         Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_forgot_password));
 
         /**
-         * Aktivere tilbake knapp i action bar.
+         * Activating "back- button" on the action bar.
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /**
-         * Aktivisere komponentene i layouten og koble de til variablene.
+         * Activating components in the layout and connecting the variables.
          */
         editTextEmail = findViewById(R.id.txtEmail);
         resetPassword = findViewById(R.id.btnForgotPassword);
@@ -49,7 +49,7 @@ public class ForgotPassword extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         /**
-         * Legge til en lytter på knappen.
+         * Adding a listener to the button.
          */
         resetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,7 +61,7 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     /**
-     * Metode for å tilbakestille passordet.
+     * Method for reset password.
      */
     private void resetPassword() {
         String email = editTextEmail.getText().toString().trim();
@@ -90,7 +90,7 @@ public class ForgotPassword extends AppCompatActivity {
     }
 
     /**
-     * Kode for å aktivere tilbake knappen i appen.
+     * Code for activating "back- button" on the action bar.
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {

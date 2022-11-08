@@ -33,12 +33,12 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         /**
-         Legge inn tittel på siden.
+        Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_profile));
 
         /**
-         * Henter ut bruker fra Firebase
+         * Retrieving the user's information from the database.
          */
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
@@ -120,7 +120,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         /**
-         * Logg ut knapp
+         * Logout button
          */
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +133,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     /**
-     * Metode for å initialisere knappene
+     * Method for initializing the buttons.
      */
 
     private void initViews() {

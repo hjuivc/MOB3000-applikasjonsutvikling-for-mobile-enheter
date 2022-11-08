@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     /**
-     * Lage variabler for de forskjellige elementene i layouten
+     *  Making variables for the different elements in the layout
      */
     private TextView txtSaveRecipy;
     private EditText editRecipeName, editTextDescription, editStepByStep, editIngredient, editAmount, txtAmount, txtIngredient;
@@ -62,17 +62,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         setContentView(R.layout.activity_add_recipe);
 
         /**
-         Legge inn tittel på siden.
+         Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_add_recipe));
 
         /**
-         * Aktivere tilbake knapp i action bar.
+         * Activating "back- button" in the action bar.
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /**
-         * Aktivisere komponentene i layouten og koble de til variablene.
+         * Activate components in the layout and connecting them to the different variables.
          */
         mAuth = FirebaseAuth.getInstance();
 
@@ -96,7 +96,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         image.setOnClickListener(this);
 
         /**
-         * Legge til elementer i cousine spinneren
+         * Adding elements to the cuisine- spinner
          */
         ArrayAdapter<CharSequence> adapter_cousine = ArrayAdapter.createFromResource(this, R.array.cousine_array, android.R.layout.simple_spinner_item);
         adapter_cousine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -108,7 +108,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
-     * Metode for å registrere bruker. Kalles når man trykker "save" og "add ingredients.
+     * Method for user- registration. Calls the method when "save" is clicked, and add ingredients.
      */
     @Override
     public void onClick(View v) {
@@ -126,7 +126,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
-     * Metode for å legge til ingredienser
+     * Method for adding ingredients to the recipe.
      */
     private void addIngredient() {
         final View ingredientsView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
@@ -150,7 +150,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
-     * Metode for å fjerne ingredienser
+     * Method for removing ingredients from the recipe.
      */
     private void removeView(View view) {
         layoutList.removeView(view);
@@ -204,7 +204,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
-     * Metode for å lagre hele oppskriften.
+     * Method for saving the entire recipe.
      */
     private void saveRecipe() {
         if (checkIfValidAndRead()) {
@@ -230,7 +230,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 }
 
                 /**
-                 * Metode for å lagre ingrediens til databasen.
+                 * Method for saving the ingredients to the database.
                  */
                 private void saveIngredientsToDatabase(Integer highestRecipeID) {
                     Integer recipeID = highestRecipeID;
@@ -240,13 +240,13 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                         FirebaseDatabase.getInstance().getReference("Ingredients")
                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                .push() // Legger til for å ikke overskrive data til databasen hver gang
+                                .push() // Adding this for not overwriting to the database every time
                                 .setValue(ingredients);
                     }
                 }
 
                 /**
-                 * Metode for å lagre oppskriften til databasen
+                 * Method for saving the recipe to the database
                  */
                 private void saveRecipeToDatabase(Integer highestRecipeID) {
                     Integer recipeID = highestRecipeID;
@@ -283,7 +283,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                     FirebaseDatabase.getInstance().getReference("Recipes")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .push() // Legger til for å ikke overskrive data til databasen hver gang
+                            .push() // Adding this for not overwriting to the database every time
                             .setValue(recipe);
 
                     progressBar.setVisibility(View.GONE);
@@ -300,7 +300,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
-     * Kode for å aktivere tilbake knappen i appen.
+     * Code for activating the "back- button" in the app.
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -315,7 +315,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     }
 
     /**
-     * Metode for å aktivere switch vegan i appen.
+     * Method for activating the "SwitchVegan" in the app.
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

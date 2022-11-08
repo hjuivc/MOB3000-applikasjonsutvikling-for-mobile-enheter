@@ -22,7 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
-     * Lage variabler for de forskjellige elementene i layouten
+     * Making variables to the different elements in the layout
      */
     private TextView register, forgotPassword;
     private EditText editTextEmail, editTextPassword;
@@ -37,12 +37,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         /**
-         Legge inn tittel på siden.
+         Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_login));
 
         /**
-         * Aktivisere komponentene i layouten og koble de til variablene.
+         * Activating the components in layout and connect them to the variables.
          */
         register = findViewById(R.id.registerNewUser);
         register.setOnClickListener(this);
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * Denne metoden blir kallet på når brukeren trykker på de ulike "knappene" i layouten.
+     * This method being called when the user clicks on the different buttons.
      */
     @Override
     public void onClick(View v) {
@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     /**
-     * Denne metoden blir kallet på når brukeren trykker på "Logg inn" knappen.
+     * This method gets called when the user clicks on the login button.
      */
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
@@ -115,7 +115,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         progressBar.setVisibility(View.VISIBLE);
 
         /**
-         * Denne metoden sjekker om brukeren er registrert i databasen.
+         * This method checks if the user is registered in the database.
          */
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         Toast.makeText(getApplicationContext(), R.string.check_email, Toast.LENGTH_LONG).show();
                     }
                     /**
-                     * Sende brukeren til bruker profilen
+                     * Sends the user to the profile page if the user is registered.
                      */
                     startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
                 } else {

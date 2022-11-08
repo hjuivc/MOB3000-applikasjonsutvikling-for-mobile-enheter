@@ -12,7 +12,7 @@ public class Recipe {
 
     public Recipe() {
         /**
-         * Default konstruktør trengs for å kalle på DataSnapshot.getValue(Recipe.class)
+         * Default constructor required for calls to DataSnapshot.getValue(Recipe.class)
          */
     }
 

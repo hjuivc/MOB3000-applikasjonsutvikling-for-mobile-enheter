@@ -6,7 +6,7 @@ public class Ingredients {
 
     public Ingredients() {
         /**
-         * Default konstruktør trengs for å kalle på DataSnapshot.getValue(Ingredients.class)
+         * Default constructor needed to call DataSnapshot.getValue(Ingredients.class)
          */
     }
 

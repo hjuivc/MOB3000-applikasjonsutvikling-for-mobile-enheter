@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -35,6 +36,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
     private RecyclerView recyclerView;
     private Button btnConfirmUpdateRecipe;
     private Switch favoriteSwitch, veganSwitch;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,17 +46,17 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
 
 
         /**
-         Legge inn tittel på siden.
+         Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_update_recipes));
 
         /**
-         * Aktivere tilbake knapp i action bar.
+         * Activating the "back- button" on the action bar.
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /**
-         * Legge til elementer i cousine spinneren
+         * Adding elements to the cuisine- spinner.
          */
         final Spinner recipeCousineSpinner = findViewById(R.id.recipeCousine);
         ArrayAdapter<CharSequence> adapter_cousine = ArrayAdapter.createFromResource(this, R.array.cousine_array, android.R.layout.simple_spinner_item);
@@ -76,6 +78,9 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
 
         btnConfirmUpdateRecipe = findViewById(R.id.btnUpdateRecipe);
         btnConfirmUpdateRecipe.setOnClickListener(this);
+
+        image = findViewById(R.id.logo);
+        image.setOnClickListener(this);
 
         referenceRecipe.child(userID).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -118,7 +123,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(UpdateRecipe.this, "Noe gikk galt", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateRecipe.this, "Something wrong happened!", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -126,7 +131,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
-            Toast.makeText(UpdateRecipe.this, "Noe gikk galt", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateRecipe.this, "Something wrong happened!", Toast.LENGTH_SHORT).show();
         }
     });
 
@@ -177,7 +182,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Kode for å aktivere tilbake knappen i appen.
+     * Code for activating the "back- button".
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -197,11 +202,14 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
             case R.id.btnUpdateRecipe:
                 updateRecipe();
                 break;
+            case R.id.logo:
+                startActivity(new Intent(this, ProfileActivity.class));
+                break;
         }
     }
 
     /**
-     * Metode for å oppdatere oppskriften.
+     * Method for updating the recipe.
      */
     private void updateRecipe() {
         String recipeName = ((EditText) findViewById(R.id.recipeName)).getText().toString();
@@ -212,22 +220,22 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
         Boolean favorite = ((Switch) findViewById(R.id.favoriteSwitch)).isChecked();
 
         if (recipeName.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeName)).setError("Oppskriftens navn må fylles ut");
+            ((EditText) findViewById(R.id.recipeName)).setError("Recipe name is required!");
             ((EditText) findViewById(R.id.recipeName)).requestFocus();
             return;
         }
         if (recipeDescription.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeDescription)).setError("Oppskriftens beskrivelse må fylles ut");
+            ((EditText) findViewById(R.id.recipeDescription)).setError("Description is required!");
             ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
             return;
         }
         if (recipeSteps.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeStepByStep)).setError("Oppskriftens steg for steg må fylles ut");
+            ((EditText) findViewById(R.id.recipeStepByStep)).setError("Step- by- step is required!");
             ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
             return;
         }
         if (cousine.isEmpty()) {
-            ((Spinner) findViewById(R.id.recipeCousine)).setPrompt("Oppskriftens kategori må fylles ut");
+            ((Spinner) findViewById(R.id.recipeCousine)).setPrompt("Cuisine is required!");
             ((Spinner) findViewById(R.id.recipeCousine)).requestFocus();
             return;
         }
@@ -246,7 +254,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
 
     }
     /**
-     * Metode for å aktivere switch favorite i appen.
+     * Method for activating the "back- button".
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

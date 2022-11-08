@@ -25,17 +25,17 @@ public class About extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_about);
 
         /**
-         Legge inn tittel på siden.
+         Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_about));
 
         /**
-         * Aktivere tilbake knapp i action bar.
+         * Activate "back- button" in action bar.
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /**
-         * Legge til emoji og tekst på about siden.
+         * Adding emojis on the about page.
          */
         emoji = findViewById(R.id.txtAbout);
         emoji.setText(getResources().getString(R.string.txtAbout));
@@ -57,7 +57,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
     }
 
     /**
-     * Kode for å aktivere tilbake knappen i appen.
+     * Code for "back- button" in the app.
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -83,6 +83,9 @@ public class About extends AppCompatActivity implements View.OnClickListener {
         }
     }
 
+    /**
+     * method for connecting mail- system to the app
+     */
     public void contactButton(View view) {
         contact_btn = findViewById(R.id.contact);
         contact_btn.setText(getResources().getString(R.string.btnContact_us));

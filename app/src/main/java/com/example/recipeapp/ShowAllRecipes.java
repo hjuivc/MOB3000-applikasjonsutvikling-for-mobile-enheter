@@ -6,12 +6,14 @@ import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -26,14 +28,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
+public class ShowAllRecipes extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private RecyclerView recyclerView;
     RecipeRecAdapter adapter;
     SearchView searchView;
     private Switch veganSwitch;
     private String userID;
+    private String recipeId;
     private FirebaseUser user;
     private DatabaseReference referenceRecipe;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,27 +45,27 @@ public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.
         setContentView(R.layout.activity_show_all_recipes);
 
         /**
-         Legge inn tittel på siden.
+        Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_show_all_recipes));
 
         /**
-         * Aktivere tilbake knapp i action bar.
+         * Acitvating the "back- button" on the action bar.
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /**
-         * Aktivere search view
+         * Activating search view
          */
         searchView = findViewById(R.id.searchView);
 
         /**
-         * Aktivere recycler view
+         * Activating recycler view
          */
         recyclerView = findViewById(R.id.recipeRecyclerView);
 
         /**
-         * Aktivere vegan switch
+         * Activating vegan switch
          */
         veganSwitch = findViewById(R.id.veganSwitch);
         veganSwitch.setOnCheckedChangeListener(this);
@@ -74,7 +78,13 @@ public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.
         userID = user.getUid();
 
         /**
-         * Legge til elementer i cousine spinneren
+         * Logo button, which takes the user to the ProfileActivity.
+         */
+        image = findViewById(R.id.logo);
+        image.setOnClickListener(this);
+
+        /**
+         * Adding elements to the cuisine- spinner
          */
         final Spinner recipeCousineSpinner = findViewById(R.id.recipeCousine);
         ArrayAdapter<CharSequence> adapter_cousine = ArrayAdapter.createFromResource(this, R.array.cousine_array, android.R.layout.simple_spinner_item);
@@ -227,7 +237,7 @@ public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.
 
 
     /**
-     * Metode for å aktivere switch favorite i appen.
+     * Method for activating the switch- favorite.
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -307,7 +317,7 @@ public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.
     }
 
         /**
-         * Kode for å aktivere tilbake knappen i appen.
+         * Code for activating the "back- button".
          */
         @Override
         public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -320,4 +330,13 @@ public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.
             }
             return super.onOptionsItemSelected(item);
         }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.logo:
+                startActivity(new Intent(this, ProfileActivity.class));
+                break;
+        }
+    }
 }

@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
     /**
-     * Lage variabler for de forskjellige elementene i layouten
+     * Making variables for the different elements in the layout
      */
     private TextView registerUser;
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
@@ -35,17 +35,17 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_register_user);
 
         /**
-         Legge inn tittel på siden.
+         Adding title.
          */
         this.setTitle(getResources().getString(R.string.activity_register_user));
 
         /**
-         * Aktivere tilbake knapp i action bar.
+         * Activating "back- button" on the action bar.
          */
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /**
-         * Aktivisere komponentene i layouten og koble de til variablene.
+         * Activating the components in the layout and connecting them to the variables.
          */
         mAuth = FirebaseAuth.getInstance();
 
@@ -61,7 +61,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Metode for å registrere bruker. Kalles når man trykker "registrer".
+     * Method for registering a new user.
      */
     @Override
     public void onClick(View v) {
@@ -73,7 +73,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     }
 
     /**
-     * Metode for å registrere bruker. Kalles når man trykket på register.
+     * Method for registering a new user. Gets called when the register button is clicked.
      */
     private void registerUser() {
         String email = editTextEmail.getText().toString().trim();
@@ -108,7 +108,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
 
         /**
-         * Firebase Authentikator aksepterer bare passord som er lengre enn 6 tegn.
+         * Firebase Authenticator accepts only passwords with a minimum of 6 characters.
          */
         if (password.length() < 6) {
             editTextPassword.setError("Min password length should be 6 characters!");
@@ -124,9 +124,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                         if (task.isSuccessful()) {
                             User user = new User(fullName, age, email);
                             /**
-                             * Vi lagrer bruker data i Firebase Realtime Database.
-                             * Vi bruker Firebase Authentikator for å lagre bruker data.
-                             * Målet vil være "Users/UID" where UID is the user's unique ID.
+                             * We are using the Firebase Realtime Database to store the user data.
+                             * We use the Firebase Authenticator to save the users data.
+                             * The aim would be "Users/UID where UID is the user's unique ID.
                              */
 
                             FirebaseDatabase.getInstance().getReference("Users")
@@ -153,7 +153,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                 });
     }
     /**
-     * Kode for å aktivere tilbake knappen i appen.
+     * Code for activating the "back- button".
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
