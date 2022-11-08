@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -267,6 +268,8 @@ public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.
                         }
                         if (counter == 0) {
                             Toast.makeText(ShowAllRecipes.this, "No recipes found", Toast.LENGTH_SHORT).show();
+                            // if toast, show nothing
+                            recyclerView.setAdapter(null);
                         }
 
                     }
