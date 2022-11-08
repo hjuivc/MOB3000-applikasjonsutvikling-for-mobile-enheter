@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -234,10 +235,14 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
         String recipeId = getIntent().getStringExtra("recipeId");
         referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(favorite);
         referenceRecipe.child(userID).child(recipeId).child("vegan").setValue(vegan);
-        referenceRecipe.child(userID).child(recipeId).child("recipeName").setValue(recipeName);
-        referenceRecipe.child(userID).child(recipeId).child("recipeDescription").setValue(recipeDescription);
+        referenceRecipe.child(userID).child(recipeId).child("name").setValue(recipeName);
+        referenceRecipe.child(userID).child(recipeId).child("description").setValue(recipeDescription);
         referenceRecipe.child(userID).child(recipeId).child("stepbystep").setValue(recipeSteps);
         referenceRecipe.child(userID).child(recipeId).child("cuisine").setValue(cousine);
+        // make a toast for the user
+        Toast.makeText(UpdateRecipe.this, "Recipe updated", Toast.LENGTH_SHORT).show();
+        // back to showAllRecipes
+        startActivity(new Intent(UpdateRecipe.this, ShowAllRecipes.class));
 
     }
     /**
