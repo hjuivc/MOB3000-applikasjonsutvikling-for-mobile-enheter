@@ -8,14 +8,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 
-public class About extends AppCompatActivity {
+public class About extends AppCompatActivity implements View.OnClickListener {
 
     private TextView emoji, about, about2, about3, copyright;
     private MaterialButton contact_btn;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,9 @@ public class About extends AppCompatActivity {
 
         copyright = findViewById(R.id.txtCopyrightAbout);
         copyright.setText(getResources().getString(R.string.txtCopyrightAbout));
+
+        image = findViewById(R.id.logo);
+        image.setOnClickListener(this);
     }
 
     /**
@@ -62,8 +67,20 @@ public class About extends AppCompatActivity {
                 break;
             default:
                 break;
+
         }
         return super.onOptionsItemSelected(item);
+    }
+    /**
+     * method for going back to profileview
+     */
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.logo:
+                startActivity(new Intent(this, ProfileActivity.class));
+                break;
+        }
     }
 
     public void contactButton(View view) {
