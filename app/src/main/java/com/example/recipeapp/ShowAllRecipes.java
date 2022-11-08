@@ -230,22 +230,53 @@ public class ShowAllRecipes extends AppCompatActivity implements CompoundButton.
      */
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+        final Spinner recipeCousineSpinner = findViewById(R.id.recipeCousine);
+        ArrayAdapter<CharSequence> adapter_cousine = ArrayAdapter.createFromResource(this, R.array.cousine_array, android.R.layout.simple_spinner_item);
+        adapter_cousine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        recipeCousineSpinner.setAdapter(adapter_cousine);
+
         if (veganSwitch.isChecked()) {
             veganSwitch.setText("Vegan");
 
+            // if cousine is set to "All" and vegan is checked, show all vegan recipes
+            if (recipeCousineSpinner.getSelectedItem().toString().equals("Cuisine")) {
+                referenceRecipe.child(userID).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Integer counter = 0;
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Recipe recipe = snapshot.getValue(Recipe.class);
 
-            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
-            recyclerView = findViewById(R.id.recipeRecyclerView);
-            recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-            FirebaseRecyclerOptions<Recipe> options =
-                    new FirebaseRecyclerOptions.Builder<Recipe>()
-                            .setQuery(mAuth.orderByChild("vegan").equalTo(true), Recipe.class)
-                            .build();
+                            if (recipe.getVegan().equals(true)) {
+                                recipeId = snapshot.getKey();
+                                System.out.println(recipeId);
+                                counter ++;
 
-            adapter = new RecipeRecAdapter(options);
-            adapter.startListening();
-            recyclerView.setAdapter(adapter);
+                                // Snapshot through userID childs and display only recipes with snapshot key equal to recipeId
+                                Query query = referenceRecipe.child(userID).orderByKey().equalTo(recipeId);
+                                FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>()
+                                        .setQuery(query, Recipe.class)
+                                        .build();
+
+                                adapter = new RecipeRecAdapter(options);
+                                adapter.startListening();
+                                recyclerView.setAdapter(adapter);
+                                recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
+                            }
+                        }
+                        if (counter == 0) {
+                            Toast.makeText(ShowAllRecipes.this, "No recipes found", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+
 
         } if (!veganSwitch.isChecked()) {
             veganSwitch.setText("Not vegan");
