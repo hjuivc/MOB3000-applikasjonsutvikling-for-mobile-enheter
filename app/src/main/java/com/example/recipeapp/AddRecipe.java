@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -42,6 +43,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
     private FirebaseAuth mAuth;
     private Spinner spinnerCuisine, spinnerUnit;
     private Switch switchVegan;
+
+    private ImageView image;
 
     private FirebaseUser recipie;
     private DatabaseReference reference;
@@ -89,6 +92,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
         buttonAdd.setOnClickListener(this);
 
+        image = findViewById(R.id.logo);
+        image.setOnClickListener(this);
+
         /**
          * Legge til elementer i cousine spinneren
          */
@@ -112,6 +118,9 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 break;
             case R.id.btnAddIngredient:
                 addIngredient();
+                break;
+            case R.id.logo:
+                startActivity(new Intent(this, ProfileActivity.class));
                 break;
         }
     }
