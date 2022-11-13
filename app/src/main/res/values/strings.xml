@@ -1,5 +1,5 @@
 <resources>
-    <!-- Tittel på de ulike activity i appen -->
+    <!-- Titles for the various activities -->
     <string name="app_name">recippy</string>
     <string name="activity_login">Login</string>
     <string name="activity_register_user">Register</string>
@@ -11,6 +11,27 @@
     <string name="activity_show_all_recipes">All Recipes</string>
     <string name="activity_show_recipe">Recipe</string>
     <string name="activity_update_recipes">Update Recipe</string>
+
+    <!-- Register user -->
+    <string name="register_user">Register</string>
+    <string name="register_user_email">Email</string>
+    <string name="register_user_password">Password</string>
+    <string name="register_user_age_hint">Age</string>
+    <string name="register_user_confirm_password">Confirm password</string>
+    <string name="register_user_first_name">Full name</string>
+    <string name="register_user_name">Full name is required</string>
+    <string name="register_user_email_required">Email is required</string>
+    <string name="register_user_email_invalid">Email is invalid</string>
+    <string name="register_user_password_required">Password is required</string>
+    <string name="register_user_password_invalid">Password is invalid, min 6 characters is required</string>
+    <string name="register_user_age">Age is required</string>
+
+    <!-- forgot password -->
+    <string name="forgot_password">Forgot password</string>
+    <string name="forgot_password_email">Email</string>
+    <string name="forgot_password_email_required">Email is required</string>
+    <string name="forgot_password_reset">Reset password</string>
+
 
     <!-- Login -->
     <string name="login_email">Email</string>
@@ -56,18 +77,85 @@
     <string name="recipe_name">Recipe name is required!</string>
     <string name="recipe_description">Description is required!</string>
     <string name="recipe_step_by_step">Step by step is required!</string>
+    <string name="recipe_cuisine">Cuisine is required!</string>
     <string name="error_message">Something wrong happened!</string>
     <string name="vegan">Vegan</string>
     <string name="not_vegan">Not Vegan</string>
+    <string name="ingredient_add">Ingredient</string>
+    <string name="amount_add">Amount</string>
+    <string name="add_ingredient_button">Add ingredient</string>
 
     <!-- Activity_add_recipe -->
+    <string name="add_recipe">Add recipe</string>
+    <string name="recipe_name_add">Recipe name</string>
+    <string name="recipe_description_hint">Description</string>
+    <string name="recipe_step_by_step_hint">Step by step</string>
+    <string name="recipe_vegan">Vegan</string>
+    <string name="recipe_not_vegan">Not Vegan</string>
+    <string name="add_ingredient">Add ingredient</string>
+    <string name="add_recipe_button">Add recipe</string>
+    <string name="save_recipe">Save recipe</string>
+    <string name="cuisine_recipe">Cuisine</string>
+    <string name="ingredient_button">Add ingredient</string>
 
     <!-- Recipe activity -->
     <string name="ingredient_label">Name</string>
     <string name="amount_label">Amount</string>
+    <string name="recipe_activity_name">Recipe name</string>
+    <string name="recipe_activity_description">Description</string>
+    <string name="recipe_activity_step_by_step">Step by step</string>
+    <string name="recipe_activity_cuisine">Cuisine</string>
+    <string name="recipe_activity_ingredient">Ingredients</string>
+    <string name="recipe_activity_names">Name</string>
+    <string name="recipe_activity_button_delete">Delete recipe</string>
+    <string name="recipe_activity_button_update">Update recipe</string>
+    <string name="recipe_activity_switch">Add to favorite</string>
+
+    <!-- Activity_favorite_recipes -->
+    <string name="search_favorite">Search</string>
+    <string name="recycler_name">Recipe name</string>
+    <string name="recycler_description">Description</string>
+    <string name="delete_recipe_toast">Delete recipe?</string>
+
+    <!-- Activity_update_recipe -->
+    <string name="update_recipe">Update recipe</string>
+    <string name="update_recipe_button">Update recipe</string>
+    <string name="update_recipe_name">Recipe name</string>
+    <string name="update_recipe_description">Description</string>
+    <string name="update_recipe_step_by_step">Step by step</string>
+    <string name="update_recipe_cuisine">Cuisine</string>
+    <string name="update_recipe_vegan">Vegan</string>
+    <string name="update_recipe_not_vegan">Not Vegan</string>
+    <string name="update_recipe_not_favorite">Not favorite</string>
+    <string name="update_recipe_ingredient">Ingredient</string>
+    <string name="update_recipe_amount">Amount</string>
+    <string name="update_recipe_add_ingredient">Add ingredient</string>
+    <string name="update_recipe_add_ingredient_button">Add ingredient</string>
+    <string name="update_recipe_switch">Add to favorite</string>
+    <string name="update_recipe_delete">Delete recipe</string>
+    <string name="update_recipe_delete_ingredient">Delete ingredient</string>
+    <string name="update_recipe_update">Confirm changes</string>
 
 
-    //TODO: Add more strings here
+    <!-- Toast messages -->
+    <string name="toast_recipe_added">Recipe added!</string>
+    <string name="toast_recipe_deleted">Recipe deleted!</string>
+    <string name="toast_recipe_updated">Recipe updated!</string>
+    <string name="toast_recipe_added_favorites">Recipe added to favorites!</string>
+    <string name="toast_recipe_removed_favorites">Recipe removed from favorites!</string>
+    <string name="toast_error">Something wrong happened!</string>
+    <string name="profile_message">Logged out!</string>
+    <string name="toast_register">User has been registered successfully!</string>
+    <string name="toast_register_fail">Failed to register! Try again!</string>
+    <string name="toast_recipe_message">No recipes found</string>
+
+    <!-- Email messages -->
+    <string name="email_message_required">Email required!</string>
+    <string name="email_message_invalid">Please provide valid email!</string>
+    <string name="email_message_request">Check your email to reset your password!</string>
+    <string name="email_message_error">Try again! Something wrong happened!</string>
+
+
     <!-- Spinner cousine -->
     <string-array name="cousine_array">
         <item>Cuisine</item>
@@ -89,6 +177,26 @@
         <item>kg</item>
         <item>ml</item>
         <item>l</item>
+        <item>oz</item>
+        <item>cup</item>
+        <item>tbsp</item>
+        <item>tsp</item>
+        <item>pinch</item>
+        <item>dash</item>
+        <item>slice</item>
+        <item>can</item>
+        <item>package</item>
+        <item>handful</item>
+        <item>head</item>
+        <item>stalk</item>
+        <item>leaf</item>
+        <item>pint</item>
+        <item>quart</item>
+        <item>gallon</item>
+        <item>dozen</item>
+        <item>bag</item>
+        <item>box</item>
+        <item>jar</item>
         <item>pcs</item>
     </string-array>
 </resources>

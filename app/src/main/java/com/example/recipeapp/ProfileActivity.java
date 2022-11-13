@@ -60,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String age = userProfile.age;
 
 
-                    greetingTextView.setText(getResources().getString(R.string.txtProfile_welcome) + ": " + fullName + "!");
+                    greetingTextView.setText(getResources().getString(R.string.txtProfile_welcome) + ", " + fullName + "!");
                     emailTextView.setText(getResources().getString(R.string.txtProfile_email) + ": " + email);
                     fullNameTextView.setText(getResources().getString(R.string.txtProfile_name) + ": " + fullName);
                     ageTextView.setText(getResources().getString(R.string.txtProfile_age) + ": " +age);
@@ -69,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ProfileActivity.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
+                Toast.makeText(ProfileActivity.this, R.string.error_message, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -127,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                Toast.makeText(ProfileActivity.this, "Logged out!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProfileActivity.this, R.string.profile_message, Toast.LENGTH_SHORT).show();
             }
         });
     }

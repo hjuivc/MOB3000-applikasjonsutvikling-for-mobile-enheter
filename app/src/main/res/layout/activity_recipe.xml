@@ -58,7 +58,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Recipe name: "
+                            android:text="@string/recipe_activity_name"
                             android:textStyle="bold" />
 
                         <TextView
@@ -71,7 +71,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Description: "
+                            android:text="@string/recipe_activity_description"
                             android:textStyle="bold" />
 
                         <TextView
@@ -83,7 +83,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Step by step: "
+                            android:text="@string/recipe_activity_step_by_step"
                             android:textStyle="bold" />
 
                         <TextView
@@ -95,7 +95,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Cousine: "
+                            android:text="@string/recipe_activity_cuisine"
                             android:textStyle="bold" />
 
                         <TextView
@@ -107,7 +107,7 @@
                             android:layout_marginTop="5dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Ingredients: "
+                            android:text="@string/recipe_activity_ingredient"
                             android:textStyle="bold" />
                         <LinearLayout
                             android:layout_width="fill_parent"
@@ -118,7 +118,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Name: "
+                                android:text="@string/recipe_activity_names"
                                 android:textStyle="bold"
                                 android:layout_weight="2"/>
 
@@ -126,7 +126,7 @@
                                 android:layout_marginTop="5dp"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Amount: "
+                                android:text="@string/amount_label"
                                 android:textStyle="bold"
                                 android:layout_weight="1"/>
                         </LinearLayout>
@@ -148,7 +148,7 @@
             android:id="@+id/btnDeleteRecipe"
             android:layout_width="150sp"
             android:layout_height="wrap_content"
-            android:text="Delete recipe"
+            android:text="@string/recipe_activity_button_delete"
             android:layout_marginTop="10dp"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -164,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
             android:layout_marginTop="10dp"
-            android:text="Update Recipe"
+            android:text="@string/recipe_activity_button_update"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -177,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="140dp"
-            android:text="Add to favorite"
+            android:text="@string/recipe_activity_switch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"

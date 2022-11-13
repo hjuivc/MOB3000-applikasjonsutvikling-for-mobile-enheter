@@ -137,7 +137,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                         }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-                                Toast.makeText(RecipeActivity.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
+                                Toast.makeText(RecipeActivity.this, R.string.toast_error, Toast.LENGTH_LONG).show();
                             }
                         });
                 }
@@ -145,7 +145,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(RecipeActivity.this, "Something wrong happened!", Toast.LENGTH_LONG).show();
+                Toast.makeText(RecipeActivity.this, R.string.toast_error, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -232,7 +232,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                         //Yes button clicked
                         String recipeId = getIntent().getStringExtra("recipeId");
                         referenceRecipe.child(userID).child(recipeId).removeValue();
-                        Toast.makeText(RecipeActivity.this, "Recipe deleted", Toast.LENGTH_LONG).show();
+                        Toast.makeText(RecipeActivity.this, R.string.toast_recipe_added, Toast.LENGTH_LONG).show();
                         startActivity(new Intent(RecipeActivity.this, ShowAllRecipes.class));
                         break;
 
@@ -243,7 +243,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure?").setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage(R.string.delete_recipe_toast).setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
     }
 
     @Override

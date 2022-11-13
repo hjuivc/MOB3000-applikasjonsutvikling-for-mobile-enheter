@@ -129,7 +129,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                                 }
                             }
                             if (counter == 0) {
-                                Toast.makeText(ShowAllRecipes.this, "No recipes found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ShowAllRecipes.this, R.string.toast_recipe_message, Toast.LENGTH_SHORT).show();
                             }
 
                         }
@@ -167,7 +167,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                                 }
                             }
                             if (counter == 0) {
-                                Toast.makeText(ShowAllRecipes.this, "No recipes found", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ShowAllRecipes.this, R.string.toast_recipe_message, Toast.LENGTH_SHORT).show();
                             }                     }
 
                         @Override
@@ -301,7 +301,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                             }
                         }
                         if (counter == 0) {
-                            Toast.makeText(ShowAllRecipes.this, "No recipes found", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ShowAllRecipes.this, R.string.toast_recipe_message, Toast.LENGTH_SHORT).show();
                             // if toast, show nothing
                             recyclerView.setAdapter(null);
                         }
@@ -316,7 +316,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
 
 
         } if (!veganSwitch.isChecked()) {
-            veganSwitch.setText("Not vegan");
+            veganSwitch.setText(R.string.recipe_not_vegan);
 
 
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();

@@ -82,27 +82,27 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String age = editTextAge.getText().toString().trim();
 
         if (fullName.isEmpty()) {
-            editTextFullName.setError("Full name is required");
+            editTextFullName.setError(getResources().getString(R.string.register_user_name));
             editTextFullName.requestFocus();
             return;
         }
         if (age.isEmpty()) {
-            editTextAge.setError("Age is required");
+            editTextAge.setError(getResources().getString(R.string.register_user_age));
             editTextAge.requestFocus();
             return;
         }
         if (email.isEmpty()) {
-            editTextEmail.setError("Email is required");
+            editTextEmail.setError(getResources().getString(R.string.register_user_email_required));
             editTextEmail.requestFocus();
             return;
         }
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            editTextEmail.setError("Please provide valid email");
+            editTextEmail.setError(getResources().getString(R.string.register_user_email_required));
             editTextEmail.requestFocus();
             return;
         }
         if (password.isEmpty()) {
-            editTextPassword.setError("Password is required");
+            editTextPassword.setError(getResources().getString(R.string.register_user_password_required));
             editTextPassword.requestFocus();
             return;
         }
@@ -111,7 +111,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
          * Firebase Authenticator accepts only passwords with a minimum of 6 characters.
          */
         if (password.length() < 6) {
-            editTextPassword.setError("Min password length should be 6 characters!");
+            editTextPassword.setError(getResources().getString(R.string.register_user_password_required));
             editTextPassword.requestFocus();
             return;
         }
@@ -135,18 +135,18 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(RegisterUser.this, "User has been registered successfully!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(RegisterUser.this, R.string.toast_register, Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
                                                 // Redirect to login layout
                                                 startActivity(new Intent(RegisterUser.this, ProfileActivity.class));
                                             } else {
-                                                Toast.makeText(RegisterUser.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(RegisterUser.this, R.string.toast_register_fail, Toast.LENGTH_LONG).show();
                                                 progressBar.setVisibility(View.GONE);
                                             }
                                         }
                                     });
                         } else {
-                            Toast.makeText(RegisterUser.this, "Failed to register! Try again!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(RegisterUser.this, R.string.toast_register_fail, Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
                         }
                     }

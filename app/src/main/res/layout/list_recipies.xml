@@ -31,7 +31,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Recipe name: "
+                    android:text="@string/recycler_name"
                     android:textStyle="bold" />
 
                 <TextView
@@ -51,7 +51,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Description: "
+                    android:text="@string/recycler_description"
                     android:textStyle="bold" />
 
                 <TextView

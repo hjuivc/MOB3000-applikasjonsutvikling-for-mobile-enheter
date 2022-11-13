@@ -57,7 +57,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Recipe name: "
+                            android:text="@string/update_recipe_name"
                             android:textStyle="bold" />
 
                         <EditText
@@ -71,7 +71,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Description: "
+                            android:text="@string/update_recipe_description"
                             android:textStyle="bold" />
 
                         <EditText
@@ -84,7 +84,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Step by step: "
+                            android:text="@string/update_recipe_step_by_step"
                             android:textStyle="bold" />
 
                         <EditText
@@ -97,7 +97,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Cousine: "
+                            android:text="@string/update_recipe_cuisine"
                             android:textStyle="bold" />
 
                         <Spinner
@@ -109,7 +109,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
-                            android:text="Ingredients: "
+                            android:text="@string/update_recipe_cuisine"
                             android:textStyle="bold" />
 
                         <LinearLayout
@@ -123,7 +123,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:layout_weight="2"
-                                android:text="Name: "
+                                android:text="@string/recipe_activity_names"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -131,7 +131,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
                                 android:layout_weight="1"
-                                android:text="Amount: "
+                                android:text="@string/update_recipe_amount"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
@@ -153,7 +153,7 @@
             android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Confirm changes"
+            android:text="@string/update_recipe_update"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -166,7 +166,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Not vegan"
+            android:text="@string/update_recipe_not_vegan"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toStartOf="@+id/favoriteSwitch"
@@ -179,7 +179,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Not favorite"
+            android:text="@string/update_recipe_not_favorite"
             app:layout_constraintBottom_toTopOf="@+id/btnUpdateRecipe"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

@@ -220,22 +220,25 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
         Boolean favorite = ((Switch) findViewById(R.id.favoriteSwitch)).isChecked();
 
         if (recipeName.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeName)).setError("Recipe name is required!");
+            ((EditText) findViewById(R.id.recipeName)).setError(getResources().getString(R.string.recipe_name));
+            ((EditText) findViewById(R.id.recipeName)).requestFocus();
             ((EditText) findViewById(R.id.recipeName)).requestFocus();
             return;
         }
         if (recipeDescription.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeDescription)).setError("Description is required!");
+            ((EditText) findViewById(R.id.recipeDescription)).setError(getResources().getString(R.string.recipe_description));
+            ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
             ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
             return;
         }
         if (recipeSteps.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeStepByStep)).setError("Step- by- step is required!");
+            ((EditText) findViewById(R.id.recipeStepByStep)).setError(getResources().getString(R.string.recipe_step_by_step));
+            ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
             ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
             return;
         }
         if (cousine.isEmpty()) {
-            ((Spinner) findViewById(R.id.recipeCousine)).setPrompt("Cuisine is required!");
+            ((Spinner) findViewById(R.id.recipeCousine)).setPrompt(getResources().getString(R.string.recipe_cuisine));
             ((Spinner) findViewById(R.id.recipeCousine)).requestFocus();
             return;
         }
@@ -248,7 +251,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
         referenceRecipe.child(userID).child(recipeId).child("stepbystep").setValue(recipeSteps);
         referenceRecipe.child(userID).child(recipeId).child("cuisine").setValue(cousine);
         // make a toast for the user
-        Toast.makeText(UpdateRecipe.this, "Recipe updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(UpdateRecipe.this, R.string.toast_recipe_updated, Toast.LENGTH_SHORT).show();
         // back to showAllRecipes
         startActivity(new Intent(UpdateRecipe.this, ShowAllRecipes.class));
 
