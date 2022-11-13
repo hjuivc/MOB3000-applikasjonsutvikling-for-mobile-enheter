@@ -105,55 +105,79 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
             }
             private void showRecipesByCousine(String cousine) {
                 if (veganSwitch.isChecked()) {
-                    System.out.println("vegan switch is checked");
-                    referenceRecipe.orderByChild("cuisine").equalTo(cousine).addValueEventListener(new ValueEventListener() {
+                    referenceRecipe.child(userID).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            System.out.println("dataSnapshot: " + dataSnapshot);
+                            Integer counter = 0;
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 Recipe recipe = snapshot.getValue(Recipe.class);
-                                System.out.println(recipe.name);
-                                if (recipe.vegan.equals(true)) {
-                                    System.out.println("vegan");
-                                    FirebaseRecyclerOptions<Recipe> options =
-                                            new FirebaseRecyclerOptions.Builder<Recipe>()
-                                                    .setQuery(referenceRecipe.orderByChild("cuisine").equalTo(cousine), Recipe.class)
-                                                    .build();
+                                if (recipe.getCuisine().equals(cousine) && recipe.getVegan().equals(true)) {
+                                    recipeId = snapshot.getKey();
+
+                                    counter ++;
+
+                                    // Snapshot through userID childs and display only recipes with snapshot key equal to recipeId
+                                    Query query = referenceRecipe.child(userID).orderByKey().equalTo(recipeId);
+                                    FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>()
+                                            .setQuery(query, Recipe.class)
+                                            .build();
+
                                     adapter = new RecipeRecAdapter(options);
-                                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
+                                    adapter.startListening();
                                     recyclerView.setAdapter(adapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
                                 }
+                            }
+                            if (counter == 0) {
+                                Toast.makeText(ShowAllRecipes.this, "No recipes found", Toast.LENGTH_SHORT).show();
                             }
 
                         }
+
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
-
                     });
+                }
 
-                    /**
-                    Query query = FirebaseDatabase.getInstance().getReference().child("Recipes").orderByChild("cousine").equalTo(cousine).orderByChild("vegan").equalTo(true);
-                    FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>().setQuery(query, Recipe.class).build();
-                    adapter = new RecipeRecAdapter(options);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
-                    recyclerView.setAdapter(adapter);
-                } else {
-                    Query query = FirebaseDatabase.getInstance().getReference().child("Recipes").orderByChild("cousine").equalTo(cousine);
-                    FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>().setQuery(query, Recipe.class).build();
-                    adapter = new RecipeRecAdapter(options);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
-                    recyclerView.setAdapter(adapter);*/
+                if (!veganSwitch.isChecked()) {
+                    referenceRecipe.child(userID).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Integer counter = 0;
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Recipe recipe = snapshot.getValue(Recipe.class);
 
-                    }
-                else {
-                    Query query = FirebaseDatabase.getInstance().getReference().child("Recipes").orderByChild("cousine").equalTo(cousine);
-                    FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>().setQuery(query, Recipe.class).build();
-                    adapter = new RecipeRecAdapter(options);
-                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
-                    recyclerView.setAdapter(adapter);
+                                if (recipe.getCuisine().equals(cousine) && recipe.getVegan().equals(false)) {
+
+                                    recipeId = snapshot.getKey();
+
+                                    counter ++;
+
+                                    // Snapshot through userID childs and display only recipes with snapshot key equal to recipeId
+                                    Query query = referenceRecipe.child(userID).orderByKey().equalTo(recipeId);
+                                    FirebaseRecyclerOptions<Recipe> options = new FirebaseRecyclerOptions.Builder<Recipe>()
+                                            .setQuery(query, Recipe.class)
+                                            .build();
+
+                                    adapter = new RecipeRecAdapter(options);
+                                    adapter.startListening();
+                                    recyclerView.setAdapter(adapter);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(ShowAllRecipes.this));
+                                }
+                            }
+                            if (counter == 0) {
+                                Toast.makeText(ShowAllRecipes.this, "No recipes found", Toast.LENGTH_SHORT).show();
+                            }                     }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             }
+
 
             private void showAllRecipes() {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
