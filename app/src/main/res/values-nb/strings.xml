@@ -15,22 +15,22 @@
 
     <!-- Register user -->
     <string name="register_user">Registrer</string>
-    <string name="register_user_email">Email</string>
+    <string name="register_user_email">Epost</string>
     <string name="register_user_password">Passord</string>
     <string name="register_user_age_hint">Alder</string>
     <string name="register_user_confirm_password">Bekreft passord</string>
-    <string name="register_user_first_name">Fult navn</string>
-    <string name="register_user_name">Fult navn er påkrevd</string>
-    <string name="register_user_email_required">Email er påkrevd</string>
-    <string name="register_user_email_invalid">Email er feil</string>
+    <string name="register_user_first_name">Fullt navn</string>
+    <string name="register_user_name">Fullt navn er påkrevd</string>
+    <string name="register_user_email_required">Epost er påkrevd</string>
+    <string name="register_user_email_invalid">Epost er feil</string>
     <string name="register_user_password_required">Passord er påkrevd</string>
     <string name="register_user_password_invalid">Passord er ugyldig, min 6 karakterer er påkrevd</string>
     <string name="register_user_age">Alder er påkrevd</string>
 
     <!-- forgot password -->
     <string name="forgot_password">Glemt passord</string>
-    <string name="forgot_password_email">Email</string>
-    <string name="forgot_password_email_required">Email er påkrevd</string>
+    <string name="forgot_password_email">Epost</string>
+    <string name="forgot_password_email_required">Epost er påkrevd</string>
     <string name="forgot_password_reset">Tilbakestill passord</string>
 
 
@@ -76,7 +76,7 @@
     <string name="ingredient_error">Legg inn alle detaljer korrekt!</string>
     <string name="recipe_name">Navn på oppskrift trengs!</string>
     <string name="recipe_description">Beskrivelse av oppskrift må fylles ut!</string>
-    <string name="recipe_step_by_step">Step by step må fylles ut!</string>
+    <string name="recipe_step_by_step">Steg for steg må fylles ut!</string>
     <string name="recipe_cuisine">Kjøkken er påkrevd!</string>
     <string name="error_message">Noe feil har skjedd!</string>
     <string name="vegan">Vegetar</string>
