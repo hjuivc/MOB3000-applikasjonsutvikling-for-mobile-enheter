@@ -130,6 +130,8 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                             }
                             if (counter == 0) {
                                 Toast.makeText(ShowAllRecipes.this, R.string.toast_recipe_message, Toast.LENGTH_SHORT).show();
+                                // if toast, show nothing
+                                recyclerView.setAdapter(null);
                             }
 
                         }
@@ -168,6 +170,8 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                             }
                             if (counter == 0) {
                                 Toast.makeText(ShowAllRecipes.this, R.string.toast_recipe_message, Toast.LENGTH_SHORT).show();
+                                // if toast, show nothing
+                                recyclerView.setAdapter(null);
                             }                     }
 
                         @Override
@@ -272,7 +276,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
         recipeCousineSpinner.setAdapter(adapter_cousine);
 
         if (veganSwitch.isChecked()) {
-            veganSwitch.setText("Vegan");
+            veganSwitch.setText(R.string.recipe_vegan);
 
             // if cousine is set to "All" and vegan is checked, show all vegan recipes
             if (recipeCousineSpinner.getSelectedItem().toString().equals("Cuisine")) {
