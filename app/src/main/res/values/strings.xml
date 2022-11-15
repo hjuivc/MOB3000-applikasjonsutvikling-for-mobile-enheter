@@ -156,6 +156,11 @@
     <string name="email_message_request">Check your email to reset your password!</string>
     <string name="email_message_error">Try again! Something wrong happened!</string>
 
+    <!-- BuilderMessages -->
+    <string name="builder_message_yes">YES</string>
+    <string name="builder_message_no">NO</string>
+
+
 
     <!-- Spinner cousine -->
     <string-array name="cousine_array">

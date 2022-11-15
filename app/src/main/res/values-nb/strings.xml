@@ -156,6 +156,10 @@
     <string name="update_recipe_delete_ingredient">Slett ingrediens</string>
     <string name="update_recipe_update">Bekreft endringer</string>
 
+    <!-- BuilderMessages -->
+    <string name="builder_message_yes">JA</string>
+    <string name="builder_message_no">NEI</string>
+
     //TODO: Add more strings here
     <!-- Spinner cousine -->
     <string-array name="cousine_array">

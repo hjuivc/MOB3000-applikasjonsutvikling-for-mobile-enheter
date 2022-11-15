@@ -243,7 +243,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
             }
         };
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.delete_recipe_toast).setPositiveButton("Yes", dialogClickListener).setNegativeButton("No", dialogClickListener).show();
+        builder.setMessage(R.string.delete_recipe_toast).setPositiveButton(R.string.builder_message_yes, dialogClickListener).setNegativeButton(R.string.builder_message_no, dialogClickListener).show();
     }
 
     @Override

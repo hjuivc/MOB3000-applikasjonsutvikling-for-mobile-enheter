@@ -134,6 +134,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
                 } else {
                     Toast.makeText(LoginActivity.this, R.string.login_error_message, Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                 }
             }
         });
