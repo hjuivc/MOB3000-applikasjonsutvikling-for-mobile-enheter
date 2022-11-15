@@ -96,7 +96,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String cousine = recipeCousineSpinner.getSelectedItem().toString();
-                if (cousine.equals("Cuisine")) {
+                if (cousine.equals("Cuisine") || cousine.equals("Kjøkken")) {
                     showAllRecipes();
                 } else {
                     showRecipesByCousine(cousine);
@@ -279,7 +279,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
             veganSwitch.setText(R.string.recipe_vegan);
 
             // if cousine is set to "All" and vegan is checked, show all vegan recipes
-            if (recipeCousineSpinner.getSelectedItem().toString().equals("Cuisine")) {
+            if (recipeCousineSpinner.getSelectedItem().toString().equals("Cuisine") || recipeCousineSpinner.getSelectedItem().toString().equals("Kjøkken")) {
                 referenceRecipe.child(userID).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
