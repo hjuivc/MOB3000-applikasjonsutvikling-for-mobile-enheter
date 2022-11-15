@@ -127,6 +127,7 @@
     <string name="update_recipe_vegan">Vegan</string>
     <string name="update_recipe_not_vegan">Not Vegan</string>
     <string name="update_recipe_not_favorite">Not favorite</string>
+    <string name="update_recipe_favorite">Favorite</string>
     <string name="update_recipe_ingredient">Ingredient</string>
     <string name="update_recipe_amount">Amount</string>
     <string name="update_recipe_add_ingredient">Add ingredient</string>

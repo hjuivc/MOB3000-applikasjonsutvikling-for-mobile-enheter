@@ -169,7 +169,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
-            favoriteSwitch.setText("Favorite");
+            favoriteSwitch.setText(R.string.update_recipe_favorite);
             boolean vegan = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
 
             // Update recipe vegan status
@@ -177,7 +177,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
             referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(vegan);
 
         } else {
-            favoriteSwitch.setText("Not favorite");
+            favoriteSwitch.setText(R.string.update_recipe_not_favorite);
             boolean vegan = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
 
             // Update recipe vegan status

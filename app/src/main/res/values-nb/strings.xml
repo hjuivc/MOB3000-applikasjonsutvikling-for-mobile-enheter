@@ -146,6 +146,7 @@
     <string name="update_recipe_vegan">Vegetar</string>
     <string name="update_recipe_not_vegan">Ikke vegetar</string>
     <string name="update_recipe_not_favorite">Ikke favoritt</string>
+    <string name="update_recipe_favorite">Favoritt</string>
     <string name="update_recipe_ingredient">Ingrediens</string>
     <string name="update_recipe_amount">Mengde</string>
     <string name="update_recipe_add_ingredient">Legg til ingrediens</string>

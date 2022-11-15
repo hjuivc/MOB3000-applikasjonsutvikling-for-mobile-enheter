@@ -123,7 +123,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(UpdateRecipe.this, "Something wrong happened!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateRecipe.this, R.string.toast_error, Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
@@ -131,7 +131,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onCancelled(@NonNull DatabaseError error) {
-            Toast.makeText(UpdateRecipe.this, "Something wrong happened!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdateRecipe.this, R.string.toast_error, Toast.LENGTH_SHORT).show();
         }
     });
 
@@ -262,14 +262,14 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (veganSwitch.isChecked()) {
-            veganSwitch.setText("Vegan");
+            veganSwitch.setText(R.string.vegan);
 
             boolean vegan = Boolean.parseBoolean(veganSwitch.isChecked() ? "true" : "false");
             String recipeId = getIntent().getStringExtra("recipeId");
             referenceRecipe.child(userID).child(recipeId).child("vegan").setValue(vegan);
 
         } if (favoriteSwitch.isChecked()) {
-            favoriteSwitch.setText("Favorite");
+            favoriteSwitch.setText(R.string.update_recipe_favorite);
             boolean favorite = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
 
             // Update recipe favorite status
@@ -277,13 +277,13 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
             referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(favorite);
 
         } if (!veganSwitch.isChecked()) {
-            veganSwitch.setText("Ikke vegan");
+            veganSwitch.setText(R.string.update_recipe_not_vegan);
             boolean vegan = Boolean.parseBoolean(veganSwitch.isChecked() ? "true" : "false");
             String recipeId = getIntent().getStringExtra("recipeId");
             referenceRecipe.child(userID).child(recipeId).child("vegan").setValue(vegan);
 
         } if (!favoriteSwitch.isChecked()) {
-            favoriteSwitch.setText("Ikke favoritt");
+            favoriteSwitch.setText(R.string.update_recipe_not_favorite);
             boolean favorite = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
             String recipeId = getIntent().getStringExtra("recipeId");
             referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(favorite);
