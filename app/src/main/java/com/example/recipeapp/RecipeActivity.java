@@ -232,7 +232,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                         //Yes button clicked
                         String recipeId = getIntent().getStringExtra("recipeId");
                         referenceRecipe.child(userID).child(recipeId).removeValue();
-                        Toast.makeText(RecipeActivity.this, R.string.toast_recipe_added, Toast.LENGTH_LONG).show();
+                        Toast.makeText(RecipeActivity.this, R.string.toast_recipe_deleted, Toast.LENGTH_LONG).show();
                         startActivity(new Intent(RecipeActivity.this, ShowAllRecipes.class));
                         break;
 
