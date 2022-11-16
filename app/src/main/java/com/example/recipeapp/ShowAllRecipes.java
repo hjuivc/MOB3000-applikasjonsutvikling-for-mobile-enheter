@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -19,6 +20,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +40,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
     private FirebaseUser user;
     private DatabaseReference referenceRecipe;
     private ImageView image;
+    private FloatingActionButton addRecipeBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +85,12 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
          */
         image = findViewById(R.id.logo);
         image.setOnClickListener(this);
+
+        /**
+         * Button, which takes the user to the AddRecipeActivity.
+         */
+        addRecipeBtn = findViewById(R.id.addRecipeBtn);
+        addRecipeBtn.setOnClickListener(this);
 
         /**
          * Adding elements to the cuisine- spinner
@@ -364,6 +373,9 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
             case R.id.logo:
                 startActivity(new Intent(this, ProfileActivity.class));
+                break;
+            case R.id.addRecipeBtn:
+                startActivity(new Intent(this, AddRecipe.class));
                 break;
         }
     }
