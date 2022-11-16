@@ -82,10 +82,14 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Recipe recipe = dataSnapshot.getValue(Recipe.class);
-                if (recipe.getFavorite() == true) {
-                    favoriteSwitch.setChecked(true);
-                } else {
-                    favoriteSwitch.setChecked(false);
+                try {
+                    if (recipe.getFavorite()) {
+                        favoriteSwitch.setChecked(true);
+                    } else {
+                        favoriteSwitch.setChecked(false);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
 
@@ -231,7 +235,53 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
                         String recipeId = getIntent().getStringExtra("recipeId");
-                        referenceRecipe.child(userID).child(recipeId).removeValue();
+
+                        // Get recipeID in recipe
+                        referenceRecipe.child(userID).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                Recipe recipe = snapshot.getValue(Recipe.class);
+
+
+                                if (recipe != null) {
+                                    Integer recipeID = Integer.valueOf(recipe.getRecipeID());
+
+
+                                    // Delete ingredients
+                                    referenceIngredients.child(userID).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            for (DataSnapshot ingredientSnapshot : snapshot.getChildren()) {
+                                                Ingredients ingredients = ingredientSnapshot.getValue(Ingredients.class);
+
+                                                if (ingredients != null) {
+                                                    Integer ingredientRecipeID = Integer.valueOf(ingredients.getRecipeID());
+                                                    referenceRecipe.child(userID).child(recipeId).removeValue();
+
+                                                    if (ingredientRecipeID.equals(recipeID)) {
+                                                        String ingredientId = ingredientSnapshot.getKey();
+                                                        referenceIngredients.child(userID).child(ingredientId).removeValue();
+
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+                                            Toast.makeText(RecipeActivity.this, R.string.toast_error, Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+                                Toast.makeText(RecipeActivity.this, R.string.toast_error, Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        // Loop through ingredients database with snapshot and delete all ingredients with the same recipeID as the recipe that is being deleted.
+
                         Toast.makeText(RecipeActivity.this, R.string.toast_recipe_deleted, Toast.LENGTH_LONG).show();
                         startActivity(new Intent(RecipeActivity.this, ShowAllRecipes.class));
                         break;
