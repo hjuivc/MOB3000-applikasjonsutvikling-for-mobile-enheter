@@ -75,18 +75,17 @@
 
         <Switch
             android:id="@+id/txtVeganSwitch"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_height="25dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
             android:includeFontPadding="false"
             android:paddingStart="5dp"
             android:text="@string/recipe_not_vegan"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.524"
+            app:layout_constraintEnd_toStartOf="@+id/spinnerCuisine"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCousine" />
+            app:layout_constraintTop_toBottomOf="@+id/txtStep" />
 
         <Spinner
             android:id="@+id/spinnerCuisine"
@@ -154,19 +153,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.744" />
-
-        <TextView
-            android:id="@+id/txtCousine"
-            android:layout_width="wrap_content"
-            android:layout_height="25dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="20dp"
-            android:text="@string/cuisine_recipe"
-            android:textSize="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/txtVeganSwitch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtStep" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
