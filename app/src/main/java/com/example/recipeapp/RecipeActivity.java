@@ -132,7 +132,6 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                                     FirebaseRecyclerOptions<Ingredients> options = new FirebaseRecyclerOptions.Builder<Ingredients>()
                                             .setQuery(mAuth.orderByChild("recipeID").equalTo(recipeID), Ingredients.class)
                                             .build();
-                                    System.out.println(options);
                                     IngredientRecAdapter adapter = new IngredientRecAdapter(options);
                                     recyclerView.setAdapter(adapter);
                                     adapter.startListening();
@@ -283,7 +282,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                         // Loop through ingredients database with snapshot and delete all ingredients with the same recipeID as the recipe that is being deleted.
 
                         Toast.makeText(RecipeActivity.this, R.string.toast_recipe_deleted, Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(RecipeActivity.this, ShowAllRecipes.class));
+                        startActivity(new Intent(RecipeActivity.this, ProfileActivity.class));
                         break;
 
                     case DialogInterface.BUTTON_NEGATIVE:
