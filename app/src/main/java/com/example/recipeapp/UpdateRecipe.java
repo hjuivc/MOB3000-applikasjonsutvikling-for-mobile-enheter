@@ -226,7 +226,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
         // make a toast for the user
         Toast.makeText(UpdateRecipe.this, R.string.toast_recipe_updated, Toast.LENGTH_SHORT).show();
         // back to showAllRecipes
-        startActivity(new Intent(UpdateRecipe.this, ShowAllRecipes.class));
+        startActivity(new Intent(UpdateRecipe.this, ProfileActivity.class));
 
     }
     // Method for setting text on the switches using oncheckeschanged
