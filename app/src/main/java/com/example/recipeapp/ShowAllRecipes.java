@@ -41,6 +41,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
     private DatabaseReference referenceRecipe;
     private ImageView image;
     private FloatingActionButton addRecipeBtn;
+    private FloatingActionButton resetFilterBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,10 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
          */
         addRecipeBtn = findViewById(R.id.addRecipeBtn);
         addRecipeBtn.setOnClickListener(this);
+
+        // Reset filter button
+        resetFilterBtn = findViewById(R.id.resetFilterBtn);
+        resetFilterBtn.setOnClickListener(this);
 
         /**
          * Adding elements to the cuisine- spinner
@@ -458,6 +463,9 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                 break;
             case R.id.addRecipeBtn:
                 startActivity(new Intent(this, AddRecipe.class));
+                break;
+            case R.id.resetFilterBtn:
+                startActivity(new Intent(this, ShowAllRecipes.class));
                 break;
         }
     }
