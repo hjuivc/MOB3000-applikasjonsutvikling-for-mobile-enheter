@@ -243,15 +243,8 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
 
                     @Override
                     public boolean onQueryTextChange(String newText) {
-                        if (newText.isEmpty()) {
-                            processSearch(newText);
-                            return false;
-
-                        } else {
-                            String formatedSearch = newText.substring(0, 1).toUpperCase() + newText.substring(1);
-                            processSearch(formatedSearch);
-                            return true;
-                        }
+                        processSearch(newText);
+                        return true;
                     }
                 });
             }
@@ -266,7 +259,6 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                     new FirebaseRecyclerOptions.Builder<Recipe>()
                             .setQuery(mAuth.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff"), Recipe.class)
                             .build();
-
             adapter = new RecipeRecAdapter(options);
             adapter.startListening();
             recyclerView.setAdapter(adapter);
