@@ -2,6 +2,7 @@ package com.example.recipeapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -27,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class UpdateRecipe extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -39,6 +42,9 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
     private Switch favoriteSwitch;
     @SuppressLint("UseSwitchCompatOrMaterialCode")
     private Switch veganSwitch;
+    private LinearLayout layoutList;
+    ArrayList<Ingredients> ingredientsList = new ArrayList<>();
+    private Button buttonAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,13 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
 
         // Activating the "back- button" on the action bar.
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        // Adding ingredient layout
+        layoutList = findViewById(R.id.ingredientList);
+
+        // Adding the "add ingredient" button.
+        buttonAdd = findViewById(R.id.btnAddIngredient);
+        buttonAdd.setOnClickListener(this);
 
         // Adding elements to the cuisine- spinner.
         final Spinner recipeCuisineSpinner = findViewById(R.id.recipeCousine);
@@ -101,18 +114,45 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                             for (DataSnapshot ingredientSnapshot : snapshot.getChildren()) {
                                 Ingredients ingredients = ingredientSnapshot.getValue(Ingredients.class);
 
+                                // Loop through all ingredients and add them to the list if they belong to the recipe.
                                 if (ingredients != null) {
-                                    recyclerView = findViewById(R.id.ingredientList);
-                                    String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-                                    DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Ingredients").child(userId);
-                                    FirebaseRecyclerOptions<Ingredients> options = new FirebaseRecyclerOptions.Builder<Ingredients>()
-                                            .setQuery(mAuth.orderByChild("recipeID").equalTo(recipeID), Ingredients.class)
-                                            .build();
-                                    IngredientRecAdapter adapter = new IngredientRecAdapter(options);
-                                    recyclerView.setAdapter(adapter);
-                                    adapter.startListening();
+                                    if (ingredients.getRecipeID() == recipeID) {
+                                        String ingredientUnit = ingredients.unit;
+                                        ingredientsList.add(ingredients);
+                                    }
+                                    }
                                 }
+                            // Create spinner unit for ingredients to load existing data into
+
+
+                            // Add the view to the layout.
+                            // Loop through the list and add the ingredients to the layout.
+                            for (Ingredients ingredient : ingredientsList) {
+                                View view = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
+
+                                // Create a spinner
+                                Spinner spinner = view.findViewById(R.id.spinnerUnit);
+                                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(UpdateRecipe.this, R.array.unit_array, android.R.layout.simple_spinner_item);
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                spinner.setAdapter(adapter);
+                                EditText ingredientName = view.findViewById(R.id.txtIngredient);
+                                EditText ingredientAmount = view.findViewById(R.id.txtAmount);
+                                String ingredientUnit = ingredient.unit;
+                                ImageView imageClose = view.findViewById(R.id.image_remove);
+
+
+                                ingredientName.setText(ingredient.getIngredient());
+                                ingredientAmount.setText(ingredient.getAmount());
+                                spinner.setSelection(adapter.getPosition(ingredientUnit));
+
+                                layoutList.addView(view);
+
+                                imageClose.setOnClickListener(v -> removeView(view));
+
                             }
+                        }
+                        private void removeView(View view) {
+                            layoutList.removeView(view);
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
@@ -180,7 +220,40 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
             updateRecipe();
         } else if (id == R.id.logo) {
             startActivity(new Intent(this, ProfileActivity.class));
+        } else if (id == R.id.btnAddIngredient) {
+            addIngredient();
         }
+    }
+
+    /**
+     * Method for adding ingredients to the recipe.
+     */
+    private void addIngredient() {
+        final View ingredientsView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
+
+        EditText txtIngredient = ingredientsView.findViewById(R.id.txtIngredient);
+        EditText txtAmount = ingredientsView.findViewById(R.id.txtAmount);
+        AppCompatSpinner spinnerUnit = ingredientsView.findViewById(R.id.spinnerUnit);
+        ImageView imageClose = ingredientsView.findViewById(R.id.image_remove);
+
+        ArrayAdapter<CharSequence> adapter_unit = ArrayAdapter.createFromResource(this, R.array.unit_array, android.R.layout.simple_spinner_item);
+        adapter_unit.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerUnit.setAdapter(adapter_unit);
+
+        imageClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                removeView(ingredientsView);
+            }
+        });
+        layoutList.addView(ingredientsView);
+    }
+
+    /**
+     * Method for removing ingredients from the recipe.
+     */
+    private void removeView(View view) {
+        layoutList.removeView(view);
     }
 
     // Method for updating the recipe.
