@@ -241,7 +241,6 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                         processSearch(newText);
                         return false;
                     }
-
                     @Override
                     public boolean onQueryTextChange(String newText) {
                         processSearch(newText);
