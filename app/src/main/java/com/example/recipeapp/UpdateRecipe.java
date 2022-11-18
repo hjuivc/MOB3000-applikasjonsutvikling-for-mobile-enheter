@@ -256,50 +256,136 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
         layoutList.removeView(view);
     }
 
+    private boolean checkIfValidAndRead() {
+        ingredientsList.clear();
+        boolean result = true;
+
+        for (int i = 1; i < layoutList.getChildCount(); i++) {
+
+            View ingredientsView = layoutList.getChildAt(i);
+
+            EditText txtIngredient = ingredientsView.findViewById(R.id.txtIngredient);
+            EditText txtAmount = ingredientsView.findViewById(R.id.txtAmount);
+            AppCompatSpinner spinnerUnit = ingredientsView.findViewById(R.id.spinnerUnit);
+
+            Ingredients ingredients = new Ingredients();
+
+            if (!txtIngredient.getText().toString().equals("")) {
+                ingredients.setIngredient(txtIngredient.getText().toString());
+            } else {
+                result = false;
+                break;
+            }
+
+            if (!txtAmount.getText().toString().equals("")) {
+                ingredients.setAmount(txtAmount.getText().toString());
+            } else {
+                result = false;
+                break;
+            }
+
+            if (spinnerUnit.getSelectedItemPosition() != 0) {
+                ingredients.setUnit(spinnerUnit.getSelectedItem().toString());
+            } else {
+                result = false;
+                break;
+            }
+            ingredientsList.add(ingredients);
+
+        }
+
+        if (ingredientsList.size() == 0) {
+            result = false;
+            Toast.makeText(this, R.string.add_ingredient_first, Toast.LENGTH_SHORT).show();
+        } else if (!result) {
+            Toast.makeText(this, R.string.ingredient_error, Toast.LENGTH_SHORT).show();
+        }
+        return result;
+    }
+
     // Method for updating the recipe.
     private void updateRecipe() {
-        String recipeName = ((EditText) findViewById(R.id.recipeName)).getText().toString();
-        String recipeDescription = ((EditText) findViewById(R.id.recipeDescription)).getText().toString();
-        String recipeSteps = ((EditText) findViewById(R.id.recipeStepByStep)).getText().toString();
-        String cuisine = ((Spinner) findViewById(R.id.recipeCousine)).getSelectedItem().toString();
-        Boolean vegan = Boolean.parseBoolean(veganSwitch.isChecked() ? "true" : "false");
-        Boolean favorite = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
+        if (checkIfValidAndRead()) {
+            // Get id from intent
+            Intent intent = getIntent();
+            String recipeId = intent.getStringExtra("recipeId");
+            // Snapshot through referenceIngredients and delete all ingredients.
 
-        if (recipeName.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeName)).setError(getResources().getString(R.string.recipe_name));
-            ((EditText) findViewById(R.id.recipeName)).requestFocus();
-            ((EditText) findViewById(R.id.recipeName)).requestFocus();
-            return;
-        }
-        if (recipeDescription.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeDescription)).setError(getResources().getString(R.string.recipe_description));
-            ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
-            ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
-            return;
-        }
-        if (recipeSteps.isEmpty()) {
-            ((EditText) findViewById(R.id.recipeStepByStep)).setError(getResources().getString(R.string.recipe_step_by_step));
-            ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
-            ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
-            return;
-        }
-        if (cuisine.isEmpty()) {
-            ((Spinner) findViewById(R.id.recipeCousine)).setPrompt(getResources().getString(R.string.recipe_cuisine));
-            ((Spinner) findViewById(R.id.recipeCousine)).requestFocus();
-            return;
-        }
+            referenceRecipe.child(userID).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    Recipe recipe = snapshot.getValue(Recipe.class);
+                    if (recipe != null) {
+                        Integer recipeID = recipe.getRecipeID();
 
-        String recipeId = getIntent().getStringExtra("recipeId");
-        referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(favorite);
-        referenceRecipe.child(userID).child(recipeId).child("vegan").setValue(vegan);
-        referenceRecipe.child(userID).child(recipeId).child("name").setValue(recipeName);
-        referenceRecipe.child(userID).child(recipeId).child("description").setValue(recipeDescription);
-        referenceRecipe.child(userID).child(recipeId).child("stepbystep").setValue(recipeSteps);
-        referenceRecipe.child(userID).child(recipeId).child("cuisine").setValue(cuisine);
-        // make a toast for the user
-        Toast.makeText(UpdateRecipe.this, R.string.toast_recipe_updated, Toast.LENGTH_SHORT).show();
-        // back to showAllRecipes
-        startActivity(new Intent(UpdateRecipe.this, ProfileActivity.class));
+                        for (int i = 0; i < ingredientsList.size(); i++) {
+                            Ingredients ingredients = new Ingredients(i + 1, recipeID, ingredientsList.get(i).getIngredient(), ingredientsList.get(i).getAmount(), ingredientsList.get(i).getUnit());
+
+                            String recipeName = ((EditText) findViewById(R.id.recipeName)).getText().toString();
+                            String recipeDescription = ((EditText) findViewById(R.id.recipeDescription)).getText().toString();
+                            String recipeSteps = ((EditText) findViewById(R.id.recipeStepByStep)).getText().toString();
+                            String cuisine = ((Spinner) findViewById(R.id.recipeCousine)).getSelectedItem().toString();
+                            Boolean vegan = Boolean.parseBoolean(veganSwitch.isChecked() ? "true" : "false");
+                            Boolean favorite = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
+
+                            if (recipeName.isEmpty()) {
+                                ((EditText) findViewById(R.id.recipeName)).setError(getResources().getString(R.string.recipe_name));
+                                ((EditText) findViewById(R.id.recipeName)).requestFocus();
+                                ((EditText) findViewById(R.id.recipeName)).requestFocus();
+                                return;
+                            }
+                            if (recipeDescription.isEmpty()) {
+                                ((EditText) findViewById(R.id.recipeDescription)).setError(getResources().getString(R.string.recipe_description));
+                                ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
+                                ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
+                                return;
+                            }
+                            if (recipeSteps.isEmpty()) {
+                                ((EditText) findViewById(R.id.recipeStepByStep)).setError(getResources().getString(R.string.recipe_step_by_step));
+                                ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
+                                ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
+                                return;
+                            }
+                            if (cuisine.isEmpty()) {
+                                ((Spinner) findViewById(R.id.recipeCousine)).setPrompt(getResources().getString(R.string.recipe_cuisine));
+                                ((Spinner) findViewById(R.id.recipeCousine)).requestFocus();
+                                return;
+                            }
+
+                            // Get recipeID from the intent
+                            referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(favorite);
+                            referenceRecipe.child(userID).child(recipeId).child("vegan").setValue(vegan);
+                            referenceRecipe.child(userID).child(recipeId).child("name").setValue(recipeName);
+                            referenceRecipe.child(userID).child(recipeId).child("description").setValue(recipeDescription);
+                            referenceRecipe.child(userID).child(recipeId).child("stepbystep").setValue(recipeSteps);
+                            referenceRecipe.child(userID).child(recipeId).child("cuisine").setValue(cuisine);
+
+                            Recipe recipeUpdate = new Recipe(userID, recipeID, recipeName, recipeDescription, recipeSteps, cuisine, vegan, favorite);
+                            referenceRecipe.child(userID).child(recipeId).setValue(recipeUpdate);
+
+                            FirebaseDatabase.getInstance().getReference("Ingredients")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .push() // Adding this for not overwriting to the database every time
+                                    .setValue(ingredients);
+
+                            // make a toast for the user
+                            Toast.makeText(UpdateRecipe.this, R.string.toast_recipe_updated, Toast.LENGTH_SHORT).show();
+                            // back to showAllRecipes
+                            startActivity(new Intent(UpdateRecipe.this, ProfileActivity.class));
+                    }
+            }
+                }
+
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+
+            }
+
 
     }
     // Method for setting text on the switches using oncheckeschanged
