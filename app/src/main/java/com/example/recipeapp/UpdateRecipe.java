@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -309,6 +310,37 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
             // Get id from intent
             Intent intent = getIntent();
             String recipeId = intent.getStringExtra("recipeId");
+
+            String recipeName = ((EditText) findViewById(R.id.recipeName)).getText().toString();
+            String recipeDescription = ((EditText) findViewById(R.id.recipeDescription)).getText().toString();
+            String recipeSteps = ((EditText) findViewById(R.id.recipeStepByStep)).getText().toString();
+            String cuisine = ((Spinner) findViewById(R.id.recipeCousine)).getSelectedItem().toString();
+            Boolean vegan = Boolean.parseBoolean(veganSwitch.isChecked() ? "true" : "false");
+            Boolean favorite = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
+
+            if (recipeName.isEmpty()) {
+                ((EditText) findViewById(R.id.recipeName)).setError(getResources().getString(R.string.recipe_name));
+                ((EditText) findViewById(R.id.recipeName)).requestFocus();
+                ((EditText) findViewById(R.id.recipeName)).requestFocus();
+                return;
+            }
+            if (recipeDescription.isEmpty()) {
+                ((EditText) findViewById(R.id.recipeDescription)).setError(getResources().getString(R.string.recipe_description));
+                ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
+                ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
+                return;
+            }
+            if (recipeSteps.isEmpty()) {
+                ((EditText) findViewById(R.id.recipeStepByStep)).setError(getResources().getString(R.string.recipe_step_by_step));
+                ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
+                ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
+                return;
+            }
+            if (cuisine.isEmpty()) {
+                ((Spinner) findViewById(R.id.recipeCousine)).setPrompt(getResources().getString(R.string.recipe_cuisine));
+                ((Spinner) findViewById(R.id.recipeCousine)).requestFocus();
+                return;
+            }
             // Snapshot through referenceIngredients and delete all ingredients.
 
             referenceRecipe.child(userID).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -317,41 +349,32 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                     Recipe recipe = snapshot.getValue(Recipe.class);
                     if (recipe != null) {
                         Integer recipeID = recipe.getRecipeID();
+                        // Loop through reference ingredients and delete all ingredients.
+                        referenceIngredients.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                                    Ingredients ingredients = dataSnapshot.getValue(Ingredients.class);
+
+                                    if (ingredients != null) {
+                                        Integer ingredientRecipeID = Integer.valueOf(ingredients.getRecipeID());
+                                        if (ingredientRecipeID.equals(recipeID)) {
+                                            String ingredientId = dataSnapshot.getKey();
+                                            referenceIngredients.child(userID).child(ingredientId).removeValue();
+
+                                        }
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
 
                         for (int i = 0; i < ingredientsList.size(); i++) {
                             Ingredients ingredients = new Ingredients(i + 1, recipeID, ingredientsList.get(i).getIngredient(), ingredientsList.get(i).getAmount(), ingredientsList.get(i).getUnit());
-
-                            String recipeName = ((EditText) findViewById(R.id.recipeName)).getText().toString();
-                            String recipeDescription = ((EditText) findViewById(R.id.recipeDescription)).getText().toString();
-                            String recipeSteps = ((EditText) findViewById(R.id.recipeStepByStep)).getText().toString();
-                            String cuisine = ((Spinner) findViewById(R.id.recipeCousine)).getSelectedItem().toString();
-                            Boolean vegan = Boolean.parseBoolean(veganSwitch.isChecked() ? "true" : "false");
-                            Boolean favorite = Boolean.parseBoolean(favoriteSwitch.isChecked() ? "true" : "false");
-
-                            if (recipeName.isEmpty()) {
-                                ((EditText) findViewById(R.id.recipeName)).setError(getResources().getString(R.string.recipe_name));
-                                ((EditText) findViewById(R.id.recipeName)).requestFocus();
-                                ((EditText) findViewById(R.id.recipeName)).requestFocus();
-                                return;
-                            }
-                            if (recipeDescription.isEmpty()) {
-                                ((EditText) findViewById(R.id.recipeDescription)).setError(getResources().getString(R.string.recipe_description));
-                                ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
-                                ((EditText) findViewById(R.id.recipeDescription)).requestFocus();
-                                return;
-                            }
-                            if (recipeSteps.isEmpty()) {
-                                ((EditText) findViewById(R.id.recipeStepByStep)).setError(getResources().getString(R.string.recipe_step_by_step));
-                                ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
-                                ((EditText) findViewById(R.id.recipeStepByStep)).requestFocus();
-                                return;
-                            }
-                            if (cuisine.isEmpty()) {
-                                ((Spinner) findViewById(R.id.recipeCousine)).setPrompt(getResources().getString(R.string.recipe_cuisine));
-                                ((Spinner) findViewById(R.id.recipeCousine)).requestFocus();
-                                return;
-                            }
-
                             // Get recipeID from the intent
                             referenceRecipe.child(userID).child(recipeId).child("favorite").setValue(favorite);
                             referenceRecipe.child(userID).child(recipeId).child("vegan").setValue(vegan);
@@ -360,30 +383,27 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                             referenceRecipe.child(userID).child(recipeId).child("stepbystep").setValue(recipeSteps);
                             referenceRecipe.child(userID).child(recipeId).child("cuisine").setValue(cuisine);
 
-                            Recipe recipeUpdate = new Recipe(userID, recipeID, recipeName, recipeDescription, recipeSteps, cuisine, vegan, favorite);
-                            referenceRecipe.child(userID).child(recipeId).setValue(recipeUpdate);
 
+
+                            // Add ingredients to database
                             FirebaseDatabase.getInstance().getReference("Ingredients")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .push() // Adding this for not overwriting to the database every time
                                     .setValue(ingredients);
-
-                            // make a toast for the user
-                            Toast.makeText(UpdateRecipe.this, R.string.toast_recipe_updated, Toast.LENGTH_SHORT).show();
-                            // back to showAllRecipes
-                            startActivity(new Intent(UpdateRecipe.this, ProfileActivity.class));
+                        }
                     }
-            }
                 }
-
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
+                    Toast.makeText(UpdateRecipe.this, error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
 
-
+            // make a toast for the user
+            Toast.makeText(UpdateRecipe.this, R.string.toast_recipe_updated, Toast.LENGTH_SHORT).show();
+            // back to showAllRecipes
+            startActivity(new Intent(UpdateRecipe.this, ProfileActivity.class));
             }
 
 
