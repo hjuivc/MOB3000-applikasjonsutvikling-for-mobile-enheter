@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatSpinner;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -34,46 +35,30 @@ import java.util.ArrayList;
 
 public class AddRecipe extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
-    /**
-     *  Making variables for the different elements in the layout
-     */
+    // Making variables for the different elements in the layout.
     private TextView txtSaveRecipy;
-    private EditText editRecipeName, editTextDescription, editStepByStep, editIngredient, editAmount, txtAmount, txtIngredient;
+    private EditText editRecipeName, editTextDescription, editStepByStep;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
-    private Spinner spinnerCuisine, spinnerUnit;
+    private Spinner spinnerCuisine;
     private Switch switchVegan;
-
     private ImageView image;
-
-    private FirebaseUser recipie;
-    private DatabaseReference reference;
-
-    private String recipieID;
-
-
     private LinearLayout layoutList;
-    private Button buttonAdd, btnSaveIng;
-    ArrayList<Ingredients> ingredientsList = new ArrayList<>();
+    private Button buttonAdd;
+    private ArrayList<Ingredients> ingredientsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
 
-        /**
-         Adding title.
-         */
+        // Adding title.
         this.setTitle(getResources().getString(R.string.activity_add_recipe));
 
-        /**
-         * Activating "back- button" in the action bar.
-         */
+        // Activating "back- button" in the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /**
-         * Activate components in the layout and connecting them to the different variables.
-         */
+        // Activate components in the layout and connecting them to the different variables.
         mAuth = FirebaseAuth.getInstance();
 
         txtSaveRecipy = findViewById(R.id.btnSave);
@@ -95,21 +80,18 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         image = findViewById(R.id.logo);
         image.setOnClickListener(this);
 
-        /**
-         * Adding elements to the cuisine- spinner
-         */
+        // Adding elements to the cuisine- spinner.
         ArrayAdapter<CharSequence> adapter_cousine = ArrayAdapter.createFromResource(this, R.array.cousine_array, android.R.layout.simple_spinner_item);
         adapter_cousine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerCuisine.setAdapter(adapter_cousine);
 
+        // Set listener on the vegan switch.
         if (switchVegan != null) {
             switchVegan.setOnCheckedChangeListener(this);
         }
     }
 
-    /**
-     * Method for user- registration. Calls the method when "save" is clicked, and add ingredients.
-     */
+    // Method for starting the other methods based on onClick. Activates button for saving recipe, adding ingredients and back to main page.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -125,12 +107,11 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    /**
-     * Method for adding ingredients to the recipe.
-     */
+    // Method for adding ingredients to the recipe.
     private void addIngredient() {
         final View ingredientsView = getLayoutInflater().inflate(R.layout.row_add_ingredient, null, false);
 
+        // Activating the fields in the new views created from row_add_ingredient.
         EditText txtIngredient = ingredientsView.findViewById(R.id.txtIngredient);
         EditText txtAmount = ingredientsView.findViewById(R.id.txtAmount);
         AppCompatSpinner spinnerUnit = ingredientsView.findViewById(R.id.spinnerUnit);
@@ -149,19 +130,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         layoutList.addView(ingredientsView);
     }
 
-    /**
-     * Method for removing ingredients from the recipe.
-     */
+    // Method for removing row_add_ingredients view from the main view.
     private void removeView(View view) {
         layoutList.removeView(view);
     }
 
+    // Method for checking if all of the data is entered correctly before saving the recipe.
     private boolean checkIfValidAndRead() {
         ingredientsList.clear();
         boolean result = true;
 
         for (int i = 1; i < layoutList.getChildCount(); i++) {
-
             View ingredientsView = layoutList.getChildAt(i);
 
             EditText txtIngredient = ingredientsView.findViewById(R.id.txtIngredient);
@@ -184,6 +163,14 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 break;
             }
 
+            if (spinnerUnit.getSelectedItemPosition() == 0) {
+                TextView errorText = (TextView)spinnerUnit.getSelectedView();
+                errorText.setError("");
+                errorText.setTextColor(Color.RED);//just to highlight that this is an error
+                errorText.setText(R.string.unit_error);//changes the selected item text to this
+                spinnerUnit.requestFocus();
+            }
+
             if (spinnerUnit.getSelectedItemPosition() != 0) {
                 ingredients.setUnit(spinnerUnit.getSelectedItem().toString());
             } else {
@@ -191,7 +178,6 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                 break;
             }
             ingredientsList.add(ingredients);
-
         }
 
         if (ingredientsList.size() == 0) {
@@ -203,9 +189,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         return result;
     }
 
-    /**
-     * Method for saving the entire recipe.
-     */
+    // Method for saving the entire recipe.
     private void saveRecipe() {
         if (checkIfValidAndRead()) {
             mAuth = FirebaseAuth.getInstance();
@@ -229,13 +213,10 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
 
                 }
 
-                /**
-                 * Method for saving the ingredients to the database.
-                 */
+                // Method for saving the ingredients to the database.
                 private void saveIngredientsToDatabase(Integer highestRecipeID) {
                     Integer recipeID = highestRecipeID;
                     for (int i = 0; i < ingredientsList.size(); i++) {
-
                         Ingredients ingredients = new Ingredients(i + 1, recipeID, ingredientsList.get(i).getIngredient(), ingredientsList.get(i).getAmount(), ingredientsList.get(i).getUnit());
 
                         FirebaseDatabase.getInstance().getReference("Ingredients")
@@ -245,9 +226,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                     }
                 }
 
-                /**
-                 * Method for saving the recipe to the database
-                 */
+                // Method for saving the recipe to the database.
                 private void saveRecipeToDatabase(Integer highestRecipeID) {
                     Integer recipeID = highestRecipeID;
                     String name = editRecipeName.getText().toString().trim();
@@ -275,10 +254,17 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                         return;
                     }
 
+                    if (spinnerCuisine.getSelectedItemPosition() == 0) {
+                        TextView errorText = (TextView)spinnerCuisine.getSelectedView();
+                        errorText.setError("");
+                        errorText.setTextColor(Color.RED);//just to highlight that this is an error
+                        errorText.setText(R.string.cuisine_error);//changes the selected item text to this
+                        spinnerCuisine.requestFocus();
+                        return;
+                    }
+
                     progressBar.setVisibility(View.VISIBLE);
-
                     saveIngredientsToDatabase(highestRecipeID);
-
                     Recipe recipe = new Recipe(userID, recipeID, name, description, stepByStep, cuisine, vegan, favorite);
 
                     FirebaseDatabase.getInstance().getReference("Recipes")
@@ -299,9 +285,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         }
     }
 
-    /**
-     * Code for activating the "back- button" in the app.
-     */
+    // Code for activating the "back- button" in the app.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -314,9 +298,7 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Method for activating the "SwitchVegan" in the app.
-     */
+    // Method for activating the "SwitchVegan" in the app.
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
