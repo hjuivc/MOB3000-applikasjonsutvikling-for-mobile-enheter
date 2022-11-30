@@ -97,6 +97,8 @@
     <string name="save_recipe">Save recipe</string>
     <string name="cuisine_recipe">Cuisine</string>
     <string name="ingredient_button">Add ingredient</string>
+    <string name="unit_error">!!!</string>
+    <string name="cuisine_error">Choose cuisine!</string>
 
     <!-- Recipe activity -->
     <string name="ingredient_label">Name</string>
