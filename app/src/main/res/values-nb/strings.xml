@@ -84,6 +84,8 @@
     <string name="ingredient_add">Ingrediens</string>
     <string name="amount_add">Mengde</string>
     <string name="add_ingredient_button">Legg til ingredienser</string>
+    <string name="unit_error">!!!</string>
+    <string name="cuisine_error">Velg kjøkken!</string>
 
     <!-- Activity_add_recipe -->
     <string name="add_recipe">Legg til oppskrift</string>
