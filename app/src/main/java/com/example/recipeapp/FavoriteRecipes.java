@@ -32,36 +32,24 @@ public class FavoriteRecipes extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorite_recipes);
 
-        /**
-         Adding title.
-         */
+        // Adding title.
         this.setTitle(getResources().getString(R.string.activity_favorite_recipes));
 
-        /**
-         * Activating the "back- button" on the action bar.
-         */
+        // Activating the "back- button" on the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /**
-         * Activating search view
-         */
+        // Activating search view
         searchView = findViewById(R.id.searchView);
 
-        /**
-         * Activating logo
-         */
+        // Activating logo
         image = findViewById(R.id.logo);
         image.setOnClickListener(this);
 
-        /**
-         * Button, which takes the user to the AddRecipeActivity.
-         */
+        // Button, which takes the user to the AddRecipeActivity.
         addRecipeBtn = findViewById(R.id.addRecipeBtn);
         addRecipeBtn.setOnClickListener(this);
 
-        /**
-         * Iterate through recipes database and display all recipes.
-         */
+        // Iterate through recipes database and display all recipes.
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
         recyclerView = findViewById(R.id.recipeRecyclerView);
@@ -99,16 +87,37 @@ public class FavoriteRecipes extends AppCompatActivity implements View.OnClickLi
     }
 
     public void processSearch(String searchText) {
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
-        FirebaseRecyclerOptions<Recipe> options =
-                new FirebaseRecyclerOptions.Builder<Recipe>()
-                        .setQuery(mAuth.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff"), Recipe.class)
-                        .build();
+        // If the search text is empty, then display all recipes.
+        if (searchText.isEmpty()) {
+            // Show all favorite recipes again
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
+            recyclerView = findViewById(R.id.recipeRecyclerView);
+            recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+            FirebaseRecyclerOptions<Recipe> options =
+                    new FirebaseRecyclerOptions.Builder<Recipe>()
+                            .setQuery(mAuth.orderByChild("favorite").equalTo(true), Recipe.class)
+                            .build();
 
-        adapter = new RecipeRecAdapter(options);
-        adapter.startListening();
-        recyclerView.setAdapter(adapter);
+            adapter = new RecipeRecAdapter(options);
+            recyclerView.setAdapter(adapter);
+            adapter.startListening();
+
+        } else {
+            // If the search text is not empty, then display only the recipes that match the search text.
+            String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
+            recyclerView = findViewById(R.id.recipeRecyclerView);
+            recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+            FirebaseRecyclerOptions<Recipe> options =
+                    new FirebaseRecyclerOptions.Builder<Recipe>()
+                            .setQuery(mAuth.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff"), Recipe.class)
+                            .build();
+
+            adapter = new RecipeRecAdapter(options);
+            recyclerView.setAdapter(adapter);
+            adapter.startListening();
+        }
     }
 
     @Override
@@ -117,9 +126,7 @@ public class FavoriteRecipes extends AppCompatActivity implements View.OnClickLi
         adapter.stopListening();
     }
 
-    /**
-     * Code for activating the "back- button" in the app.
-     */
+    // Code for activating the "back- button" in the app.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -132,9 +139,7 @@ public class FavoriteRecipes extends AppCompatActivity implements View.OnClickLi
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * Code for activating the logo.
-     */
+    // Code for activating the logo.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
