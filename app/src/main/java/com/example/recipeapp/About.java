@@ -15,6 +15,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class About extends AppCompatActivity implements View.OnClickListener {
 
+    // Making variables for the different elements in the layout.
     private TextView emoji, about, about2, about3, copyright;
     private MaterialButton contact_btn;
     private ImageView image;
