@@ -173,6 +173,19 @@
         <item>Chinese</item>
         <item>Japanese</item>
         <item>Spanish</item>
+        <item>Colombian</item>
+        <item>Turkish</item>
+        <item>Thai</item>
+        <item>Arab</item>
+        <item>Lebanese</item>
+        <item>Maroccan</item>
+        <item>Korean</item>
+        <item>Vietnamese</item>
+        <item>Malaysian</item>
+        <item>Russian</item>
+        <item>Ethiopian</item>
+        <item>Polish</item>
+        <item>German</item>
     </string-array>
 
     //TODO: Add more strings here
