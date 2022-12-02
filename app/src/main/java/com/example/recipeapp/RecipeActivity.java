@@ -75,9 +75,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
         image = findViewById(R.id.logo);
         image.setOnClickListener(this);
 
-        /**
-         * If favorite is set it will show as set.
-         */
+        // If favorite is set it will show as set.
         referenceRecipe.child(userID).child(recipeId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -99,9 +97,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-        /**
-         * Iterate through recipes database and display all recipes.
-         */
+        // Iterate through recipes database and display all recipes.
         referenceRecipe.child(userID).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -152,23 +148,14 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
 
-
-
-
-        /**
-         Adding title.
-         */
+        // Adding title.
         this.setTitle(getResources().getString(R.string.activity_show_recipe));
 
-        /**
-         * Activating "back- button" on the action bar.
-         */
+        // Activating "back- button" on the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    /**
-     * Method for acitvating the SwitchVegan in the app
-     */
+    // Method for acitvating the SwitchVegan in the app.
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         if (isChecked) {
@@ -189,9 +176,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    /**
-     * Code for activating the "back- button" on the action bar.
-     */
+    // Code for activating the "back- button" on the action bar.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
