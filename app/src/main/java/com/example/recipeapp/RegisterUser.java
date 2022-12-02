@@ -21,9 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
-    /**
-     * Making variables for the different elements in the layout
-     */
+    // Making variables for the different elements in the layout.
     private TextView registerUser;
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
     private ProgressBar progressBar;
@@ -34,19 +32,13 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_user);
 
-        /**
-         Adding title.
-         */
+        // Adding title.
         this.setTitle(getResources().getString(R.string.activity_register_user));
 
-        /**
-         * Activating "back- button" on the action bar.
-         */
+        // Activating "back- button" on the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /**
-         * Activating the components in the layout and connecting them to the variables.
-         */
+        // Activating the components in the layout and connecting them to the variables.
         mAuth = FirebaseAuth.getInstance();
 
         registerUser = findViewById(R.id.btnRegisterUser);
@@ -60,9 +52,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         progressBar = findViewById(R.id.progressBar);
     }
 
-    /**
-     * Method for registering a new user.
-     */
+    // Method for registering a new user.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -72,9 +62,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    /**
-     * Method for registering a new user. Gets called when the register button is clicked.
-     */
+    // Method for registering a new user. Gets called when the register button is clicked.
     private void registerUser() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -107,9 +95,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        /**
-         * Firebase Authenticator accepts only passwords with a minimum of 6 characters.
-         */
+        // Firebase Authenticator accepts only passwords with a minimum of 6 characters.
         if (password.length() < 6) {
             editTextPassword.setError(getResources().getString(R.string.register_user_password_required));
             editTextPassword.requestFocus();
@@ -118,43 +104,33 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
 
         progressBar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            User user = new User(fullName, age, email);
-                            /**
-                             * We are using the Firebase Realtime Database to store the user data.
-                             * We use the Firebase Authenticator to save the users data.
-                             * The aim would be "Users/UID where UID is the user's unique ID.
-                             */
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        User user = new User(fullName, age, email);
+                        // We are using the Firebase Realtime Database to store the user data.
+                        // We use the Firebase Authenticator to save the users data.
+                        // The aim would be "Users/UID where UID is the user's unique ID.
 
-                            FirebaseDatabase.getInstance().getReference("Users")
-                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(RegisterUser.this, R.string.toast_register, Toast.LENGTH_LONG).show();
-                                                progressBar.setVisibility(View.GONE);
-                                                // Redirect to login layout
-                                                startActivity(new Intent(RegisterUser.this, ProfileActivity.class));
-                                            } else {
-                                                Toast.makeText(RegisterUser.this, R.string.toast_register_fail, Toast.LENGTH_LONG).show();
-                                                progressBar.setVisibility(View.GONE);
-                                            }
-                                        }
-                                    });
-                        } else {
-                            Toast.makeText(RegisterUser.this, R.string.toast_register_fail, Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
-                        }
+                        FirebaseDatabase.getInstance().getReference("Users")
+                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                .setValue(user).addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Toast.makeText(RegisterUser.this, R.string.toast_register, Toast.LENGTH_LONG).show();
+                                        progressBar.setVisibility(View.GONE);
+                                        // Redirect to login layout
+                                        startActivity(new Intent(RegisterUser.this, ProfileActivity.class));
+                                    } else {
+                                        Toast.makeText(RegisterUser.this, R.string.toast_register_fail, Toast.LENGTH_LONG).show();
+                                        progressBar.setVisibility(View.GONE);
+                                    }
+                                });
+                    } else {
+                        Toast.makeText(RegisterUser.this, R.string.toast_register_fail, Toast.LENGTH_LONG).show();
+                        progressBar.setVisibility(View.GONE);
                     }
                 });
     }
-    /**
-     * Code for activating the "back- button".
-     */
+    // Code for activating the "back- button".
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
