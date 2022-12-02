@@ -11,9 +11,7 @@ public class Recipe {
     public Boolean favorite;
 
     public Recipe() {
-        /**
-         * Default constructor required for calls to DataSnapshot.getValue(Recipe.class)
-         */
+        // Default constructor required for calls to DataSnapshot.getValue(Recipe.class).
     }
 
     public Recipe(String userID, int recipeID, String name, String description, String stepbystep, String cuisine, Boolean vegan, Boolean favorite) {
