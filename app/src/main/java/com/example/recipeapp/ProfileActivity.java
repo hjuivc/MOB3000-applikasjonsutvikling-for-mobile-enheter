@@ -32,14 +32,10 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        /**
-        Adding title.
-         */
+        // Adding title.
         this.setTitle(getResources().getString(R.string.activity_profile));
 
-        /**
-         * Retrieving the user's information from the database.
-         */
+        // Retrieving the user's information from the database.
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
@@ -75,67 +71,39 @@ public class ProfileActivity extends AppCompatActivity {
 
         initViews();
 
-        /**
-         * Show All Recipes
-         */
-        btnShowAllRecipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, ShowAllRecipes.class);
-                startActivity(intent);
-            }
+        // Show All Recipes.
+        btnShowAllRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, ShowAllRecipes.class);
+            startActivity(intent);
         });
 
-        /**
-         * Favorite recipes
-         */
-        btnFavoriteRecipes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, FavoriteRecipes.class);
-                startActivity(intent);
-            }
+        // Favorite recipes.
+        btnFavoriteRecipes.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, FavoriteRecipes.class);
+            startActivity(intent);
         });
 
-        /**
-         * Add recipe
-         */
-        btnAddRecipe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, AddRecipe.class);
-                startActivity(intent);
-            }
+        // Add recipe.
+        btnAddRecipe.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, AddRecipe.class);
+            startActivity(intent);
         });
 
-        /**
-         * About
-         */
-        btnAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ProfileActivity.this, About.class);
-                startActivity(intent);
-            }
+        // About.
+        btnAbout.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, About.class);
+            startActivity(intent);
         });
 
-        /**
-         * Logout button
-         */
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                Toast.makeText(ProfileActivity.this, R.string.profile_message, Toast.LENGTH_SHORT).show();
-            }
+        // Logout button.
+        btnLogout.setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+            Toast.makeText(ProfileActivity.this, R.string.profile_message, Toast.LENGTH_SHORT).show();
         });
     }
 
-    /**
-     * Method for initializing the buttons.
-     */
-
+    // Method for initializing the buttons.
     private void initViews() {
         btnLogout = findViewById(R.id.btnLogout);
         btnAbout = findViewById(R.id.btnAbout);
