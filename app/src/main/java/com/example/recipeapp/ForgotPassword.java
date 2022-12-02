@@ -29,40 +29,24 @@ public class ForgotPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
 
-        /**
-         Adding title.
-         */
+        // Adding title.
         this.setTitle(getResources().getString(R.string.activity_forgot_password));
 
-        /**
-         * Activating "back- button" on the action bar.
-         */
+        // Activating "back- button" on the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /**
-         * Activating components in the layout and connecting the variables.
-         */
+        // Activating components in the layout and connecting the variables.
         editTextEmail = findViewById(R.id.txtEmail);
         resetPassword = findViewById(R.id.btnForgotPassword);
         progressBar = findViewById(R.id.progressBar);
 
         auth = FirebaseAuth.getInstance();
 
-        /**
-         * Adding a listener to the button.
-         */
-        resetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetPassword();
-            }
-        });
-
+        // Adding a listener to the button.
+        resetPassword.setOnClickListener(v -> resetPassword());
     }
 
-    /**
-     * Method for reset password.
-     */
+    // Method for reset password.
     private void resetPassword() {
         String email = editTextEmail.getText().toString().trim();
 
@@ -89,9 +73,7 @@ public class ForgotPassword extends AppCompatActivity {
         });
     }
 
-    /**
-     * Code for activating "back- button" on the action bar.
-     */
+    // Code for activating "back- button" on the action bar.
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
