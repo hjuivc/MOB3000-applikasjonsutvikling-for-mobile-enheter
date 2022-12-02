@@ -5,9 +5,7 @@ public class Ingredients {
     public String ingredient, amount, unit;
 
     public Ingredients() {
-        /**
-         * Default constructor needed to call DataSnapshot.getValue(Ingredients.class)
-         */
+        // Default constructor needed to call DataSnapshot.getValue(Ingredients.class)
     }
 
     public Ingredients(int ingredientID, int recipeID, String ingredient, String amount, String unit) {
