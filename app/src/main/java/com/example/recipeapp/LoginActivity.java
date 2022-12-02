@@ -21,9 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
-    /**
-     * Making variables to the different elements in the layout
-     */
+    // Making variables to the different elements in the layout.
     private TextView register, forgotPassword;
     private EditText editTextEmail, editTextPassword;
     private Button signIn;
@@ -36,14 +34,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        /**
-         Adding title.
-         */
+        // Adding title.
         this.setTitle(getResources().getString(R.string.activity_login));
 
-        /**
-         * Activating the components in layout and connect them to the variables.
-         */
+        // Activating the components in layout and connect them to the variables.
         register = findViewById(R.id.registerNewUser);
         register.setOnClickListener(this);
 
@@ -63,9 +57,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         mAuth = FirebaseAuth.getInstance();
     }
 
-    /**
-     * This method being called when the user clicks on the different buttons.
-     */
+    // This method being called when the user clicks on the different buttons.
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -81,9 +73,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    /**
-     * This method gets called when the user clicks on the login button.
-     */
+    // This method gets called when the user clicks on the login button.
     private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
         String password = editTextPassword.getText().toString().trim();
@@ -114,28 +104,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         progressBar.setVisibility(View.VISIBLE);
 
-        /**
-         * This method checks if the user is registered in the database.
-         */
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    if (user.isEmailVerified()) {
-                        startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
-                    } else {
-                        user.sendEmailVerification();
-                        Toast.makeText(getApplicationContext(), R.string.check_email, Toast.LENGTH_LONG).show();
-                    }
-                    /**
-                     * Sends the user to the profile page if the user is registered.
-                     */
+        // This method checks if the user is registered in the database.
+        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user.isEmailVerified()) {
                     startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
                 } else {
-                    Toast.makeText(LoginActivity.this, R.string.login_error_message, Toast.LENGTH_LONG).show();
-                    progressBar.setVisibility(View.GONE);
+                    user.sendEmailVerification();
+                    Toast.makeText(getApplicationContext(), R.string.check_email, Toast.LENGTH_LONG).show();
                 }
+                // Sends the user to the profile page if the user is registered.
+                startActivity(new Intent(LoginActivity.this, ProfileActivity.class));
+            } else {
+                Toast.makeText(LoginActivity.this, R.string.login_error_message, Toast.LENGTH_LONG).show();
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
