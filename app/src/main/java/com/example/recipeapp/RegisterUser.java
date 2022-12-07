@@ -9,6 +9,7 @@ import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,6 +27,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     private EditText editTextFullName, editTextAge, editTextEmail, editTextPassword;
     private ProgressBar progressBar;
     private FirebaseAuth mAuth;
+    private ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         editTextPassword = findViewById(R.id.txtPassword);
 
         progressBar = findViewById(R.id.progressBar);
+
+        image = findViewById(R.id.logo);
+        image.setOnClickListener(this);
     }
 
     // Method for registering a new user.
@@ -58,6 +63,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.btnRegisterUser:
                 registerUser();
+                break;
+            case R.id.logo:
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
         }
     }
