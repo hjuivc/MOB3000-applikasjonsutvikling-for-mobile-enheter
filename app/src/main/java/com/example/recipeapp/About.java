@@ -78,6 +78,6 @@ public class About extends AppCompatActivity implements View.OnClickListener {
     public void contactButton(View view) {
         contact_btn = findViewById(R.id.contact);
         contact_btn.setText(getResources().getString(R.string.btnContact_us));
-        startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto: " + ")")));
+        startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto: " + "recippy@outlook.com")));
     }
 }
