@@ -48,63 +48,44 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_all_recipes);
 
-        /**
-        Adding title.
-         */
+        // Adding title.
         this.setTitle(getResources().getString(R.string.activity_show_all_recipes));
 
-        /**
-         * Acitvating the "back- button" on the action bar.
-         */
+        // Acitvating the "back- button" on the action bar.
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /**
-         * Activating search view
-         */
+        // Activating search view.
         searchView = findViewById(R.id.searchView);
 
-        /**
-         * Activating recycler view
-         */
+        // Activating recycler view.
         recyclerView = findViewById(R.id.recipeRecyclerView);
 
-        /**
-         * Activating vegan switch
-         */
+        // Activating vegan switch.
         veganSwitch = findViewById(R.id.veganSwitch);
         veganSwitch.setOnCheckedChangeListener(this);
 
-        /**
-         * Iterate through recipes database and display all recipes.
-         */
+        // Iterate through recipes database and display all recipes.
         referenceRecipe = FirebaseDatabase.getInstance().getReference("Recipes");
         user = FirebaseAuth.getInstance().getCurrentUser();
         userID = user.getUid();
 
-        /**
-         * Logo button, which takes the user to the ProfileActivity.
-         */
+        // Logo button, which takes the user to the ProfileActivity.
         image = findViewById(R.id.logo);
         image.setOnClickListener(this);
 
-        /**
-         * Button, which takes the user to the AddRecipeActivity.
-         */
+        // Button, which takes the user to the AddRecipeActivity.
         addRecipeBtn = findViewById(R.id.addRecipeBtn);
         addRecipeBtn.setOnClickListener(this);
 
-        // Reset filter button
+        // Reset filter button.
         resetFilterBtn = findViewById(R.id.resetFilterBtn);
         resetFilterBtn.setOnClickListener(this);
 
-        /**
-         * Adding elements to the cuisine- spinner
-         */
+        // Adding elements to the cuisine- spinner.
         final Spinner recipeCousineSpinner = findViewById(R.id.recipeCousine);
         ArrayAdapter<CharSequence> adapter_cousine = ArrayAdapter.createFromResource(this, R.array.cousine_array, android.R.layout.simple_spinner_item);
         adapter_cousine.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         recipeCousineSpinner.setAdapter(adapter_cousine);
-
 
         recipeCousineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -115,8 +96,8 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                 } else {
                     showRecipesByCousine(cousine);
                 }
-
             }
+
             private void showRecipesByCousine(String cousine) {
                 if (veganSwitch.isChecked()) {
                     referenceRecipe.child(userID).addValueEventListener(new ValueEventListener() {
@@ -192,7 +173,6 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                 }
             }
 
-
             private void showAllRecipes() {
                 String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
@@ -214,9 +194,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
         });
 
 
-        /**
-         * Iterate through recipes database and display all recipes.
-         */
+        // Iterate through recipes database and display all recipes.
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
         recyclerView.setLayoutManager(new WrapContentLinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -250,8 +228,6 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
             }
         }
 
-
-
         public void processSearch(String searchText) {
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
@@ -265,9 +241,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
         }
 
 
-    /**
-     * Method for activating the switch- favorite.
-     */
+    // Method for activating the switch- favorite.
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
@@ -306,7 +280,6 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                             // if toast, show nothing
                             recyclerView.setAdapter(null);
                         }
-
                     }
 
                     @Override
@@ -351,8 +324,6 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                     }
                 });
             }
-
-
         } if (!veganSwitch.isChecked()) {
             veganSwitch.setText(R.string.recipe_not_vegan);
             // if cousine is set to "All" and vegan is checked, show all vegan recipes
@@ -385,7 +356,6 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                             // if toast, show nothing
                             recyclerView.setAdapter(null);
                         }
-
                     }
 
                     @Override
@@ -439,9 +409,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
         adapter.stopListening();
     }
 
-        /**
-         * Code for activating the "back- button".
-         */
+        // Code for activating the "back- button".
         @Override
         public boolean onOptionsItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
