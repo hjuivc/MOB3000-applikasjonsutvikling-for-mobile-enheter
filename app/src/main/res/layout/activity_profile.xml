@@ -21,7 +21,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnLogout"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:text="@string/btnLogout"
@@ -33,7 +33,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAbout"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="60dp"
         android:text="@string/btnAbout"
@@ -47,7 +47,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAddRecipe"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/btnAdd_recipe"
         app:backgroundTint="#323232"
@@ -60,7 +60,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnFavoriteRecipes"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:text="@string/btnFavorite_recipes"
         app:backgroundTint="#323232"
@@ -73,7 +73,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnShowAllRecipes"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/btnShow_all_recipes"
