@@ -88,15 +88,14 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/contact"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:onClick="contactButton"
         android:text="@string/btnContact_us"
         app:backgroundTint="#323232"
         app:layout_constraintBottom_toTopOf="@+id/txtCopyrightAbout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtAbout3"
-        app:shapeAppearanceOverlay="@style/buttonShape"
-        android:onClick="contactButton"
-        />
+        app:shapeAppearanceOverlay="@style/buttonShape" />
 </androidx.constraintlayout.widget.ConstraintLayout>
