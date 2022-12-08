@@ -116,57 +116,79 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
                     if (Locale.getDefault().toString().equals("nb_NO")) {
                         if (recipeCousine.equals("Japanese")) {
                             new_cuisine = recipeCousine.replace("Japanese", "Japansk");
+                            recipeCousineTextView.setText(new_cuisine);
                         } else if (recipeCousine.equals("French")) {
                             new_cuisine = recipeCousine.replace("French", "Fransk");
-                        } else if (recipeCousine.equals("Italiensk")) {
-                            new_cuisine = recipeCousine.replace("Italiensk", "Italian");
-                        } else if (recipeCousine.equals("Kinesisk")) {
-                            new_cuisine = recipeCousine.replace("Kinesisk", "Chinese");
-                        } else if (recipeCousine.equals("Meksikansk")) {
-                            new_cuisine = recipeCousine.replace("Meksikansk", "Mexican");
-                        } else if (recipeCousine.equals("Norsk")) {
-                            new_cuisine = recipeCousine.replace("Norsk", "Norwegian");
-                        } else if (recipeCousine.equals("Svensk")) {
-                            new_cuisine = recipeCousine.replace("Svensk", "Swedish");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Italian")) {
+                            new_cuisine = recipeCousine.replace("ItalItalianiensk", "Italiensk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Chinese")) {
+                            new_cuisine = recipeCousine.replace("Chinese", "Kinesisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Mexican")) {
+                            new_cuisine = recipeCousine.replace("Mexican", "Meksikansk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Norwegian")) {
+                            new_cuisine = recipeCousine.replace("Norwegian", "Norsk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Swedish")) {
+                            new_cuisine = recipeCousine.replace("Swedish", "Svensk");
+                            recipeCousineTextView.setText(new_cuisine);
                         } else if (recipeCousine.equals("Thai")) {
                             new_cuisine = recipeCousine.replace("Thai", "Thai");
-                        } else if (recipeCousine.equals("Tysk")) {
-                            new_cuisine = recipeCousine.replace("Tysk", "German");
-                        } else if (recipeCousine.equals("Spansk")) {
-                            new_cuisine = recipeCousine.replace("Spansk", "Spanish");
-                        } else if (recipeCousine.equals("Indisk")) {
-                            new_cuisine = recipeCousine.replace("Indisk", "Indian");
-                        } else if (recipeCousine.equals("Colombiansk")) {
-                            new_cuisine = recipeCousine.replace("Colombiansk", "Colombian");
-                        } else if (recipeCousine.equals("Tyrkisk")) {
-                            new_cuisine = recipeCousine.replace("Tyrkisk", "Turkish");
-                        } else if (recipeCousine.equals("Arabisk")) {
-                            new_cuisine = recipeCousine.replace("Arabisk", "Arabic");
-                        } else if (recipeCousine.equals("Libanesisk")) {
-                            new_cuisine = recipeCousine.replace("Libanesisk", "Lebanese");
-                        } else if (recipeCousine.equals("Marokkansk")) {
-                            new_cuisine = recipeCousine.replace("Marokkansk", "Moroccan");
-                        } else if (recipeCousine.equals("Koreansk")) {
-                            new_cuisine = recipeCousine.replace("Koreansk", "Korean");
-                        } else if (recipeCousine.equals("Vietnamesisk")) {
-                            new_cuisine = recipeCousine.replace("Vietnamesisk", "Vietnamese");
-                        } else if (recipeCousine.equals("Malaysisk")) {
-                            new_cuisine = recipeCousine.replace("Malaysisk", "Malaysian");
-                        } else if (recipeCousine.equals("Russisk")) {
-                            new_cuisine = recipeCousine.replace("Russisk", "Russian");
-                        } else if (recipeCousine.equals("Etiopisk")) {
-                            new_cuisine = recipeCousine.replace("Etiopisk", "Ethiopian");
-                        } else if (recipeCousine.equals("Polsk")) {
-                            new_cuisine = recipeCousine.replace("Polsk", "Polish");
-                        } else if (recipeCousine.equals("Tysk")) {
-                            new_cuisine = recipeCousine.replace("Tysk", "German");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("German")) {
+                            new_cuisine = recipeCousine.replace("German", "Tysk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Spanish")) {
+                            new_cuisine = recipeCousine.replace("Spanish", "Spansk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Indian")) {
+                            new_cuisine = recipeCousine.replace("Indian", "Indisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Colombian")) {
+                            new_cuisine = recipeCousine.replace("Colombian", "Colombiansk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Turkish")) {
+                            new_cuisine = recipeCousine.replace("Turkish", "Tyrkisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Arabic")) {
+                            new_cuisine = recipeCousine.replace("Arabic", "Arabisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Lebanese")) {
+                            new_cuisine = recipeCousine.replace("Lebanese", "Libanesisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Moroccan")) {
+                            new_cuisine = recipeCousine.replace("Moroccan", "Marokkansk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Korean")) {
+                            new_cuisine = recipeCousine.replace("Korean", "Koreansk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Vietnamese")) {
+                            new_cuisine = recipeCousine.replace("Vietnamese", "Vietnamesisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Malaysian")) {
+                            new_cuisine = recipeCousine.replace("Malaysian", "Malaysisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Russian")) {
+                            new_cuisine = recipeCousine.replace("Russian", "Russisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Ethiopian")) {
+                            new_cuisine = recipeCousine.replace("Ethiopian", "Etiopisk");
+                            recipeCousineTextView.setText(new_cuisine);
+                        } else if (recipeCousine.equals("Polish")) {
+                            new_cuisine = recipeCousine.replace("Polish", "Polsk");
+                            recipeCousineTextView.setText(new_cuisine);
                         }
+                    } else {
+                        recipeCousineTextView.setText(recipeCousine);
                     }
 
                     recipeNameTextView.setText(recipeName);
                     recipeDescriptionTextView.setText(recipeDescription);
                     recipeStepsTextView.setText(recipeSteps);
-                    recipeCousineTextView.setText(new_cuisine);
+
 
                     referenceIngredients.child(userID).addValueEventListener(new ValueEventListener() {
                         @Override
