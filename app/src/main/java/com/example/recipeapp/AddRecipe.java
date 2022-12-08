@@ -263,9 +263,60 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                         return;
                     }
 
+                    String new_cuisine = null;
+
+                    // If cuisine is equal to the norwegian version replace it with english cuisine name before saving to database.
+                    if (cuisine.equals("Japansk")) {
+                        new_cuisine = cuisine.replace("Japansk", "Japanese");
+                    } else if (cuisine.equals("Fransk")) {
+                        new_cuisine = cuisine.replace("Fransk", "French");
+                    } else if (cuisine.equals("Italiensk")) {
+                        new_cuisine = cuisine.replace("Italiensk", "Italian");
+                    } else if (cuisine.equals("Kinesisk")) {
+                        new_cuisine = cuisine.replace("Kinesisk", "Chinese");
+                    } else if (cuisine.equals("Meksikansk")) {
+                        new_cuisine = cuisine.replace("Meksikansk", "Mexican");
+                    } else if (cuisine.equals("Norsk")) {
+                        new_cuisine = cuisine.replace("Norsk", "Norwegian");
+                    } else if (cuisine.equals("Svensk")) {
+                        new_cuisine = cuisine.replace("Svensk", "Swedish");
+                    } else if (cuisine.equals("Thai")) {
+                        new_cuisine = cuisine.replace("Thai", "Thai");
+                    } else if (cuisine.equals("Tysk")) {
+                        new_cuisine = cuisine.replace("Tysk", "German");
+                    } else if (cuisine.equals("Spansk")) {
+                        new_cuisine = cuisine.replace("Spansk", "Spanish");
+                    } else if (cuisine.equals("Indisk")) {
+                        new_cuisine = cuisine.replace("Indisk", "Indian");
+                    } else if (cuisine.equals("Colombiansk")) {
+                        new_cuisine = cuisine.replace("Colombiansk", "Colombian");
+                    } else if (cuisine.equals("Tyrkisk")) {
+                        new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
+                    } else if (cuisine.equals("Arabisk")) {
+                        new_cuisine = cuisine.replace("Arabisk", "Arabic");
+                    } else if (cuisine.equals("Libanesisk")) {
+                        new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
+                    } else if (cuisine.equals("Marokkansk")) {
+                        new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
+                    } else if (cuisine.equals("Koreansk")) {
+                        new_cuisine = cuisine.replace("Koreansk", "Korean");
+                    } else if (cuisine.equals("Vietnamesisk")) {
+                        new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
+                    } else if (cuisine.equals("Malaysisk")) {
+                        new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
+                    } else if (cuisine.equals("Russisk")) {
+                        new_cuisine = cuisine.replace("Russisk", "Russian");
+                    } else if (cuisine.equals("Etiopisk")) {
+                        new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
+                    } else if (cuisine.equals("Polsk")) {
+                        new_cuisine = cuisine.replace("Polsk", "Polish");
+                    } else if (cuisine.equals("Tysk")) {
+                        new_cuisine = cuisine.replace("Tysk", "German");
+                    }
+
                     progressBar.setVisibility(View.VISIBLE);
                     saveIngredientsToDatabase(highestRecipeID);
-                    Recipe recipe = new Recipe(userID, recipeID, name, description, stepByStep, cuisine, vegan, favorite);
+                    Recipe recipe = new Recipe(userID, recipeID, name, description, stepByStep, new_cuisine, vegan, favorite);
 
                     FirebaseDatabase.getInstance().getReference("Recipes")
                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
