@@ -19,7 +19,7 @@
 
     <EditText
         android:id="@+id/txtEmail"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -32,7 +32,7 @@
 
     <EditText
         android:id="@+id/txtPassword"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -45,7 +45,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnRegisterUser"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="150dp"
         android:text="@string/register_user"
@@ -68,7 +68,7 @@
 
     <EditText
         android:id="@+id/txtAge"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:ems="10"
@@ -80,7 +80,7 @@
 
     <EditText
         android:id="@+id/txtFullName"
-        android:layout_width="230dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:ems="10"
