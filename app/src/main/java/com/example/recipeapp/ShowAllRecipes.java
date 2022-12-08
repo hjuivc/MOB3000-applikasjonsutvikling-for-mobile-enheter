@@ -91,10 +91,60 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String cousine = recipeCousineSpinner.getSelectedItem().toString();
+                String cuisine = recipeCousineSpinner.getSelectedItem().toString();
+                // If cuisine is equal to the norwegian version replace it with english cuisine name before filtering results.
+                String new_cuisine = null;
+                if (cuisine.equals("Japansk")) {
+                    new_cuisine = cuisine.replace("Japansk", "Japanese");
+                } else if (cuisine.equals("Fransk")) {
+                    new_cuisine = cuisine.replace("Fransk", "French");
+                } else if (cuisine.equals("Italiensk")) {
+                    new_cuisine = cuisine.replace("Italiensk", "Italian");
+                } else if (cuisine.equals("Kinesisk")) {
+                    new_cuisine = cuisine.replace("Kinesisk", "Chinese");
+                } else if (cuisine.equals("Meksikansk")) {
+                    new_cuisine = cuisine.replace("Meksikansk", "Mexican");
+                } else if (cuisine.equals("Norsk")) {
+                    new_cuisine = cuisine.replace("Norsk", "Norwegian");
+                } else if (cuisine.equals("Svensk")) {
+                    new_cuisine = cuisine.replace("Svensk", "Swedish");
+                } else if (cuisine.equals("Thai")) {
+                    new_cuisine = cuisine.replace("Thai", "Thai");
+                } else if (cuisine.equals("Tysk")) {
+                    new_cuisine = cuisine.replace("Tysk", "German");
+                } else if (cuisine.equals("Spansk")) {
+                    new_cuisine = cuisine.replace("Spansk", "Spanish");
+                } else if (cuisine.equals("Indisk")) {
+                    new_cuisine = cuisine.replace("Indisk", "Indian");
+                } else if (cuisine.equals("Colombiansk")) {
+                    new_cuisine = cuisine.replace("Colombiansk", "Colombian");
+                } else if (cuisine.equals("Tyrkisk")) {
+                    new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
+                } else if (cuisine.equals("Arabisk")) {
+                    new_cuisine = cuisine.replace("Arabisk", "Arabic");
+                } else if (cuisine.equals("Libanesisk")) {
+                    new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
+                } else if (cuisine.equals("Marokkansk")) {
+                    new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
+                } else if (cuisine.equals("Koreansk")) {
+                    new_cuisine = cuisine.replace("Koreansk", "Korean");
+                } else if (cuisine.equals("Vietnamesisk")) {
+                    new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
+                } else if (cuisine.equals("Malaysisk")) {
+                    new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
+                } else if (cuisine.equals("Russisk")) {
+                    new_cuisine = cuisine.replace("Russisk", "Russian");
+                } else if (cuisine.equals("Etiopisk")) {
+                    new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
+                } else if (cuisine.equals("Polsk")) {
+                    new_cuisine = cuisine.replace("Polsk", "Polish");
+                } else if (cuisine.equals("Tysk")) {
+                    new_cuisine = cuisine.replace("Tysk", "German");
+                }
                 if (cousine.equals("Cuisine") || cousine.equals("Kjøkken")) {
                     showAllRecipes();
                 } else {
-                    showRecipesByCousine(cousine);
+                    showRecipesByCousine(new_cuisine);
                 }
             }
 
@@ -229,6 +279,10 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
         }
 
         public void processSearch(String searchText) {
+            // Force first letter in searchText to always capitalize
+            if (searchText.length() > 0) {
+                searchText = searchText.substring(0, 1).toUpperCase() + searchText.substring(1);
+            }
             String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
             DatabaseReference mAuth = FirebaseDatabase.getInstance().getReference().child("Recipes").child(userId);
             FirebaseRecyclerOptions<Recipe> options =
@@ -261,7 +315,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
 
                             if (recipe.getVegan().equals(true)) {
                                 recipeId = snapshot.getKey();
-                                System.out.println(recipeId);
+
                                 counter ++;
 
                                 // Snapshot through userID childs and display all recipes with snapshot key equal to recipeId
@@ -343,9 +397,6 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                             new_cuisine = cuisine.replace("Tysk", "German");
                         }
 
-
-                        System.out.println(new_cuisine);
-
                         Integer counter = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Recipe recipe = snapshot.getValue(Recipe.class);
@@ -380,7 +431,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
             }
         } if (!veganSwitch.isChecked()) {
             veganSwitch.setText(R.string.recipe_not_vegan);
-            // if cousine is set to "All" and vegan is checked, show all vegan recipes
+            // if cousine is set to "All" and vegan is not checked, show all recipes which is not vegan.
             if (recipeCousineSpinner.getSelectedItem().toString().equals("Cuisine") || recipeCousineSpinner.getSelectedItem().toString().equals("Kjøkken")) {
                 referenceRecipe.child(userID).addValueEventListener(new ValueEventListener() {
                     @Override
@@ -422,10 +473,60 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         String cuisine = recipeCousineSpinner.getSelectedItem().toString();
+                        // If cuisine is equal to the norwegian version replace it with english cuisine name before filtering results.
+                        String new_cuisine = null;
+                        if (cuisine.equals("Japansk")) {
+                            new_cuisine = cuisine.replace("Japansk", "Japanese");
+                        } else if (cuisine.equals("Fransk")) {
+                            new_cuisine = cuisine.replace("Fransk", "French");
+                        } else if (cuisine.equals("Italiensk")) {
+                            new_cuisine = cuisine.replace("Italiensk", "Italian");
+                        } else if (cuisine.equals("Kinesisk")) {
+                            new_cuisine = cuisine.replace("Kinesisk", "Chinese");
+                        } else if (cuisine.equals("Meksikansk")) {
+                            new_cuisine = cuisine.replace("Meksikansk", "Mexican");
+                        } else if (cuisine.equals("Norsk")) {
+                            new_cuisine = cuisine.replace("Norsk", "Norwegian");
+                        } else if (cuisine.equals("Svensk")) {
+                            new_cuisine = cuisine.replace("Svensk", "Swedish");
+                        } else if (cuisine.equals("Thai")) {
+                            new_cuisine = cuisine.replace("Thai", "Thai");
+                        } else if (cuisine.equals("Tysk")) {
+                            new_cuisine = cuisine.replace("Tysk", "German");
+                        } else if (cuisine.equals("Spansk")) {
+                            new_cuisine = cuisine.replace("Spansk", "Spanish");
+                        } else if (cuisine.equals("Indisk")) {
+                            new_cuisine = cuisine.replace("Indisk", "Indian");
+                        } else if (cuisine.equals("Colombiansk")) {
+                            new_cuisine = cuisine.replace("Colombiansk", "Colombian");
+                        } else if (cuisine.equals("Tyrkisk")) {
+                            new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
+                        } else if (cuisine.equals("Arabisk")) {
+                            new_cuisine = cuisine.replace("Arabisk", "Arabic");
+                        } else if (cuisine.equals("Libanesisk")) {
+                            new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
+                        } else if (cuisine.equals("Marokkansk")) {
+                            new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
+                        } else if (cuisine.equals("Koreansk")) {
+                            new_cuisine = cuisine.replace("Koreansk", "Korean");
+                        } else if (cuisine.equals("Vietnamesisk")) {
+                            new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
+                        } else if (cuisine.equals("Malaysisk")) {
+                            new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
+                        } else if (cuisine.equals("Russisk")) {
+                            new_cuisine = cuisine.replace("Russisk", "Russian");
+                        } else if (cuisine.equals("Etiopisk")) {
+                            new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
+                        } else if (cuisine.equals("Polsk")) {
+                            new_cuisine = cuisine.replace("Polsk", "Polish");
+                        } else if (cuisine.equals("Tysk")) {
+                            new_cuisine = cuisine.replace("Tysk", "German");
+                        }
+
                         Integer counter = 0;
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Recipe recipe = snapshot.getValue(Recipe.class);
-                            if (recipe.getCuisine().equals(cuisine) && recipe.getVegan().equals(false)) {
+                            if (recipe.getCuisine().equals(new_cuisine) && recipe.getVegan().equals(false)) {
                                 recipeId = snapshot.getKey();
 
                                 counter ++;
@@ -433,7 +534,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                                 // Snapshot through userID childs and display only recipes with snapshot key equal to recipeId
                                 FirebaseRecyclerOptions<Recipe> options =
                                         new FirebaseRecyclerOptions.Builder<Recipe>()
-                                                .setQuery(referenceRecipe.child(userID).orderByChild("cuisine").equalTo(cuisine), Recipe.class)
+                                                .setQuery(referenceRecipe.child(userID).orderByChild("cuisine").equalTo(new_cuisine), Recipe.class)
                                                 .build();
 
                                 adapter = new RecipeRecAdapter(options);
