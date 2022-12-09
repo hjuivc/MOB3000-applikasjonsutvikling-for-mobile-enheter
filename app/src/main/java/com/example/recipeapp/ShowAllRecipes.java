@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -29,6 +30,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Locale;
 
 public class ShowAllRecipes extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
     private RecyclerView recyclerView;
@@ -90,65 +93,87 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
         recipeCousineSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String cousine = recipeCousineSpinner.getSelectedItem().toString();
                 String cuisine = recipeCousineSpinner.getSelectedItem().toString();
                 // If cuisine is equal to the norwegian version replace it with english cuisine name before filtering results.
                 String new_cuisine = null;
                 if (cuisine.equals("Japansk")) {
                     new_cuisine = cuisine.replace("Japansk", "Japanese");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Fransk")) {
                     new_cuisine = cuisine.replace("Fransk", "French");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Italiensk")) {
                     new_cuisine = cuisine.replace("Italiensk", "Italian");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Kinesisk")) {
                     new_cuisine = cuisine.replace("Kinesisk", "Chinese");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Meksikansk")) {
                     new_cuisine = cuisine.replace("Meksikansk", "Mexican");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Norsk")) {
                     new_cuisine = cuisine.replace("Norsk", "Norwegian");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Svensk")) {
                     new_cuisine = cuisine.replace("Svensk", "Swedish");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Thai")) {
                     new_cuisine = cuisine.replace("Thai", "Thai");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Tysk")) {
                     new_cuisine = cuisine.replace("Tysk", "German");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Spansk")) {
                     new_cuisine = cuisine.replace("Spansk", "Spanish");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Indisk")) {
                     new_cuisine = cuisine.replace("Indisk", "Indian");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Colombiansk")) {
                     new_cuisine = cuisine.replace("Colombiansk", "Colombian");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Tyrkisk")) {
                     new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Arabisk")) {
                     new_cuisine = cuisine.replace("Arabisk", "Arabic");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Libanesisk")) {
                     new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Marokkansk")) {
                     new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Koreansk")) {
                     new_cuisine = cuisine.replace("Koreansk", "Korean");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Vietnamesisk")) {
                     new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Malaysisk")) {
                     new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Russisk")) {
                     new_cuisine = cuisine.replace("Russisk", "Russian");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Etiopisk")) {
                     new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Polsk")) {
                     new_cuisine = cuisine.replace("Polsk", "Polish");
+                    showRecipesByCousine(new_cuisine);
                 } else if (cuisine.equals("Tysk")) {
                     new_cuisine = cuisine.replace("Tysk", "German");
+                    showRecipesByCousine(new_cuisine);
                 }
-                if (cousine.equals("Cuisine") || cousine.equals("Kjøkken")) {
+                if (cuisine.equals("Cuisine") || cuisine.equals("Kjøkken")) {
                     showAllRecipes();
                 } else {
-                    showRecipesByCousine(new_cuisine);
+                    showRecipesByCousine(cuisine);
                 }
             }
 
-            private void showRecipesByCousine(String cousine) {
+            private void showRecipesByCousine(String cuisine) {
                 if (veganSwitch.isChecked()) {
                     referenceRecipe.child(userID).addValueEventListener(new ValueEventListener() {
                         @Override
@@ -156,12 +181,12 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                             Integer counter = 0;
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 Recipe recipe = snapshot.getValue(Recipe.class);
-                                if (recipe.getCuisine().equals(cousine) && recipe.getVegan().equals(true)) {
+                                if (recipe.getCuisine().equals(cuisine) && recipe.getVegan().equals(true)) {
                                     recipeId = snapshot.getKey();
 
                                     FirebaseRecyclerOptions<Recipe> options =
                                             new FirebaseRecyclerOptions.Builder<Recipe>()
-                                                    .setQuery(referenceRecipe.child(userID).orderByChild("cuisine").equalTo(cousine), Recipe.class)
+                                                    .setQuery(referenceRecipe.child(userID).orderByChild("cuisine").equalTo(cuisine), Recipe.class)
                                                     .build();
 
                                     counter ++;
@@ -193,7 +218,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 Recipe recipe = snapshot.getValue(Recipe.class);
 
-                                if (recipe.getCuisine().equals(cousine) && recipe.getVegan().equals(false)) {
+                                if (recipe.getCuisine().equals(cuisine) && recipe.getVegan().equals(false)) {
 
                                     recipeId = snapshot.getKey();
 
@@ -201,7 +226,7 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
 
                                     FirebaseRecyclerOptions<Recipe> options =
                                             new FirebaseRecyclerOptions.Builder<Recipe>()
-                                                    .setQuery(referenceRecipe.child(userID).orderByChild("cuisine").equalTo(cousine), Recipe.class)
+                                                    .setQuery(referenceRecipe.child(userID).orderByChild("cuisine").equalTo(cuisine), Recipe.class)
                                                     .build();
 
                                     adapter = new RecipeRecAdapter(options);
@@ -349,52 +374,56 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                         String cuisine = recipeCousineSpinner.getSelectedItem().toString();
                         // If cuisine is equal to the norwegian version replace it with english cuisine name before filtering results.
                         String new_cuisine = null;
-                        if (cuisine.equals("Japansk")) {
-                            new_cuisine = cuisine.replace("Japansk", "Japanese");
-                        } else if (cuisine.equals("Fransk")) {
-                            new_cuisine = cuisine.replace("Fransk", "French");
-                        } else if (cuisine.equals("Italiensk")) {
-                            new_cuisine = cuisine.replace("Italiensk", "Italian");
-                        } else if (cuisine.equals("Kinesisk")) {
-                            new_cuisine = cuisine.replace("Kinesisk", "Chinese");
-                        } else if (cuisine.equals("Meksikansk")) {
-                            new_cuisine = cuisine.replace("Meksikansk", "Mexican");
-                        } else if (cuisine.equals("Norsk")) {
-                            new_cuisine = cuisine.replace("Norsk", "Norwegian");
-                        } else if (cuisine.equals("Svensk")) {
-                            new_cuisine = cuisine.replace("Svensk", "Swedish");
-                        } else if (cuisine.equals("Thai")) {
-                            new_cuisine = cuisine.replace("Thai", "Thai");
-                        } else if (cuisine.equals("Tysk")) {
-                            new_cuisine = cuisine.replace("Tysk", "German");
-                        } else if (cuisine.equals("Spansk")) {
-                            new_cuisine = cuisine.replace("Spansk", "Spanish");
-                        } else if (cuisine.equals("Indisk")) {
-                            new_cuisine = cuisine.replace("Indisk", "Indian");
-                        } else if (cuisine.equals("Colombiansk")) {
-                            new_cuisine = cuisine.replace("Colombiansk", "Colombian");
-                        } else if (cuisine.equals("Tyrkisk")) {
-                            new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
-                        } else if (cuisine.equals("Arabisk")) {
-                            new_cuisine = cuisine.replace("Arabisk", "Arabic");
-                        } else if (cuisine.equals("Libanesisk")) {
-                            new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
-                        } else if (cuisine.equals("Marokkansk")) {
-                            new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
-                        } else if (cuisine.equals("Koreansk")) {
-                            new_cuisine = cuisine.replace("Koreansk", "Korean");
-                        } else if (cuisine.equals("Vietnamesisk")) {
-                            new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
-                        } else if (cuisine.equals("Malaysisk")) {
-                            new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
-                        } else if (cuisine.equals("Russisk")) {
-                            new_cuisine = cuisine.replace("Russisk", "Russian");
-                        } else if (cuisine.equals("Etiopisk")) {
-                            new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
-                        } else if (cuisine.equals("Polsk")) {
-                            new_cuisine = cuisine.replace("Polsk", "Polish");
-                        } else if (cuisine.equals("Tysk")) {
-                            new_cuisine = cuisine.replace("Tysk", "German");
+                        if (Locale.getDefault().toString().equals("nb_NO")) {
+                            if (cuisine.equals("Japansk")) {
+                                new_cuisine = cuisine.replace("Japansk", "Japanese");
+                            } else if (cuisine.equals("Fransk")) {
+                                new_cuisine = cuisine.replace("Fransk", "French");
+                            } else if (cuisine.equals("Italiensk")) {
+                                new_cuisine = cuisine.replace("Italiensk", "Italian");
+                            } else if (cuisine.equals("Kinesisk")) {
+                                new_cuisine = cuisine.replace("Kinesisk", "Chinese");
+                            } else if (cuisine.equals("Meksikansk")) {
+                                new_cuisine = cuisine.replace("Meksikansk", "Mexican");
+                            } else if (cuisine.equals("Norsk")) {
+                                new_cuisine = cuisine.replace("Norsk", "Norwegian");
+                            } else if (cuisine.equals("Svensk")) {
+                                new_cuisine = cuisine.replace("Svensk", "Swedish");
+                            } else if (cuisine.equals("Thai")) {
+                                new_cuisine = cuisine.replace("Thai", "Thai");
+                            } else if (cuisine.equals("Tysk")) {
+                                new_cuisine = cuisine.replace("Tysk", "German");
+                            } else if (cuisine.equals("Spansk")) {
+                                new_cuisine = cuisine.replace("Spansk", "Spanish");
+                            } else if (cuisine.equals("Indisk")) {
+                                new_cuisine = cuisine.replace("Indisk", "Indian");
+                            } else if (cuisine.equals("Colombiansk")) {
+                                new_cuisine = cuisine.replace("Colombiansk", "Colombian");
+                            } else if (cuisine.equals("Tyrkisk")) {
+                                new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
+                            } else if (cuisine.equals("Arabisk")) {
+                                new_cuisine = cuisine.replace("Arabisk", "Arabic");
+                            } else if (cuisine.equals("Libanesisk")) {
+                                new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
+                            } else if (cuisine.equals("Marokkansk")) {
+                                new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
+                            } else if (cuisine.equals("Koreansk")) {
+                                new_cuisine = cuisine.replace("Koreansk", "Korean");
+                            } else if (cuisine.equals("Vietnamesisk")) {
+                                new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
+                            } else if (cuisine.equals("Malaysisk")) {
+                                new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
+                            } else if (cuisine.equals("Russisk")) {
+                                new_cuisine = cuisine.replace("Russisk", "Russian");
+                            } else if (cuisine.equals("Etiopisk")) {
+                                new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
+                            } else if (cuisine.equals("Polsk")) {
+                                new_cuisine = cuisine.replace("Polsk", "Polish");
+                            } else if (cuisine.equals("Tysk")) {
+                                new_cuisine = cuisine.replace("Tysk", "German");
+                            }
+                        } else {
+                            new_cuisine = cuisine;
                         }
 
                         Integer counter = 0;
@@ -475,52 +504,56 @@ public class ShowAllRecipes extends AppCompatActivity implements View.OnClickLis
                         String cuisine = recipeCousineSpinner.getSelectedItem().toString();
                         // If cuisine is equal to the norwegian version replace it with english cuisine name before filtering results.
                         String new_cuisine = null;
-                        if (cuisine.equals("Japansk")) {
-                            new_cuisine = cuisine.replace("Japansk", "Japanese");
-                        } else if (cuisine.equals("Fransk")) {
-                            new_cuisine = cuisine.replace("Fransk", "French");
-                        } else if (cuisine.equals("Italiensk")) {
-                            new_cuisine = cuisine.replace("Italiensk", "Italian");
-                        } else if (cuisine.equals("Kinesisk")) {
-                            new_cuisine = cuisine.replace("Kinesisk", "Chinese");
-                        } else if (cuisine.equals("Meksikansk")) {
-                            new_cuisine = cuisine.replace("Meksikansk", "Mexican");
-                        } else if (cuisine.equals("Norsk")) {
-                            new_cuisine = cuisine.replace("Norsk", "Norwegian");
-                        } else if (cuisine.equals("Svensk")) {
-                            new_cuisine = cuisine.replace("Svensk", "Swedish");
-                        } else if (cuisine.equals("Thai")) {
-                            new_cuisine = cuisine.replace("Thai", "Thai");
-                        } else if (cuisine.equals("Tysk")) {
-                            new_cuisine = cuisine.replace("Tysk", "German");
-                        } else if (cuisine.equals("Spansk")) {
-                            new_cuisine = cuisine.replace("Spansk", "Spanish");
-                        } else if (cuisine.equals("Indisk")) {
-                            new_cuisine = cuisine.replace("Indisk", "Indian");
-                        } else if (cuisine.equals("Colombiansk")) {
-                            new_cuisine = cuisine.replace("Colombiansk", "Colombian");
-                        } else if (cuisine.equals("Tyrkisk")) {
-                            new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
-                        } else if (cuisine.equals("Arabisk")) {
-                            new_cuisine = cuisine.replace("Arabisk", "Arabic");
-                        } else if (cuisine.equals("Libanesisk")) {
-                            new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
-                        } else if (cuisine.equals("Marokkansk")) {
-                            new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
-                        } else if (cuisine.equals("Koreansk")) {
-                            new_cuisine = cuisine.replace("Koreansk", "Korean");
-                        } else if (cuisine.equals("Vietnamesisk")) {
-                            new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
-                        } else if (cuisine.equals("Malaysisk")) {
-                            new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
-                        } else if (cuisine.equals("Russisk")) {
-                            new_cuisine = cuisine.replace("Russisk", "Russian");
-                        } else if (cuisine.equals("Etiopisk")) {
-                            new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
-                        } else if (cuisine.equals("Polsk")) {
-                            new_cuisine = cuisine.replace("Polsk", "Polish");
-                        } else if (cuisine.equals("Tysk")) {
-                            new_cuisine = cuisine.replace("Tysk", "German");
+                        if (Locale.getDefault().toString().equals("nb_NO")) {
+                            if (cuisine.equals("Japansk")) {
+                                new_cuisine = cuisine.replace("Japansk", "Japanese");
+                            } else if (cuisine.equals("Fransk")) {
+                                new_cuisine = cuisine.replace("Fransk", "French");
+                            } else if (cuisine.equals("Italiensk")) {
+                                new_cuisine = cuisine.replace("Italiensk", "Italian");
+                            } else if (cuisine.equals("Kinesisk")) {
+                                new_cuisine = cuisine.replace("Kinesisk", "Chinese");
+                            } else if (cuisine.equals("Meksikansk")) {
+                                new_cuisine = cuisine.replace("Meksikansk", "Mexican");
+                            } else if (cuisine.equals("Norsk")) {
+                                new_cuisine = cuisine.replace("Norsk", "Norwegian");
+                            } else if (cuisine.equals("Svensk")) {
+                                new_cuisine = cuisine.replace("Svensk", "Swedish");
+                            } else if (cuisine.equals("Thai")) {
+                                new_cuisine = cuisine.replace("Thai", "Thai");
+                            } else if (cuisine.equals("Tysk")) {
+                                new_cuisine = cuisine.replace("Tysk", "German");
+                            } else if (cuisine.equals("Spansk")) {
+                                new_cuisine = cuisine.replace("Spansk", "Spanish");
+                            } else if (cuisine.equals("Indisk")) {
+                                new_cuisine = cuisine.replace("Indisk", "Indian");
+                            } else if (cuisine.equals("Colombiansk")) {
+                                new_cuisine = cuisine.replace("Colombiansk", "Colombian");
+                            } else if (cuisine.equals("Tyrkisk")) {
+                                new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
+                            } else if (cuisine.equals("Arabisk")) {
+                                new_cuisine = cuisine.replace("Arabisk", "Arabic");
+                            } else if (cuisine.equals("Libanesisk")) {
+                                new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
+                            } else if (cuisine.equals("Marokkansk")) {
+                                new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
+                            } else if (cuisine.equals("Koreansk")) {
+                                new_cuisine = cuisine.replace("Koreansk", "Korean");
+                            } else if (cuisine.equals("Vietnamesisk")) {
+                                new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
+                            } else if (cuisine.equals("Malaysisk")) {
+                                new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
+                            } else if (cuisine.equals("Russisk")) {
+                                new_cuisine = cuisine.replace("Russisk", "Russian");
+                            } else if (cuisine.equals("Etiopisk")) {
+                                new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
+                            } else if (cuisine.equals("Polsk")) {
+                                new_cuisine = cuisine.replace("Polsk", "Polish");
+                            } else if (cuisine.equals("Tysk")) {
+                                new_cuisine = cuisine.replace("Tysk", "German");
+                            }
+                        } else {
+                            new_cuisine = cuisine;
                         }
 
                         Integer counter = 0;
