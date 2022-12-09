@@ -31,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Objects;
 
 public class UpdateRecipe extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
@@ -104,10 +105,82 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                     String recipeCuisine = recipe.cuisine;
                     Integer recipeID = recipe.getRecipeID();
 
+                    String new_cuisine = null;
+                    if (Locale.getDefault().toString().equals("nb_NO")) {
+                        if (recipeCuisine.equals("Japanese")) {
+                            new_cuisine = recipeCuisine.replace("Japanese", "Japansk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("French")) {
+                            new_cuisine = recipeCuisine.replace("French", "Fransk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Italian")) {
+                            new_cuisine = recipeCuisine.replace("Italian", "Italiensk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Chinese")) {
+                            new_cuisine = recipeCuisine.replace("Chinese", "Kinesisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Mexican")) {
+                            new_cuisine = recipeCuisine.replace("Mexican", "Meksikansk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Norwegian")) {
+                            new_cuisine = recipeCuisine.replace("Norwegian", "Norsk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Swedish")) {
+                            new_cuisine = recipeCuisine.replace("Swedish", "Svensk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Thai")) {
+                            new_cuisine = recipeCuisine.replace("Thai", "Thai");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("German")) {
+                            new_cuisine = recipeCuisine.replace("German", "Tysk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Spanish")) {
+                            new_cuisine = recipeCuisine.replace("Spanish", "Spansk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Indian")) {
+                            new_cuisine = recipeCuisine.replace("Indian", "Indisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Colombian")) {
+                            new_cuisine = recipeCuisine.replace("Colombian", "Colombiansk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Turkish")) {
+                            new_cuisine = recipeCuisine.replace("Turkish", "Tyrkisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Arabic")) {
+                            new_cuisine = recipeCuisine.replace("Arabic", "Arabisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Lebanese")) {
+                            new_cuisine = recipeCuisine.replace("Lebanese", "Libanesisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Moroccan")) {
+                            new_cuisine = recipeCuisine.replace("Moroccan", "Marokkansk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Korean")) {
+                            new_cuisine = recipeCuisine.replace("Korean", "Koreansk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Vietnamese")) {
+                            new_cuisine = recipeCuisine.replace("Vietnamese", "Vietnamesisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Malaysian")) {
+                            new_cuisine = recipeCuisine.replace("Malaysian", "Malaysisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Russian")) {
+                            new_cuisine = recipeCuisine.replace("Russian", "Russisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Ethiopian")) {
+                            new_cuisine = recipeCuisine.replace("Ethiopian", "Etiopisk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        } else if (recipeCuisine.equals("Polish")) {
+                            new_cuisine = recipeCuisine.replace("Polish", "Polsk");
+                            recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(new_cuisine));
+                        }
+                    } else {
+                        recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(recipeCuisine));                    }
+
                     recipeNameEditText.setText(recipeName);
                     recipeDescriptionEditText.setText(recipeDescription);
                     recipeStepsEditText.setText(recipeSteps);
-                    recipeCuisineSpinner.setSelection(adapter_cuisine.getPosition(recipeCuisine));
+
 
                     referenceIngredients.child(userID).addValueEventListener(new ValueEventListener() {
                         @Override
