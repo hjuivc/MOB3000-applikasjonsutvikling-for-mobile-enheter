@@ -416,6 +416,58 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
             }
             // Snapshot through referenceIngredients and delete all ingredients.
 
+            String new_cuisine = null;
+            if (Locale.getDefault().toString().equals("nb_NO")) {
+                if (cuisine.equals("Japansk")) {
+                    new_cuisine = cuisine.replace("Japansk", "Japanese");
+                } else if (cuisine.equals("Fransk")) {
+                    new_cuisine = cuisine.replace("Fransk", "French");
+                } else if (cuisine.equals("Italiensk")) {
+                    new_cuisine = cuisine.replace("Italiensk", "Italian");
+                } else if (cuisine.equals("Kinesisk")) {
+                    new_cuisine = cuisine.replace("Kinesisk", "Chinese");
+                } else if (cuisine.equals("Mexican")) {
+                    new_cuisine = cuisine.replace("Mexican", "Meksikansk");
+                } else if (cuisine.equals("Norwegian")) {
+                    new_cuisine = cuisine.replace("Norwegian", "Norsk");
+                } else if (cuisine.equals("Swedish")) {
+                    new_cuisine = cuisine.replace("Swedish", "Svensk");
+                } else if (cuisine.equals("Thai")) {
+                    new_cuisine = cuisine.replace("Thai", "Thai");
+                } else if (cuisine.equals("German")) {
+                    new_cuisine = cuisine.replace("German", "Tysk");
+                } else if (cuisine.equals("Spanish")) {
+                    new_cuisine = cuisine.replace("Spanish", "Spansk");
+                } else if (cuisine.equals("Indian")) {
+                    new_cuisine = cuisine.replace("Indian", "Indisk");
+                } else if (cuisine.equals("Colombian")) {
+                    new_cuisine = cuisine.replace("Colombian", "Colombiansk");
+                } else if (cuisine.equals("Turkish")) {
+                    new_cuisine = cuisine.replace("Turkish", "Tyrkisk");
+                } else if (cuisine.equals("Arabic")) {
+                    new_cuisine = cuisine.replace("Arabic", "Arabisk");
+                } else if (cuisine.equals("Lebanese")) {
+                    new_cuisine = cuisine.replace("Lebanese", "Libanesisk");
+                } else if (cuisine.equals("Moroccan")) {
+                    new_cuisine = cuisine.replace("Moroccan", "Marokkansk");
+                } else if (cuisine.equals("Korean")) {
+                    new_cuisine = cuisine.replace("Korean", "Koreansk");
+                } else if (cuisine.equals("Vietnamese")) {
+                    new_cuisine = cuisine.replace("Vietnamese", "Vietnamesisk");
+                } else if (cuisine.equals("Malaysian")) {
+                    new_cuisine = cuisine.replace("Malaysian", "Malaysisk");
+                } else if (cuisine.equals("Russian")) {
+                    new_cuisine = cuisine.replace("Russian", "Russisk");
+                } else if (cuisine.equals("Ethiopian")) {
+                    new_cuisine = cuisine.replace("Ethiopian", "Etiopisk");
+                } else if (cuisine.equals("Polish")) {
+                    new_cuisine = cuisine.replace("Polish", "Polsk");
+                }
+            } else {
+                new_cuisine = cuisine;
+            }
+
+            String finalNew_cuisine = new_cuisine;
             referenceRecipe.child(userID).child(recipeId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -454,7 +506,7 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                             referenceRecipe.child(userID).child(recipeId).child("name").setValue(recipeName);
                             referenceRecipe.child(userID).child(recipeId).child("description").setValue(recipeDescription);
                             referenceRecipe.child(userID).child(recipeId).child("stepbystep").setValue(recipeSteps);
-                            referenceRecipe.child(userID).child(recipeId).child("cuisine").setValue(cuisine);
+                            referenceRecipe.child(userID).child(recipeId).child("cuisine").setValue(finalNew_cuisine);
 
 
 
