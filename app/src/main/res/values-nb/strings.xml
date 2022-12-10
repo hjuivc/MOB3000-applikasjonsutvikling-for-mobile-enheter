@@ -13,6 +13,17 @@
     <string name="activity_show_recipe">Oppskrift</string>
     <string name="activity_update_recipes">Oppdatere oppskrift</string>
 
+    <!-- Edit profile -->
+    <string name="edit_name">Fullt navn</string>
+    <string name="edit_email">Epost</string>
+    <string name="edit_age">Alder</string>
+    <string name="edit_save">LAGRE PROFIL</string>
+    <string name="error_name">Vennligst fyll inn navn</string>
+    <string name="error_email">Vennligst fyll inn epost</string>
+    <string name="error_age">Vennligst fyll inn alder</string>
+    <string name="profile_updated">Profilen er oppdatert</string>
+    <string name="edit_title">Profilendringer</string>
+
     <!-- Register user -->
     <string name="register_user">Registrer</string>
     <string name="register_user_email">Epost</string>

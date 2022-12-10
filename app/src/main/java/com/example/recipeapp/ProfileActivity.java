@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private Button btnLogout, btnAbout, btnAddRecipe, btnFavoriteRecipes, btnShowAllRecipes;
+    private Button btnLogout, btnAbout, btnAddRecipe, btnFavoriteRecipes, btnShowAllRecipes, btnEdit;
 
     private FirebaseUser user;
     private DatabaseReference reference;
@@ -44,6 +44,15 @@ public class ProfileActivity extends AppCompatActivity {
         final TextView emailTextView = findViewById(R.id.email);
         final TextView fullNameTextView = findViewById(R.id.fullName);
         final TextView ageTextView = findViewById(R.id.age);
+
+        // Button, which takes the user to the edit profile
+        btnEdit = findViewById(R.id.btnEdit);
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this, EditProfile.class));
+            }
+        });
 
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -101,6 +110,12 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             Toast.makeText(ProfileActivity.this, R.string.profile_message, Toast.LENGTH_SHORT).show();
         });
+
+        // Edit profile
+        btnEdit.setOnClickListener(v -> {
+            Intent intent = new Intent(ProfileActivity.this, EditProfile.class);
+            startActivity(intent);
+        });
     }
 
     // Method for initializing the buttons.
@@ -110,5 +125,6 @@ public class ProfileActivity extends AppCompatActivity {
         btnAddRecipe = findViewById(R.id.btnAddRecipe);
         btnFavoriteRecipes = findViewById(R.id.btnFavoriteRecipes);
         btnShowAllRecipes = findViewById(R.id.btnShowAllRecipes);
+        btnEdit = findViewById(R.id.btnEdit);
     }
 }

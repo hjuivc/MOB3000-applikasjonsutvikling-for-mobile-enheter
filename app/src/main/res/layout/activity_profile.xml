@@ -30,6 +30,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:shapeAppearanceOverlay="@style/buttonShape" />
+    
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnEdit"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_title"
+        app:backgroundTint="#323232"
+        app:layout_constraintBottom_toTopOf="@+id/btnAbout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddRecipe"
+        app:shapeAppearanceOverlay="@style/buttonShape" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnAbout"
@@ -42,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddRecipe"
+        app:layout_constraintTop_toBottomOf="@+id/btnEdit"
         app:shapeAppearanceOverlay="@style/buttonShape" />
 
     <com.google.android.material.button.MaterialButton
@@ -51,7 +64,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btnAdd_recipe"
         app:backgroundTint="#323232"
-        app:layout_constraintBottom_toTopOf="@+id/btnAbout"
+        app:layout_constraintBottom_toTopOf="@+id/btnEdit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"

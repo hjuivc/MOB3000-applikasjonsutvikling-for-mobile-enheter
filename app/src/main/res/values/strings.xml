@@ -12,6 +12,17 @@
     <string name="activity_show_recipe">Recipe</string>
     <string name="activity_update_recipes">Update Recipe</string>
 
+    <!-- Edit profile -->
+    <string name="edit_name">Full name</string>
+    <string name="edit_email">Email</string>
+    <string name="edit_age">Age</string>
+    <string name="edit_save">SAVE PROFILE</string>
+    <string name="error_name">Please enter your full name</string>
+    <string name="error_email">Please enter your email</string>
+    <string name="error_age">Please enter your age</string>
+    <string name="profile_updated">Profile updated</string>
+    <string name="edit_title">Edit Profile</string>
+
     <!-- Register user -->
     <string name="register_user">Register</string>
     <string name="register_user_email">Email</string>
