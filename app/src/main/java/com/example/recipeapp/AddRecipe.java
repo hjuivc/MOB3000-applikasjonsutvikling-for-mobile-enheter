@@ -325,6 +325,34 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                     // Force first letter to upper string in name.
                     String nameFirstLetter = name.substring(0, 1).toUpperCase() + name.substring(1);
 
+                    String new_unit = null;
+                    if (Locale.getDefault().toString().equals("nb_NO")) {
+                        // If units is equal to the norwegian version replace it with english cuisine name before saving to database
+                        for (int i = 0; i < ingredientsList.size(); i++) {
+                            if (ingredientsList.get(i).getUnit().equals("stk")) {
+                                ingredientsList.get(i).setUnit("pcs");
+                            } else if (ingredientsList.get(i).getUnit().equals("ts")) {
+                                ingredientsList.get(i).setUnit("tsp");
+                            } else if (ingredientsList.get(i).getUnit().equals("ss")) {
+                                ingredientsList.get(i).setUnit("tbsp");
+                            } else if (ingredientsList.get(i).getUnit().equals("dl")) {
+                                ingredientsList.get(i).setUnit("dl");
+                            } else if (ingredientsList.get(i).getUnit().equals("l")) {
+                                ingredientsList.get(i).setUnit("l");
+                            } else if (ingredientsList.get(i).getUnit().equals("kg")) {
+                                ingredientsList.get(i).setUnit("kg");
+                            } else if (ingredientsList.get(i).getUnit().equals("g")) {
+                                ingredientsList.get(i).setUnit("g");
+                            } else if (ingredientsList.get(i).getUnit().equals("ml")) {
+                                ingredientsList.get(i).setUnit("ml");
+                            }
+                        } // End for loop
+                    } else {
+                        for (int i = 0; i < ingredientsList.size(); i++) {
+                            new_unit = ingredientsList.get(i).getUnit();
+                        }
+                    }
+
                     progressBar.setVisibility(View.VISIBLE);
                     saveIngredientsToDatabase(highestRecipeID);
                     Recipe recipe = new Recipe(userID, recipeID, nameFirstLetter, description, stepByStep, new_cuisine, vegan, favorite);
