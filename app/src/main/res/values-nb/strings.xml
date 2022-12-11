@@ -200,7 +200,6 @@
         <item>Tysk</item>
     </string-array>
 
-    //TODO: Add more strings here
     <!-- Spinner unit -->
     <string-array name="unit_array">
         <item>Enhet</item>

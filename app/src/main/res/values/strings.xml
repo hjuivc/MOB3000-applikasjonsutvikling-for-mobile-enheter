@@ -200,35 +200,19 @@
         <item>Polish</item>
         <item>German</item>
     </string-array>
-
-    //TODO: Add more strings here
+    
     <!-- Spinner unit -->
     <string-array name="unit_array">
         <item>Unit</item>
         <item>g</item>
         <item>kg</item>
+        <item>dl</item>
+        <item>cl</item>
         <item>ml</item>
         <item>l</item>
-        <item>oz</item>
-        <item>cup</item>
-        <item>tbsp</item>
         <item>tsp</item>
-        <item>pinch</item>
-        <item>dash</item>
-        <item>slice</item>
-        <item>can</item>
-        <item>package</item>
-        <item>handful</item>
-        <item>head</item>
-        <item>stalk</item>
-        <item>leaf</item>
-        <item>pint</item>
-        <item>quart</item>
-        <item>gallon</item>
-        <item>dozen</item>
-        <item>bag</item>
-        <item>box</item>
-        <item>jar</item>
+        <item>tbsp</item>
         <item>pcs</item>
+        <item>can</item>
     </string-array>
 </resources>
