@@ -216,8 +216,6 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
 
                                 String new_unit = null;
 
-                                System.out.println("UNIT: " + ingredientUnit);
-
                                 if (Locale.getDefault().toString().equals("nb_NO")) {
                                     if (ingredientUnit.equals("pcs")) {
                                         new_unit = ingredientUnit.replace("pcs", "stk");
@@ -392,6 +390,36 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
 
             if (spinnerUnit.getSelectedItemPosition() != 0) {
                 ingredients.setUnit(spinnerUnit.getSelectedItem().toString());
+                // Convert ignredients units to english if set to norwegian
+                if (Locale.getDefault().toString().equals("nb_NO")) {
+                    String ingredientUnit = ingredients.getUnit();
+                    String new_unit;
+                    if (ingredientUnit.equals("ts")) {
+                        new_unit = ingredientUnit.replace("ts", "tsp");
+                        ingredients.setUnit(new_unit);
+                    } else if (ingredientUnit.equals("ss")) {
+                        new_unit = ingredientUnit.replace("ss", "tbsp");
+                        ingredients.setUnit(new_unit);
+                    } else if (ingredientUnit.equals("stk")) {
+                        new_unit = ingredientUnit.replace("stk", "pcs");
+                        ingredients.setUnit(new_unit);
+                    } else if (ingredientUnit.equals("dl")) {
+                        new_unit = ingredientUnit.replace("dl", "cup");
+                        ingredients.setUnit(new_unit);
+                    } else if (ingredientUnit.equals("l")) {
+                        new_unit = ingredientUnit.replace("l", "l");
+                        ingredients.setUnit(new_unit);
+                    } else if (ingredientUnit.equals("kg")) {
+                        new_unit = ingredientUnit.replace("kg", "kg");
+                        ingredients.setUnit(new_unit);
+                    } else if (ingredientUnit.equals("g")) {
+                        new_unit = ingredientUnit.replace("g", "g");
+                        ingredients.setUnit(new_unit);
+                    } else if (ingredientUnit.equals("boks")) {
+                        new_unit = ingredientUnit.replace("boks", "can");
+                        ingredients.setUnit(new_unit);
+                    }
+                }
             } else {
                 result = false;
                 break;
@@ -458,42 +486,42 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                     new_cuisine = cuisine.replace("Italiensk", "Italian");
                 } else if (cuisine.equals("Kinesisk")) {
                     new_cuisine = cuisine.replace("Kinesisk", "Chinese");
-                } else if (cuisine.equals("Mexican")) {
-                    new_cuisine = cuisine.replace("Mexican", "Meksikansk");
-                } else if (cuisine.equals("Norwegian")) {
-                    new_cuisine = cuisine.replace("Norwegian", "Norsk");
-                } else if (cuisine.equals("Swedish")) {
-                    new_cuisine = cuisine.replace("Swedish", "Svensk");
+                } else if (cuisine.equals("Meksikansk")) {
+                    new_cuisine = cuisine.replace("Meksikansk", "Mexican");
+                } else if (cuisine.equals("Norsk")) {
+                    new_cuisine = cuisine.replace("Norsk", "Norwegian");
+                } else if (cuisine.equals("Svensk")) {
+                    new_cuisine = cuisine.replace("Svensk", "Swedish");
                 } else if (cuisine.equals("Thai")) {
                     new_cuisine = cuisine.replace("Thai", "Thai");
-                } else if (cuisine.equals("German")) {
-                    new_cuisine = cuisine.replace("German", "Tysk");
-                } else if (cuisine.equals("Spanish")) {
-                    new_cuisine = cuisine.replace("Spanish", "Spansk");
-                } else if (cuisine.equals("Indian")) {
-                    new_cuisine = cuisine.replace("Indian", "Indisk");
-                } else if (cuisine.equals("Colombian")) {
-                    new_cuisine = cuisine.replace("Colombian", "Colombiansk");
-                } else if (cuisine.equals("Turkish")) {
-                    new_cuisine = cuisine.replace("Turkish", "Tyrkisk");
-                } else if (cuisine.equals("Arabic")) {
-                    new_cuisine = cuisine.replace("Arabic", "Arabisk");
-                } else if (cuisine.equals("Lebanese")) {
-                    new_cuisine = cuisine.replace("Lebanese", "Libanesisk");
-                } else if (cuisine.equals("Moroccan")) {
-                    new_cuisine = cuisine.replace("Moroccan", "Marokkansk");
-                } else if (cuisine.equals("Korean")) {
-                    new_cuisine = cuisine.replace("Korean", "Koreansk");
-                } else if (cuisine.equals("Vietnamese")) {
-                    new_cuisine = cuisine.replace("Vietnamese", "Vietnamesisk");
-                } else if (cuisine.equals("Malaysian")) {
-                    new_cuisine = cuisine.replace("Malaysian", "Malaysisk");
-                } else if (cuisine.equals("Russian")) {
-                    new_cuisine = cuisine.replace("Russian", "Russisk");
-                } else if (cuisine.equals("Ethiopian")) {
-                    new_cuisine = cuisine.replace("Ethiopian", "Etiopisk");
-                } else if (cuisine.equals("Polish")) {
-                    new_cuisine = cuisine.replace("Polish", "Polsk");
+                } else if (cuisine.equals("Tysk")) {
+                    new_cuisine = cuisine.replace("Tysk", "German");
+                } else if (cuisine.equals("Spansk")) {
+                    new_cuisine = cuisine.replace("Spansk", "Spanish");
+                } else if (cuisine.equals("Indisk")) {
+                    new_cuisine = cuisine.replace("Indisk", "Indian");
+                } else if (cuisine.equals("Colombiansk")) {
+                    new_cuisine = cuisine.replace("Colombiansk", "Colombian");
+                } else if (cuisine.equals("Tyrkisk")) {
+                    new_cuisine = cuisine.replace("Tyrkisk", "Turkish");
+                } else if (cuisine.equals("Arabisk")) {
+                    new_cuisine = cuisine.replace("Arabisk", "Arabic");
+                } else if (cuisine.equals("Libanesisk")) {
+                    new_cuisine = cuisine.replace("Libanesisk", "Lebanese");
+                } else if (cuisine.equals("Marokkansk")) {
+                    new_cuisine = cuisine.replace("Marokkansk", "Moroccan");
+                } else if (cuisine.equals("Koreansk")) {
+                    new_cuisine = cuisine.replace("Koreansk", "Korean");
+                } else if (cuisine.equals("Vietnamesisk")) {
+                    new_cuisine = cuisine.replace("Vietnamesisk", "Vietnamese");
+                } else if (cuisine.equals("Malaysisk")) {
+                    new_cuisine = cuisine.replace("Malaysisk", "Malaysian");
+                } else if (cuisine.equals("Russisk")) {
+                    new_cuisine = cuisine.replace("Russisk", "Russian");
+                } else if (cuisine.equals("Etiopisk")) {
+                    new_cuisine = cuisine.replace("Etiopisk", "Ethiopian");
+                } else if (cuisine.equals("Polsk")) {
+                    new_cuisine = cuisine.replace("Polsk", "Polish");
                 }
             } else {
                 new_cuisine = cuisine;
