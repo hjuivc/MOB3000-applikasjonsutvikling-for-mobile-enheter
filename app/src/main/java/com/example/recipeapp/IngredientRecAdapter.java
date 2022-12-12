@@ -45,6 +45,8 @@ public class IngredientRecAdapter  extends FirebaseRecyclerAdapter <Ingredients,
                 new_unit = unit.replace("kg", "kg");
             } else if (unit.equals("g")) {
                 new_unit = unit.replace("g", "g");
+            } else if (unit.equals("boks")) {
+                new_unit = unit.replace("can", "can");
             } else {
                 new_unit = unit;
             }
@@ -64,8 +66,9 @@ public class IngredientRecAdapter  extends FirebaseRecyclerAdapter <Ingredients,
                 new_unit = unit.replace("kg", "kg");
             } else if (unit.equals("g")) {
                 new_unit = unit.replace("g", "g");
-            }
-            else {
+            } else if (unit.equals("can")) {
+                new_unit = unit.replace("can", "boks");
+            } else {
                 new_unit = unit;
             }
         }
