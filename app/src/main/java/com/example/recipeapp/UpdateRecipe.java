@@ -214,15 +214,46 @@ public class UpdateRecipe extends AppCompatActivity implements View.OnClickListe
                                 String ingredientUnit = ingredient.unit;
                                 ImageView imageClose = view.findViewById(R.id.image_remove);
 
+                                String new_unit = null;
+
+                                System.out.println("UNIT: " + ingredientUnit);
+
+                                if (Locale.getDefault().toString().equals("nb_NO")) {
+                                    if (ingredientUnit.equals("pcs")) {
+                                        new_unit = ingredientUnit.replace("pcs", "stk");
+                                        spinner.setSelection(adapter.getPosition(new_unit));
+                                    } else if (ingredientUnit.equals("tsp")) {
+                                        new_unit = ingredientUnit.replace("tsp", "ts");
+                                        spinner.setSelection(adapter.getPosition(new_unit));
+                                    } else if (ingredientUnit.equals("tbsp")) {
+                                        new_unit = ingredientUnit.replace("tbsp", "ss");
+                                        spinner.setSelection(adapter.getPosition(new_unit));
+                                    } else if (ingredientUnit.equals("dl")) {
+                                        new_unit = ingredientUnit.replace("dl", "dl");
+                                        spinner.setSelection(adapter.getPosition(new_unit));
+                                    } else if (ingredientUnit.equals("l")) {
+                                        new_unit = ingredientUnit.replace("l", "l");
+                                        spinner.setSelection(adapter.getPosition(new_unit));
+                                    } else if (ingredientUnit.equals("kg")) {
+                                        new_unit = ingredientUnit.replace("kg", "kg");
+                                        spinner.setSelection(adapter.getPosition(new_unit));
+                                    } else if (ingredientUnit.equals("g")) {
+                                        new_unit = ingredientUnit.replace("g", "g");
+                                        spinner.setSelection(adapter.getPosition(new_unit));
+                                    } else if (ingredientUnit.equals("can")) {
+                                        new_unit = ingredientUnit.replace("can", "boks");
+                                        spinner.setSelection(adapter.getPosition(new_unit));
+                                    }
+                                } else {
+                                    spinner.setSelection(adapter.getPosition(ingredientUnit));
+                                }
 
                                 ingredientName.setText(ingredient.getIngredient());
                                 ingredientAmount.setText(ingredient.getAmount());
-                                spinner.setSelection(adapter.getPosition(ingredientUnit));
 
                                 layoutList.addView(view);
 
                                 imageClose.setOnClickListener(v -> removeView(view));
-
                             }
                         }
                         private void removeView(View view) {
