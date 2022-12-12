@@ -58,6 +58,7 @@ public class About extends AppCompatActivity implements View.OnClickListener {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                finish();
                 break;
             default:
                 break;

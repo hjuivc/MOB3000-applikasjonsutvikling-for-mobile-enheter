@@ -144,6 +144,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                finish();
                 break;
             default:
                 break;

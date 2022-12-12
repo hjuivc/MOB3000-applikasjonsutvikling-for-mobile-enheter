@@ -258,6 +258,7 @@ public class RecipeActivity extends AppCompatActivity implements View.OnClickLis
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                finish();
                 break;
             default:
                 break;

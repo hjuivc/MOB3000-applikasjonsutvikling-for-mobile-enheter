@@ -132,6 +132,7 @@ public class FavoriteRecipes extends AppCompatActivity implements View.OnClickLi
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
+                finish();
                 break;
             default:
                 break;
