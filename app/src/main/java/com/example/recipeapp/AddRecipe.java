@@ -345,6 +345,8 @@ public class AddRecipe extends AppCompatActivity implements View.OnClickListener
                                 ingredientsList.get(i).setUnit("g");
                             } else if (ingredientsList.get(i).getUnit().equals("ml")) {
                                 ingredientsList.get(i).setUnit("ml");
+                            } else if (ingredientsList.get(i).getUnit().equals("boks")) {
+                                ingredientsList.get(i).setUnit("can");
                             }
                         } // End for loop
                     } else {
