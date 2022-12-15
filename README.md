@@ -1,4 +1,4 @@
-# MOB3000-applikasjonsutvikling-for-mobile-enheter
+# MOB3000 Applikasjonsutvikling for mobile enheter
 Android Studio and Java programming course.<br><br>
 
 This app is made by a group of s tudents at USN Ringerike. We are studying software engineering and this is an app that is a part of course MOB3000 Mobile Application Development.<br><br>
